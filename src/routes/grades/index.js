@@ -2,11 +2,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export async function get() {
-	const studentvue = require('studentvue.js');
+	import studentvue from 'studentvue.js';
 	const user = process.env['USER'];
 	const password = process.env['PASSWORD'];
 	console.log(user, password);
-	console.log(studentvue);
+	console.log(studentvue.login);
 	let client = await studentvue.login('https://wa-bsd405-psv.edupoint.com/', user, password);
 	console.log(client);
 	let test = await client.getGradebook(user, password);
