@@ -10,6 +10,6 @@ export async function get() {
 	let gradebook = await client.getGradebook(username, password);
 	return {
 		status: 200,
-		body: gradebook.Gradebook
+		body: gradebook
 	};
 }
