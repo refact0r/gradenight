@@ -1,0 +1,23 @@
+<script>
+	let grades;
+	async function getGrades() {
+		let res = await fetch('/grades');
+		grades = await res.json();
+	}
+</script>
+
+<h1>Synergy Test</h1>
+
+<button on:click={getGrades}>Get Grades</button>
+
+{#if grades}
+	<h3>{grades.ReportingPeriod.GradePeriod}</h3>
+	<table>
+		{#each grades.Courses.Course as course}
+			<tr>
+				<td>{course.Title}</td>
+				<td>{course.Marks.Mark.CalculatedScoreString} ({course.Marks.Mark.CalculatedScoreRaw})</td>
+			</tr>
+		{/each}
+	</table>
+{/if}
