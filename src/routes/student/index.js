@@ -7,9 +7,8 @@ let password = process.env['PASSWORD'];
 
 export async function get() {
 	let client = await studentvue.login('https://wa-bsd405-psv.edupoint.com/', username, password);
-	let gradebook = await client.getGradebook(username, password);
+	let gradebook = JSON.parse(await client.getGradebook(username, password));
 	return {
-		status: 200,
 		body: gradebook
 	};
 }

@@ -2,12 +2,13 @@
 	let grades;
 	async function getGrades() {
 		let res = await fetch('/grades');
-		grades = await res.json().Gradebook;
+		grades = await res.json();
+		console.log(grades);
 	}
 </script>
 
 <h1>Synergy Test</h1>
-    
+
 <button on:click={getGrades}>Get Grades</button>
 
 {#if grades}
