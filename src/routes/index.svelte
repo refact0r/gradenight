@@ -12,8 +12,9 @@
 <h1>Synergy Test</h1>
 
 Username <input type="text" bind:value={username}/><br/>
+<br/>
 Password <input type="password" bind:value={password}/><br/>
-
+<br/>
 <button on:click={getGrades}>Get Grades</button>
 
 {#if grades}
