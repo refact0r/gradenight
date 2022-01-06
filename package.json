@@ -22,6 +22,7 @@
   "type": "module",
   "dependencies": {
     "dotenv": "^10.0.0",
+    "node-expat": "^2.4.0",
     "studentvue.js": "^0.1.1"
   }
 }
