@@ -11,14 +11,13 @@
 
 <h1>Synergy Test</h1>
 
+Username <input type="text" bind:value={username}/><br/>
+Password <input type="password" bind:value={password}/><br/>
+
 <button on:click={getGrades}>Get Grades</button>
 
 {#if grades}
 	<h3>{grades.ReportingPeriod.GradePeriod}</h3>
-	Username<br/>
-	<input type="text" bind:value={username}/>
-	Password<br/>	
-	<input type="password" bind:value={password}/>
 	<table>
 		{#each grades.Courses.Course as course}
 			<tr>
