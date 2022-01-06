@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 dotenv.config();
-const studentvue = require('studentvue.js');
 
 export async function get() {
+	const studentvue = require('studentvue.js');
 	const user = process.env['USER'];
 	const password = process.env['PASSWORD'];
 	console.log(user, password);
