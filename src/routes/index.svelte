@@ -2,7 +2,7 @@
 	let grades;
 	async function getGrades() {
 		let res = await fetch('/grades');
-		grades = await res.json();
+		grades = await res.json().Gradebook;
 	}
 </script>
 
