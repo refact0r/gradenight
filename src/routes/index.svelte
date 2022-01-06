@@ -7,7 +7,7 @@
 </script>
 
 <h1>Synergy Test</h1>
-
+    
 <button on:click={getGrades}>Get Grades</button>
 
 {#if grades}
