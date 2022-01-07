@@ -5,7 +5,6 @@
 </script>
 
 <script>
-    export let grades;
 </script>
 
-<slot {grades}/>
+<slot />
