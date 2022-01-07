@@ -4,9 +4,7 @@
 	let password;
 	async function getGrades() {
 		let res = await fetch('/grades', {
-			headers: {
-				Authorization: 'Basic ' + Buffer.from(username + ':' + password).toString('base64')
-			}
+			headers: { Authorization: 'Basic ' + btoa(username + ':' + password) }
 		});
 		grades = await res.json();
 		console.log(grades);
