@@ -6,10 +6,12 @@ const username = process.env['USER'];
 const password = process.env['PASSWORD'];
 
 export async function get(request) {
-	const str = Buffer.from(req.headers.authorization.split(" ")[1], 'base64').toString()
-	console.log(str);
-	let client = await login('https://wa-bsd405-psv.edupoint.com/', username, password);
-	let gradebook = JSON.parse(await client.getGradebook(username, password));
+	const auth = Buffer.from(request.headers.authorization.split(' ')[1], 'base64')
+		.toString()
+		.split(':');
+	console.log(auth);
+	let client = await login('https://wa-bsd405-psv.edupoint.com/', auth[0], auth[1]);
+	let gradebook = JSON.parse(await client.getGradebook(auth[0], auth[1]));
 	return {
 		body: gradebook.Gradebook
 	};
