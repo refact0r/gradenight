@@ -1,6 +1,6 @@
 <script context="module">
-	export async function load({ page }) {
-		const auth = localStorage.get('authorization')
+	export async function load({ fetch }) {
+		const auth = window.localStorage.get('authorization')
 		let grades;
 		if (auth) {
 			let res = await fetch('/grades', {
