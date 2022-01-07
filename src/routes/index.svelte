@@ -1,5 +1,5 @@
 <script>
-	export let grades;
+	let grades
 	let username;
 	let password;
 	async function getGrades() {
@@ -7,7 +7,6 @@
 			headers: { Authorization: 'Basic ' + btoa(username + ':' + password) }
 		});
 		grades = await res.json();
-		localStorage.set('authorization', btoa(username + ':' + password))
 		console.log(grades);
 	}
 </script>
