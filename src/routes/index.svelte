@@ -7,6 +7,7 @@
 			headers: { Authorization: 'Basic ' + btoa(username + ':' + password) }
 		});
 		grades = await res.json();
+		localStorage.set('authorization', btoa(username + ':' + password))
 		console.log(grades);
 	}
 </script>
