@@ -1,5 +1,5 @@
 <script>
-	let grades;
+	export let grades;
 	let username;
 	let password;
 	async function getGrades() {
