@@ -1,9 +1,4 @@
 import { login } from 'studentvue.js';
-import dotenv from 'dotenv';
-dotenv.config();
-
-const username = process.env['USER'];
-const password = process.env['PASSWORD'];
 
 export async function get(request) {
 	const auth = Buffer.from(request.headers.authorization.split(' ')[1], 'base64')
