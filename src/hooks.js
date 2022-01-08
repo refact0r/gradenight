@@ -25,15 +25,15 @@ export const handle = async ({ request, resolve }) => {
 // Sets session on client-side
 // try console logging session in routes' load({ session }) functions
 export const getSession = async (request) => {
-	if (request.locals.user) {
-		let client = await login(
-			'https://wa-bsd405-psv.edupoint.com/',
-			request.locals.user.username,
-			request.locals.user.password
-		)
-		request.locals.gradebook = JSON.parse(
-			await client.getGradebook(request.locals.user.username, request.locals.user.password)
-		).Gradebook
-	}
+	// if (request.locals.user) {
+	// 	let client = await login(
+	// 		'https://wa-bsd405-psv.edupoint.com/',
+	// 		request.locals.user.username,
+	// 		request.locals.user.password
+	// 	)
+	// 	request.locals.gradebook = JSON.parse(
+	// 		await client.getGradebook(request.locals.user.username, request.locals.user.password)
+	// 	).Gradebook
+	// }
 	return request.locals
 }
