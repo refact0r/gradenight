@@ -1,5 +1,5 @@
 <script context="module">
-	export async function load({ fetch }) {
+	export async function load({}) {
 		return {}
 	}
 </script>

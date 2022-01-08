@@ -1,4 +1,4 @@
-import netlify from '@sveltejs/adapter-netlify';
+import netlify from '@sveltejs/adapter-netlify'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -6,6 +6,6 @@ const config = {
 		adapter: netlify(),
 		target: '#svelte'
 	}
-};
+}
 
-export default config;
+export default config
