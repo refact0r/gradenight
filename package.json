@@ -21,6 +21,7 @@
   },
   "type": "module",
   "dependencies": {
+    "cookie": "^0.4.1",
     "dotenv": "^10.0.0",
     "node-expat": "^2.4.0",
     "studentvue.js": "^0.1.1",
