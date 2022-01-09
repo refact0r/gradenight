@@ -14,11 +14,11 @@
 	import { session } from '$app/stores'
 
 	async function logout() {
+		$session.user = null
+		$session.gradebook = null
 		await fetch('/auth/logout', {
 			method: 'POST'
 		})
-		$session.user = null
-		$session.gradebook = null
 	}
 </script>
 

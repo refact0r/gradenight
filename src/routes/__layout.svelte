@@ -9,8 +9,10 @@
 	import { onMount } from 'svelte'
 
 	onMount(async () => {
-		const res = await fetch('/gradebook')
-		$session.gradebook = await res.json()
+		if ($session.user) {
+			const res = await fetch('/gradebook')
+			$session.gradebook = await res.json()
+		}
 	})
 </script>
 
