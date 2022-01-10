@@ -1,14 +1,14 @@
-import studentvue from 'studentvue.js'
-import dotenv from 'dotenv'
-dotenv.config()
+import { login } from 'studentvue.js'
 
-let username = process.env['USERNAME']
-let password = process.env['PASSWORD']
-
-export async function get() {
-	let client = await studentvue.login('https://wa-bsd405-psv.edupoint.com/', username, password)
-	let gradebook = JSON.parse(await client.getGradebook(username, password))
+export async function get(request) {
+	console.log('get student')
+	let client = await login(
+		'https://wa-bsd405-psv.edupoint.com/',
+		request.locals.user.username,
+		request.locals.user.password
+	)
+	let student = JSON.parse(await client.getStudentInfo()).StudentInfo
 	return {
-		body: gradebook
+		body: student
 	}
 }
