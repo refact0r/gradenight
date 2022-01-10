@@ -1,0 +1,14 @@
+:root {
+	font-family: 'Outfit';
+	font-weight: 300;
+	font-size: 112.5%;
+}
+
+* {
+	box-sizing: border-box;
+	scrollbar-width: thin;
+}
+
+button {
+	font: inherit;
+}

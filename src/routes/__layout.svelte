@@ -5,13 +5,16 @@
 </script>
 
 <script>
+	import '../app.css'
 	import { session } from '$app/stores'
 	import { onMount } from 'svelte'
 
 	onMount(async () => {
 		if ($session.user) {
-			const res = await fetch('/gradebook')
-			$session.gradebook = await res.json()
+			const student = await fetch('/student')
+			$session.student = await student.json()
+			const gradebook = await fetch('/gradebook')
+			$session.gradebook = await gradebook.json()
 		}
 	})
 </script>

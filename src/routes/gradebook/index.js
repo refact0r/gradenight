@@ -7,9 +7,7 @@ export async function get(request) {
 		request.locals.user.username,
 		request.locals.user.password
 	)
-	let gradebook = JSON.parse(
-		await client.getGradebook(request.locals.user.username, request.locals.user.password)
-	).Gradebook
+	let gradebook = JSON.parse(await client.getGradebook()).Gradebook
 	return {
 		body: gradebook
 	}

@@ -22,7 +22,14 @@
 	}
 </script>
 
-<h1>Synergy Test</h1>
+<h1>StudentVue</h1>
+
+{#if $session.student}
+	Welcome, {$session.student.FormattedName}<br />
+	<br />
+	<img src={'data:image/jpeg;base64,' + $session.student.Photo} />
+	<br />
+{/if}
 
 {#if $session.gradebook}
 	<h3>{$session.gradebook.ReportingPeriod.GradePeriod}</h3>
@@ -42,3 +49,6 @@
 <br />
 
 <button on:click={logout}>Log out</button>
+
+<style>
+</style>
