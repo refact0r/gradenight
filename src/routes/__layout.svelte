@@ -24,5 +24,12 @@
 	})
 </script>
 
-<ProgressBar bind:this={progress} color="#0366d6" intervalTime="100" stepSizes={[0.05]} />
+<ProgressBar
+	bind:this={progress}
+	color="#0366d6"
+	minimum={0.02}
+	maximum={0.98}
+	intervalTime={100}
+	stepSizes={[0.04]}
+/>
 <slot />
