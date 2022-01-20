@@ -14,7 +14,7 @@
 	import { session } from '$app/stores'
 
 	async function logout() {
-		$session = null
+		$session = {}
 		await fetch('/auth/logout', {
 			method: 'POST'
 		})
