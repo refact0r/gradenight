@@ -14,8 +14,7 @@
 	import { session } from '$app/stores'
 
 	async function logout() {
-		$session.user = null
-		$session.gradebook = null
+		$session = null
 		await fetch('/auth/logout', {
 			method: 'POST'
 		})
@@ -25,22 +24,22 @@
 <h1>StudentVue</h1>
 
 {#if $session.student}
-	Welcome, {$session.student.FormattedName}<br />
+	Welcome, {$session.student.FormattedName}!<br />
 	<br />
 	<img src={'data:image/jpeg;base64,' + $session.student.Photo} />
 	<br />
 {/if}
 
 {#if $session.gradebook}
-	<h3>{$session.gradebook.ReportingPeriod.GradePeriod}</h3>
+	<h3>Grades</h3>
 	<table>
 		{#each $session.gradebook.Courses.Course as course}
 			<tr>
 				<td>{course.Title}</td>
-				<td
-					>{course.Marks.Mark.CalculatedScoreString} ({course.Marks.Mark
-						.CalculatedScoreRaw})</td
-				>
+				<td>
+					{course.Marks.Mark.CalculatedScoreString}
+					({course.Marks.Mark.CalculatedScoreRaw})
+				</td>
 			</tr>
 		{/each}
 	</table>

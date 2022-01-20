@@ -11,10 +11,11 @@
 
 	onMount(async () => {
 		if ($session.user) {
-			const student = await fetch('/student')
-			$session.student = await student.json()
-			const gradebook = await fetch('/gradebook')
-			$session.gradebook = await gradebook.json()
+			console.log('fetch')
+			const res = await fetch('/all')
+			const json = await res.json()
+			$session.student = json.student
+			$session.gradebook = json.gradebook
 		}
 	})
 </script>
