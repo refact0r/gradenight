@@ -25,6 +25,7 @@
     "dotenv": "^10.0.0",
     "node-expat": "^2.4.0",
     "studentvue.js": "^0.1.1",
+    "svelte-progress-bar": "^3.0.2",
     "xml2json": "^0.12.0"
   }
 }
