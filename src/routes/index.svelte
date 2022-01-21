@@ -33,12 +33,12 @@
 {#if $session.gradebook}
 	<h3>Grades</h3>
 	<table>
-		{#each $session.gradebook.Courses.Course as course}
+		{#each $session.gradebook.Courses.Course as course, index}
 			<tr>
-				<td>{course.Title}</td>
+				<td><a href={'/course/' + index}>{course.Title}</a></td>
 				<td>
 					{course.Marks.Mark.CalculatedScoreString}
-					({course.Marks.Mark.CalculatedScoreRaw})
+					({course.Marks.Mark.CalculatedScoreRaw}%)
 				</td>
 			</tr>
 		{/each}

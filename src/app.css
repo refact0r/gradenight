@@ -12,3 +12,7 @@
 button {
 	font: inherit;
 }
+
+td {
+	padding-right: 20px;
+}
