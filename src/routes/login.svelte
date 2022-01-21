@@ -35,12 +35,13 @@
 			})
 		})
 		if (res.ok) {
-			const data = await res.json()
+			const json = await res.json()
 			$session.user = {
 				username,
 				password
 			}
-			$session.gradebook = data.gradebook
+			$session.gradebook = json.gradebook
+			$session.student = json.student
 			goto('/')
 		} else {
 			error = 'Incorrect username or password'

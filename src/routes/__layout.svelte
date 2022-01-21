@@ -15,7 +15,7 @@
 		if ($session.user) {
 			console.log('fetch')
 			progress.start()
-			const res = await fetch('/all')
+			const res = await fetch('/data')
 			const json = await res.json()
 			$session.student = json.student
 			$session.gradebook = json.gradebook
