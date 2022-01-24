@@ -49,15 +49,17 @@
 	}
 </script>
 
-<h1>Login</h1>
+<div class="content">
+	<h1>Login</h1>
 
-<form on:submit|preventDefault={login}>
-	Username <input type="text" bind:value={username} /><br />
-	<br />
-	Password <input type="password" bind:value={password} /><br />
-	<br />
-	{#if error}
-		{error}<br /><br />
-	{/if}
-	<button type="submit">Login</button>
-</form>
+	<form on:submit|preventDefault={login}>
+		Username <input type="text" bind:value={username} /><br />
+		<br />
+		Password <input type="password" bind:value={password} /><br />
+		<br />
+		{#if error}
+			{error}<br /><br />
+		{/if}
+		<button type="submit">Login</button>
+	</form>
+</div>
