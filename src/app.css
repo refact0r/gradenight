@@ -1,7 +1,16 @@
 :root {
 	font-family: 'Outfit';
 	font-weight: 300;
-	font-size: 112.5%;
+	font-size: 150%;
+	--bg-color-1: hsl(220, 17%, 9%);
+	--bg-color-1-5: hsl(220, 19%, 10.5%);
+	--bg-color-2: hsl(220, 18%, 12%);
+	--bg-color-2-5: hsl(220, 17%, 14.5%);
+	--bg-color-3: hsl(220, 17%, 17%);
+	--bg-color-3-5: hsl(220, 17%, 21.5%);
+	--sub-color: hsl(220, 18%, 26%);
+	--font-color: hsl(220, 37%, 68%);
+	--spacing: 40px;
 }
 
 * {
@@ -9,10 +18,43 @@
 	scrollbar-width: thin;
 }
 
-button {
+body {
+	margin: 0;
+	height: 100vh;
+	background: var(--bg-color-1);
+	color: var(--font-color);
+}
+
+#svelte {
+	height: 100vh;
+	display: flex;
+	padding: var(--spacing);
+}
+
+button,
+a {
 	font: inherit;
+	color: inherit;
+	background: none;
+	border: none;
+	padding: 0;
+}
+button:hover {
+	cursor: pointer;
 }
 
 td {
 	padding-right: 20px;
+}
+
+h1,
+h2,
+h3 {
+	margin-top: 0;
+}
+
+.box {
+	background-color: var(--bg-color-2);
+	border-radius: 30px;
+	padding: var(--spacing);
 }

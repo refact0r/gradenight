@@ -23,7 +23,7 @@
 
 {#if course}
 	<h1>{course.Title}</h1>
-	<h3>{course.Staff}	</h3>
+	<h3>{course.Staff}</h3>
 	<h2>
 		{course.Marks.Mark.CalculatedScoreString}
 		({course.Marks.Mark.CalculatedScoreRaw}%)
