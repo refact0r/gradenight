@@ -49,7 +49,7 @@
 	}
 </script>
 
-<div class="content">
+<div class="layout">
 	<h1>Login</h1>
 
 	<form on:submit|preventDefault={login}>
