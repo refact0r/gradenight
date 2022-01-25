@@ -1,4 +1,5 @@
 import { login } from 'studentvue.js'
+import * as cookie from 'cookie'
 
 export async function get(request) {
 	console.log('get all')
@@ -13,6 +14,20 @@ export async function get(request) {
 		client.getStudentInfo().then((value) => JSON.parse(value).StudentInfo),
 		client.getGradebook().then((value) => JSON.parse(value).Gradebook)
 	])
+
+	if (!result[0]) {
+		return {
+			headers: {
+				'Set-cookie': cookie.serialize('auth', '', {
+					httpOnly: true,
+					sameSite: 'strict',
+					path: '/',
+					expires: new Date(0)
+				})
+			}
+		}
+	}
+
 	return {
 		body: {
 			student: result[0],

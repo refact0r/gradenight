@@ -6,22 +6,33 @@
 
 <script>
 	import '../app.css'
-	import 'bootstrap-icons/font/bootstrap-icons.css'
+	import '../bootstrap-icons.css'
 	import { session } from '$app/stores'
 	import { onMount } from 'svelte'
 	import Spinner from '$lib/Spinner.svelte'
-	// import ProgressBar from 'svelte-progress-bar'
-	// let progress
 
 	onMount(async () => {
 		if ($session.user) {
 			console.log('fetch')
-			// progress.start()
 			const res = await fetch('/data')
 			const json = await res.json()
 			$session.student = json.student
 			$session.gradebook = json.gradebook
-			// progress.complete()
+			let assignments = []
+			for (const course of $session.gradebook.Courses.Course) {
+				for (const assignment of course.Marks.Mark.Assignments.Assignment) {
+					if (assignment.Points.includes(' / ')) {
+						let split = assignment.Points.split(' / ')
+						assignment.scoreValue = parseFloat(split[0])
+						assignment.totalValue = parseFloat(split[1])
+						assignments.push(assignment)
+					}
+				}
+			}
+			assignments.sort(function (a, b) {
+				return new Date(b.DueDate) - new Date(a.DueDate)
+			})
+			$session.assignments = assignments
 		}
 	})
 
@@ -35,17 +46,13 @@
 
 {#if $session.user}
 	{#if $session.gradebook && $session.student}
-		<!-- <ProgressBar
-			bind:this={progress}
-			color="#0366d6"
-			minimum={0.02}
-			maximum={0.98}
-			intervalTime={100}
-			stepSizes={[0.04]}
-		/> -->
 		<nav class="box">
 			{#if $session.student}
-				<img src={'data:image/jpeg;base64,' + $session.student.Photo} on:click={logout} />
+				<img
+					alt="profile"
+					src={'data:image/jpeg;base64,' + $session.student.Photo}
+					on:click={logout}
+				/>
 			{/if}
 			<a href="/">
 				<i class="bi bi-house" />

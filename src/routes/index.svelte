@@ -32,8 +32,8 @@
 			<div class="value-label">Assignments<br />this week</div>
 		</div>
 		<div class="grades box">
-			<h2>Grades</h2>
-			<table>
+			<a href="/grades"><h2>Grades</h2></a>
+			<table class="grades-table">
 				{#each $session.gradebook.Courses.Course as course, index}
 					<tr>
 						<td class="course-name"><a href={'/course/' + index}>{course.Title}</a></td>
@@ -50,7 +50,19 @@
 			</table>
 		</div>
 		<div class="assignments box">
-			<h2>Assignments</h2>
+			<div class="assignments-scroll">
+				<a href="/assignments"><h2>Assignments</h2></a>
+				<table class="assignments-table">
+					{#each $session.assignments as assignment, index}
+						<tr>
+							<td class="assignment-name">{assignment.Measure}</td>
+							<td class="assignment-score">
+								{assignment.scoreValue}/{assignment.totalValue}
+							</td>
+						</tr>
+					{/each}
+				</table>
+			</div>
 		</div>
 	</div>
 {/if}
@@ -60,7 +72,7 @@
 		display: grid;
 		height: 100%;
 		gap: var(--spacing);
-		grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+		grid-template-columns: 1fr 1fr 1fr 1fr 2.1fr;
 		grid-template-rows: auto auto 1fr;
 	}
 
@@ -83,20 +95,59 @@
 	}
 
 	.assignments {
+		padding: 0;
 		grid-column: 5;
 		grid-row: 1 / 4;
+		overflow: hidden;
+	}
+
+	.assignments-scroll {
+		height: 100%;
+		overflow-y: auto;
+		scrollbar-color: var(--bg-color-2-5) transparent;
+		padding: var(--spacing);
 	}
 
 	table {
 		width: 100%;
-		height: calc(100% - 2 * var(--spacing));
 	}
 
 	td {
 		padding: 0;
 	}
-	.course-score {
+
+	.grades-table {
+		height: calc(100% - 2 * var(--spacing));
+	}
+
+	.assignments-table {
+		table-layout: fixed;
+		width: 100%;
+	}
+
+	.assignments-table td {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	.assignment-name {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		width: max-content;
+	}
+
+	.assignment-score {
+		width: min-content;
+		text-align: right;
+		white-space: nowrap;
+		padding-left: 10px;
+	}
+
+	.course-name {
 		padding-right: auto;
+	}
+	.course-score {
 	}
 	.course-grade {
 		text-align: right;
