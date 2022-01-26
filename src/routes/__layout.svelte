@@ -9,6 +9,7 @@
 	import '../bootstrap-icons.css'
 	import { session } from '$app/stores'
 	import { onMount } from 'svelte'
+	import { parseData } from '$lib/parseData.js'
 	import Spinner from '$lib/Spinner.svelte'
 
 	onMount(async () => {
@@ -16,23 +17,7 @@
 			console.log('fetch')
 			const res = await fetch('/data')
 			const json = await res.json()
-			$session.student = json.student
-			$session.gradebook = json.gradebook
-			let assignments = []
-			for (const course of $session.gradebook.Courses.Course) {
-				for (const assignment of course.Marks.Mark.Assignments.Assignment) {
-					if (assignment.Points.includes(' / ')) {
-						let split = assignment.Points.split(' / ')
-						assignment.scoreValue = parseFloat(split[0])
-						assignment.totalValue = parseFloat(split[1])
-						assignments.push(assignment)
-					}
-				}
-			}
-			assignments.sort(function (a, b) {
-				return new Date(b.DueDate) - new Date(a.DueDate)
-			})
-			$session.assignments = assignments
+			$session = parseData($session, json.student, json.gradebook)
 		}
 	})
 
