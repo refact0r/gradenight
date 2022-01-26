@@ -24,6 +24,8 @@
 	"dependencies": {
 		"cookie": "^0.4.1",
 		"dotenv": "^10.0.0",
-		"studentvue.js": "^0.1.1"
+		"node-expat": "^2.3.18",
+		"studentvue.js": "^0.1.1",
+		"xml2json": "^0.12.0"
 	}
 }
