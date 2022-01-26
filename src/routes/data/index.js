@@ -1,12 +1,12 @@
 import { login } from 'studentvue.js'
 import * as cookie from 'cookie'
 
-export async function get(request) {
+export async function get(event) {
 	console.log('get all')
 	let client = await login(
 		'https://wa-bsd405-psv.edupoint.com/',
-		request.locals.user.username,
-		request.locals.user.password
+		event.locals.user.username,
+		event.locals.user.password
 	)
 	// let student = JSON.parse(await client.getStudentInfo()).StudentInfo
 	// let gradebook = JSON.parse(await client.getGradebook()).Gradebook
