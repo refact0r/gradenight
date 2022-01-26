@@ -77,8 +77,4 @@
 		text-align: right;
 		white-space: nowrap;
 	}
-
-	a {
-		text-decoration: none;
-	}
 </style>

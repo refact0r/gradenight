@@ -110,8 +110,6 @@
 	a:first-of-type {
 		margin-top: 50px;
 	}
-	a:nth-last-of-type(2) {
-	}
 	a:last-of-type {
 		margin-top: auto;
 		margin-bottom: 20px;

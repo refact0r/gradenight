@@ -89,9 +89,6 @@
 		text-align: center;
 	}
 
-	.value-label {
-	}
-
 	.grades {
 		grid-column: 1 / 5;
 	}
@@ -148,8 +145,6 @@
 
 	.course-name {
 		padding-right: auto;
-	}
-	.course-score {
 	}
 	.course-grade {
 		text-align: right;
