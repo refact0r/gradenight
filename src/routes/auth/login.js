@@ -1,8 +1,8 @@
 import { login } from 'studentvue.js'
 import cookie from 'cookie'
 
-export async function post(request) {
-	const body = JSON.parse(request.body)
+export async function post({ request }) {
+	const body = await request.json()
 
 	let result
 	let client = await login('https://wa-bsd405-psv.edupoint.com/', body.username, body.password)
