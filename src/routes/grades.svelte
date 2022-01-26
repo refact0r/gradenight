@@ -38,8 +38,6 @@
 {/if}
 
 <style>
-	.layout {
-	}
 
 	.content {
 		height: calc(100vh - 155px);

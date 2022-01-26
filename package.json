@@ -25,6 +25,7 @@
 		"cookie": "^0.4.1",
 		"dotenv": "^10.0.0",
 		"node-expat": "^2.4.0",
+		"node-gyp": "^8.4.1",
 		"studentvue.js": "^0.1.1",
 		"xml2json": "^0.12.0"
 	}
