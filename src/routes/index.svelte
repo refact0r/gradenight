@@ -12,8 +12,6 @@
 
 <script>
 	import { session } from '$app/stores'
-
-	$: console.log($session.gradebook.Courses.Course)
 </script>
 
 {#if $session.student && $session.gradebook}
