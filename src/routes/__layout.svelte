@@ -8,6 +8,7 @@
 	import '../app.css'
 	import '../bootstrap-icons.css'
 	import { session } from '$app/stores'
+	import { goto } from '$app/navigation'
 	import { onMount } from 'svelte'
 	import { parseData } from '$lib/parseData.js'
 	import Spinner from '$lib/Spinner.svelte'
@@ -26,6 +27,7 @@
 		await fetch('/auth/logout', {
 			method: 'POST'
 		})
+		goto('/login')
 	}
 </script>
 

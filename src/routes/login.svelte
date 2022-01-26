@@ -13,6 +13,7 @@
 <script>
 	import { session } from '$app/stores'
 	import { goto } from '$app/navigation'
+	import { parseData } from '$lib/parseData.js'
 
 	let username
 	let password
@@ -40,9 +41,7 @@
 				username,
 				password
 			}
-			$session.gradebook = json.gradebook
-			$session.student = json.student
-			console.log($session)
+			$session = parseData($session, json.student, json.gradebook)
 			goto('/')
 		} else {
 			error = 'Incorrect username or password'
