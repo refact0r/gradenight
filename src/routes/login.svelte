@@ -42,6 +42,7 @@
 			}
 			$session.gradebook = json.gradebook
 			$session.student = json.student
+			console.log($session)
 			goto('/')
 		} else {
 			error = 'Incorrect username or password'
