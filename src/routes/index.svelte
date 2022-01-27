@@ -22,7 +22,8 @@
 			<div class="value-label">Average grade</div>
 		</div>
 		<div class="improvement value box">
-			<div class="value-label">Improvement<br />this week</div>
+			<h1>{$session.assignments.weekAverage}%</h1>
+			<div class="value-label">Average grade<br />this week</div>
 		</div>
 		<div class="week-assignments value box">
 			<h1>{$session.assignments.week.length}</h1>

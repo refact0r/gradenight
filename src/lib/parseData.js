@@ -30,8 +30,12 @@ function getAssignments(gradebook) {
 	let week = list.filter((a) => {
 		return new Date(a.DueDate) > lastSunday
 	})
+	console.log(week.reduce((a, b) => a + (b.scoreValue / b.totalValue) * 100, 0))
+	let weekAverage =
+		week.reduce((a, b) => a + (b.scoreValue / b.totalValue) * 100, 0) / week.length
 
 	return {
+		weekAverage,
 		week,
 		list
 	}
