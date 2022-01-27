@@ -1,6 +1,9 @@
 {
 	"name": "studentvue",
 	"version": "0.0.1",
+	"engines": {
+		"node": "14.18.1"
+	},
 	"scripts": {
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",
