@@ -20,7 +20,7 @@
 		<div class="content box">
 			<div class="scroll">
 				<table>
-					{#each $session.assignments as assignment, index}
+					{#each $session.assignments.list as assignment, index}
 						<tr>
 							<td class="assignment-name">{assignment.Measure}</td>
 							<td class="assignment-date">{assignment.DueDate}</td>
