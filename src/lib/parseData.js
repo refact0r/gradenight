@@ -1,4 +1,5 @@
 export function parseData(session, student, gradebook) {
+	gradebook.Courses.Course.map((course) => course.Title.replace(/ \([\s\S]*?\)/g, ''))
 	return {
 		...session,
 		student,
@@ -17,6 +18,7 @@ function getAssignments(gradebook) {
 				let split = assignment.Points.split(' / ')
 				assignment.scoreValue = parseFloat(split[0])
 				assignment.totalValue = parseFloat(split[1])
+				assignment.course = course.Title
 				list.push(assignment)
 			}
 		}
