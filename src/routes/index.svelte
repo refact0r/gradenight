@@ -18,18 +18,27 @@
 	<div class="layout">
 		<h1>Hello, {$session.student.FormattedName.split(' ')[0]}!</h1>
 		<div class="average value box">
+			<h1>{$session.average.toFixed(2)}%</h1>
 			<div class="value-label">Average grade</div>
 		</div>
 		<div class="improvement value box">
 			<div class="value-label">Improvement<br />this week</div>
 		</div>
-		<div class="days value box">
+		<div class="week-assignments value box">
+			<h1>{$session.assignments.week.length}</h1>
 			<div class="value-label">
-				Days left in {$session.gradebook.ReportingPeriod.GradePeriod}
+				{$session.assignments.week.length === 1 ? 'Assignment' : 'Assignments'}
+				<br />this week
 			</div>
 		</div>
-		<div class="week-assignments value box">
-			<div class="value-label">Assignments<br />this week</div>
+		<div class="days value box">
+			<h1>
+				{$session.days}
+			</h1>
+			<div class="value-label">
+				{$session.days === 1 ? 'Day' : 'Days'} left in
+				<br />{$session.gradebook.ReportingPeriod.GradePeriod}
+			</div>
 		</div>
 		<div class="grades box">
 			<a href="/grades"><h2>Grades</h2></a>
@@ -53,7 +62,7 @@
 			<div class="assignments-scroll">
 				<a href="/assignments"><h2>Assignments</h2></a>
 				<table class="assignments-table">
-					{#each $session.assignments as assignment, index}
+					{#each $session.assignments.list as assignment, index}
 						<tr>
 							<td class="assignment-name">{assignment.Measure}</td>
 							<td class="assignment-score">
@@ -85,6 +94,10 @@
 	.value {
 		aspect-ratio: 1;
 		text-align: center;
+	}
+	.value h1 {
+		margin-top: 30px;
+		margin-bottom: 10px;
 	}
 
 	.grades {
