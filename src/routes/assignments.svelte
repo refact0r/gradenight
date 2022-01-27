@@ -23,6 +23,7 @@
 					{#each $session.assignments.list as assignment, index}
 						<tr>
 							<td class="assignment-name">{assignment.Measure}</td>
+							<td class="assignment-course">{assignment.course}</td>
 							<td class="assignment-date">{assignment.DueDate}</td>
 							<td class="assignment-percentage">
 								{assignment.totalValue != 0
