@@ -31,8 +31,14 @@ body {
 	padding: var(--spacing);
 }
 
+::placeholder,
+::-webkit-input-placeholder {
+	color: var(--sub-color);
+}
+
 button,
-a {
+a,
+input {
 	font: inherit;
 	color: inherit;
 	background: none;

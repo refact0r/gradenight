@@ -21,6 +21,10 @@
 	$: course = $session.gradebook ? $session.gradebook.Courses.Course[courseIndex] : null
 </script>
 
+<svelte:head>
+	<title>{course.Title}</title>
+</svelte:head>
+
 {#if course}
 	<h1>{course.Title}</h1>
 	<h3>{course.Staff}</h3>
