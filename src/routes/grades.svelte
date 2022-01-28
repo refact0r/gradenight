@@ -14,6 +14,10 @@
 	import { session } from '$app/stores'
 </script>
 
+<svelte:head>
+	<title>Grades</title>
+</svelte:head>
+
 {#if $session.student && $session.gradebook}
 	<div class="layout">
 		<h1>Grades</h1>

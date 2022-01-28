@@ -18,16 +18,19 @@
 	let username
 	let password
 	let error
+	let status
 
 	async function login() {
+		error = ''
 		if (!username) {
-			error = 'Please enter a username'
+			error = 'Please enter a username.'
 			return
 		}
 		if (!password) {
-			error = 'Please enter a password'
+			error = 'Please enter a password.'
 			return
 		}
+		status = 'Logging in...'
 		const res = await fetch('/auth/login', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -44,22 +47,69 @@
 			$session = parseData($session, json.student, json.gradebook)
 			goto('/')
 		} else {
-			error = 'Incorrect username or password'
+			error = 'Invalid login credentials.'
 		}
+		status = ''
 	}
 </script>
 
-<div class="content">
-	<h1>Login</h1>
+<svelte:head>
+	<title>Login to StudentVue</title>
+</svelte:head>
 
+<div class="content">
 	<form on:submit|preventDefault={login}>
-		Username <input type="text" bind:value={username} /><br />
-		<br />
-		Password <input type="password" bind:value={password} /><br />
-		<br />
-		{#if error}
-			{error}<br /><br />
-		{/if}
-		<button type="submit">Login</button>
+		<h2>StudentVue</h2>
+		<input type="text" placeholder="Username" bind:value={username} />
+		<input type="password" placeholder="Password" bind:value={password} />
+		<div class="error">
+			{error ? error : 'Your login info will not be saved anywhere except your browser.'}
+		</div>
+		<button type="submit">{status ? status : 'Login'}</button>
 	</form>
 </div>
+
+<style>
+	.content {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	form {
+		width: 500px;
+		padding: 20px;
+		border-radius: 18px;
+		background: var(--bg-color-2);
+		display: flex;
+		flex-direction: column;
+	}
+
+	.error {
+		margin: 20px 0;
+		color: var(--sub-color);
+		font-size: 0.8em;
+		text-align: center;
+	}
+
+	input,
+	button {
+		border-radius: 12px;
+		padding: 10px;
+		background: var(--bg-color-1);
+	}
+
+	button:hover {
+		background: var(--bg-color-1-5);
+	}
+
+	input {
+		margin-top: 10px;
+	}
+
+	h2 {
+		width: 100%;
+		text-align: center;
+	}
+</style>
