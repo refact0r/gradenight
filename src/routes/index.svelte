@@ -23,10 +23,10 @@
 		<h1>Hello, {$session.student.FormattedName.split(' ')[0]}!</h1>
 		<div class="average value box">
 			<h1>{$session.average.toFixed(2)}%</h1>
-			<div class="value-label">Average grade</div>
+			<div class="value-label">Average grade<br />&nbsp;</div>
 		</div>
 		<div class="improvement value box">
-			<h1>{$session.assignments.weekAverage}%</h1>
+			<h1>{$session.assignments.weekAverage.toFixed(2)}%</h1>
 			<div class="value-label">Average grade<br />this week</div>
 		</div>
 		<div class="week-assignments value box">
@@ -99,10 +99,15 @@
 	.value {
 		aspect-ratio: 1;
 		text-align: center;
+		display: flex;
+		flex-direction: column;
 	}
 	.value h1 {
-		margin-top: 30px;
+		margin-top: auto;
 		margin-bottom: 10px;
+	}
+	.value div {
+		margin-bottom: auto;
 	}
 
 	.grades {
