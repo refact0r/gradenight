@@ -73,7 +73,7 @@
 		flex-direction: column;
 		justify-items: center;
 		width: min-content;
-		padding: 15px;
+		padding: calc(var(--spacing) / 2);
 	}
 
 	main {

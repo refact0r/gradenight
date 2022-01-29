@@ -63,8 +63,7 @@
 	}
 
 	h1 {
-		margin-top: 15px;
-		margin-bottom: 30px;
+		margin-top: calc(var(--spacing) / 2);
 		margin-bottom: var(--spacing);
 	}
 
