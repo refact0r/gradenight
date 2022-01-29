@@ -1,5 +1,7 @@
 export function parseData(session, student, gradebook) {
-	gradebook.Courses.Course.map((course) => course.Title.replace(/ \([\s\S]*?\)/g, ''))
+	gradebook.Courses.Course.map(
+		(course) => (course.Title = course.Title.replace(/ \([\s\S]*?\)/g, ''))
+	)
 	return {
 		...session,
 		student,
