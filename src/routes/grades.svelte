@@ -42,14 +42,12 @@
 {/if}
 
 <style>
-
 	.content {
 		height: calc(100vh - 155px);
 	}
 
 	h1 {
-		margin-top: 15px;
-		margin-bottom: 30px;
+		margin-top: calc(var(--spacing) / 2);
 		margin-bottom: var(--spacing);
 	}
 

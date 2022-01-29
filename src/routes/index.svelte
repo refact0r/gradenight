@@ -91,7 +91,7 @@
 	}
 
 	h1 {
-		margin-top: 15px;
+		margin-top: calc(var(--spacing) / 2);
 		margin-bottom: 0px;
 		grid-column: 1 / 5;
 	}
@@ -159,11 +159,11 @@
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
-		width: max-content;
+		width: 100%;
 	}
 
 	.assignment-score {
-		width: min-content;
+		width: 80px;
 		text-align: right;
 		white-space: nowrap;
 		padding-left: 10px;
