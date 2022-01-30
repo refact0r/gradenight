@@ -62,11 +62,6 @@
 		padding: var(--spacing);
 	}
 
-	h1 {
-		margin-top: calc(var(--spacing) / 2);
-		margin-bottom: var(--spacing);
-	}
-
 	table {
 		width: 100%;
 		height: 100%;

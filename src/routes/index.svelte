@@ -91,7 +91,6 @@
 	}
 
 	h1 {
-		margin-top: calc(var(--spacing) / 2);
 		margin-bottom: 0px;
 		grid-column: 1 / 5;
 	}
@@ -133,14 +132,6 @@
 		padding: var(--spacing);
 	}
 
-	table {
-		width: 100%;
-	}
-
-	td {
-		padding: 0;
-	}
-
 	.grades-table {
 		height: calc(100% - 2 * var(--spacing));
 	}
@@ -176,9 +167,5 @@
 		text-align: right;
 		padding: 0;
 		font-weight: bold;
-	}
-
-	a {
-		text-decoration: none;
 	}
 </style>
