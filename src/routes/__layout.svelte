@@ -105,7 +105,7 @@
 
 	a {
 		position: relative;
-		height: 30px;
+		height: 25px;
 		margin-top: 40px;
 		text-align: center;
 	}
@@ -114,13 +114,13 @@
 	}
 	a:last-of-type {
 		margin-top: auto;
-		margin-bottom: 20px;
+		margin-bottom: 12.5px;
 	}
 
 	i {
 		display: inline-block;
-		height: 30px;
-		font-size: 30px;
-		line-height: 30px;
+		height: 25px;
+		font-size: 25px;
+		line-height: 25px;
 	}
 </style>

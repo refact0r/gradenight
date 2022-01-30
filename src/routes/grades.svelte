@@ -42,22 +42,13 @@
 {/if}
 
 <style>
-	.content {
-		height: calc(100vh - 155px);
-	}
-
-	h1 {
-		margin-top: calc(var(--spacing) / 2);
-		margin-bottom: var(--spacing);
-	}
-
-	table {
-		width: 100%;
+	.layout {
+		display: flex;
 		height: 100%;
+		flex-direction: column;
 	}
-
-	td {
-		padding: 0;
+	.content {
+		flex-grow: 1;
 	}
 	.course-score {
 		padding-right: auto;
@@ -66,9 +57,5 @@
 		text-align: right;
 		padding: 0;
 		font-weight: bold;
-	}
-
-	a {
-		text-decoration: none;
 	}
 </style>

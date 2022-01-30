@@ -1,7 +1,7 @@
 :root {
 	font-family: 'Outfit';
 	font-weight: 300;
-	font-size: 125%;
+	font-size: 112.5%;
 	--bg-color-1: hsl(220, 17%, 9%);
 	--bg-color-1-5: hsl(220, 19%, 10.5%);
 	--bg-color-2: hsl(220, 18%, 12%);
@@ -49,10 +49,28 @@ button:hover {
 	cursor: pointer;
 }
 
-h1,
-h2,
-h3 {
+a {
+	text-decoration: none;
+}
+
+h1 {
+	line-height: 50px;
+	margin-top: calc(var(--spacing) / 2);
+	margin-bottom: var(--spacing);
+}
+
+h2 {
 	margin-top: 0;
+	margin-bottom: var(--spacing);
+}
+
+table {
+	width: 100%;
+	height: 100%;
+}
+
+td {
+	padding: 0;
 }
 
 .box {
