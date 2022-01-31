@@ -38,7 +38,9 @@
 									: '-'}
 							</td>
 							<td class="assignment-score">
-								{assignment.scoreValue}/{assignment.totalValue}
+								{assignment.scoreValue
+									? assignment.scoreValue + '/' + assignment.totalValue
+									: 'Not Graded'}
 							</td>
 						</tr>
 					{/each}
@@ -49,8 +51,13 @@
 {/if}
 
 <style>
+	.layout {
+		display: flex;
+		height: 100%;
+		flex-direction: column;
+	}
+
 	.content {
-		height: calc(100vh - 155px);
 		padding: 0;
 		overflow: hidden;
 	}
@@ -62,11 +69,6 @@
 		padding: var(--spacing);
 	}
 
-	table {
-		width: 100%;
-		height: 100%;
-	}
-
 	td {
 		padding-top: 10px;
 		padding-bottom: 10px;
@@ -74,6 +76,5 @@
 
 	.assignment-score {
 		text-align: right;
-		white-space: nowrap;
 	}
 </style>

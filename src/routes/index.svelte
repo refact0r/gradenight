@@ -68,12 +68,14 @@
 				<a href="/assignments"><h2>Assignments</h2></a>
 				<table class="assignments-table">
 					{#each $session.assignments.list as assignment, index}
-						<tr>
-							<td class="assignment-name">{assignment.Measure}</td>
-							<td class="assignment-score">
-								{assignment.scoreValue}/{assignment.totalValue}
-							</td>
-						</tr>
+						{#if assignment.scoreValue}
+							<tr>
+								<td class="assignment-name">{assignment.Measure}</td>
+								<td class="assignment-score">
+									{assignment.scoreValue}/{assignment.totalValue}
+								</td>
+							</tr>
+						{/if}
 					{/each}
 				</table>
 			</div>
