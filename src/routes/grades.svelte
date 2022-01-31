@@ -47,12 +47,15 @@
 		height: 100%;
 		flex-direction: column;
 	}
+
 	.content {
 		flex-grow: 1;
 	}
+
 	.course-score {
 		padding-right: auto;
 	}
+
 	.course-grade {
 		text-align: right;
 		padding: 0;

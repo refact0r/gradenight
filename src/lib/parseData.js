@@ -20,9 +20,9 @@ function getAssignments(gradebook) {
 				let split = assignment.Points.split(' / ')
 				assignment.scoreValue = parseFloat(split[0])
 				assignment.totalValue = parseFloat(split[1])
-				assignment.course = course.Title
-				list.push(assignment)
 			}
+			assignment.course = course.Title
+			list.push(assignment)
 		}
 	}
 
