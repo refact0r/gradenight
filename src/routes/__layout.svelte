@@ -18,6 +18,7 @@
 			console.log('fetch')
 			const res = await fetch('/data')
 			const json = await res.json()
+			console.log(json.gradebook)
 			$session = parseData($session, json.student, json.gradebook)
 		}
 	})

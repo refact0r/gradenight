@@ -15,6 +15,9 @@ export function parseData(session, student, gradebook) {
 function getAssignments(gradebook) {
 	let list = []
 	for (const course of gradebook.Courses.Course) {
+		if (!course.Marks.Mark.Assignments.Assignment) {
+			continue
+		}
 		for (const assignment of course.Marks.Mark.Assignments.Assignment) {
 			if (assignment.Points.includes(' / ')) {
 				let split = assignment.Points.split(' / ')
@@ -34,7 +37,6 @@ function getAssignments(gradebook) {
 	let week = list.filter((a) => {
 		return new Date(a.DueDate) > lastSunday
 	})
-	console.log(week.reduce((a, b) => a + (b.scoreValue / b.totalValue) * 100, 0))
 	let weekAverage =
 		week.reduce((a, b) => a + (b.scoreValue / b.totalValue) * 100, 0) / week.length
 
@@ -58,6 +60,8 @@ function getAverage(gradebook) {
 function fourToPercent(grade) {
 	if (grade === 4.0) {
 		return 100
+	} else if (grade === 0) {
+		return 0
 	} else {
 		return grade * 10 + 55
 	}

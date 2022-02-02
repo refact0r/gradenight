@@ -26,12 +26,11 @@
 				{#each $session.gradebook.Courses.Course as course, index}
 					<tr>
 						<td class="course-name"><a href={'/course/' + index}>{course.Title}</a></td>
+						<td class="course-staff">{course.Staff}</td>
 						<td class="course-score">
-							{course.Marks.Mark.CalculatedScoreRaw}{parseFloat(
-								course.Marks.Mark.CalculatedScoreRaw
-							) >= 4.0
-								? '%'
-								: ''}
+							{parseFloat(course.Marks.Mark.CalculatedScoreRaw).toFixed(
+								1
+							)}{parseFloat(course.Marks.Mark.CalculatedScoreRaw) >= 4.0 ? '%' : ''}
 						</td>
 						<td class="course-grade">{course.Marks.Mark.CalculatedScoreString}</td>
 					</tr>
@@ -50,6 +49,10 @@
 
 	.content {
 		flex-grow: 1;
+		font-size: 1.2em;
+	}
+
+	.course-name {
 	}
 
 	.course-score {
