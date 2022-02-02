@@ -12,7 +12,10 @@ export async function get(event) {
 	// let gradebook = JSON.parse(await client.getGradebook()).Gradebook
 	const result = await Promise.all([
 		client.getStudentInfo().then((value) => JSON.parse(value).StudentInfo),
-		client.getGradebook().then((value) => JSON.parse(value).Gradebook)
+		client.getGradebook(0).then((value) => JSON.parse(value).Gradebook),
+		client.getGradebook(1).then((value) => JSON.parse(value).Gradebook),
+		client.getGradebook(2).then((value) => JSON.parse(value).Gradebook),
+		client.getGradebook(3).then((value) => JSON.parse(value).Gradebook)
 	])
 
 	if (!result[0]) {
@@ -28,10 +31,16 @@ export async function get(event) {
 		}
 	}
 
+	const currentPeriod = result[1].ReportingPeriods.ReportPeriod.findIndex((period) => {
+		const date = new Date()
+		return date > new Date(period.StartDate) && date < new Date(period.EndDate)
+	})
+
 	return {
 		body: {
-			student: result[0],
-			gradebook: result[1]
+			student: result.shift(),
+			periods: result,
+			currentPeriod
 		}
 	}
 }

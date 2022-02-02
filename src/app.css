@@ -56,7 +56,7 @@ a {
 h1 {
 	line-height: 50px;
 	margin-top: calc(var(--spacing) / 2);
-	margin-bottom: var(--spacing);
+	margin-bottom: 0;
 }
 
 h2 {
@@ -77,4 +77,15 @@ td {
 	background-color: var(--bg-color-2);
 	border-radius: 20px;
 	padding: var(--spacing);
+}
+
+.heading-container {
+	display: flex;
+	margin-bottom: var(--spacing);
+}
+
+.period {
+	padding: calc(var(--spacing) * 0.8);
+	width: fit-content;
+	margin-left: auto;
 }
