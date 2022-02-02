@@ -26,7 +26,11 @@
 			<div class="value-label">Average grade<br />&nbsp;</div>
 		</div>
 		<div class="improvement value box">
-			<h1>{$session.assignments.weekAverage.toFixed(1)}%</h1>
+			<h1>
+				{$session.assignments.weekAverage
+					? $session.assignments.weekAverage.toFixed(1) + '%'
+					: '-'}
+			</h1>
 			<div class="value-label">Average grade<br />this week</div>
 		</div>
 		<div class="week-assignments value box">
@@ -52,11 +56,9 @@
 					<tr>
 						<td class="course-name"><a href={'/course/' + index}>{course.Title}</a></td>
 						<td class="course-score">
-							{course.Marks.Mark.CalculatedScoreRaw}{parseFloat(
-								course.Marks.Mark.CalculatedScoreRaw
-							) >= 4.0
-								? '%'
-								: ''}
+							{parseFloat(course.Marks.Mark.CalculatedScoreRaw).toFixed(
+								1
+							)}{parseFloat(course.Marks.Mark.CalculatedScoreRaw) >= 4.0 ? '%' : ''}
 						</td>
 						<td class="course-grade">{course.Marks.Mark.CalculatedScoreString}</td>
 					</tr>

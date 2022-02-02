@@ -27,27 +27,32 @@
 
 {#if course}
 	<div class="layout">
-		<h1>{course.Title}</h1>
-		<h2>
-			{course.Marks.Mark.CalculatedScoreString}
-			({course.Marks.Mark.CalculatedScoreRaw}%)
-		</h2>
-
+		<h1 class="title">{course.Title}</h1>
+		<div class="grade box">
+			<h1 class="grade-letter">
+				{course.Marks.Mark.CalculatedScoreString}
+			</h1>
+			<div>{course.Marks.Mark.CalculatedScoreRaw}%</div>
+		</div>
+		<div class="graph box" />
 		<div class="assignments box">
 			<div class="scroll">
+				<h2>Assignments</h2>
 				<table>
-					{#each course.Marks.Mark.Assignments.Assignment as assignment, index}
-						<tr>
-							<td class="assignment-name">{assignment.Measure}</td>
-							<td class="assignment-course">{assignment.Type}</td>
-							<td class="assignment-date">{assignment.DueDate}</td>
-							<td class="assignment-score">
-								{assignment.scoreValue
-									? assignment.scoreValue + '/' + assignment.totalValue
-									: 'Not Graded'}
-							</td>
-						</tr>
-					{/each}
+					{#if course.Marks.Mark.Assignments.Assignment}
+						{#each course.Marks.Mark.Assignments.Assignment as assignment, index}
+							<tr>
+								<td class="assignment-name">{assignment.Measure}</td>
+								<td class="assignment-course">{assignment.Type}</td>
+								<td class="assignment-date">{assignment.DueDate}</td>
+								<td class="assignment-score">
+									{assignment.scoreValue
+										? assignment.scoreValue + '/' + assignment.totalValue
+										: 'Not Graded'}
+								</td>
+							</tr>
+						{/each}
+					{/if}
 				</table>
 			</div>
 		</div>
@@ -56,17 +61,36 @@
 
 <style>
 	.layout {
-		display: flex;
+		display: grid;
+		gap: var(--spacing);
+		grid-template-columns: 1fr 6fr;
+		grid-template-rows: auto auto 1fr;
 		height: 100%;
-		flex-direction: column;
 	}
 
-	h1 {
+	.title {
+		grid-column: 1 / 3;
 		margin-top: calc(var(--spacing) / 2);
-		margin-bottom: var(--spacing);
+		margin-bottom: 0;
+	}
+
+	.grade {
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		aspect-ratio: 1;
+	}
+	.grade h1 {
+		margin-top: auto;
+		margin-bottom: 10px;
+	}
+	.grade div {
+		margin-bottom: auto;
 	}
 
 	.assignments {
+		grid-row: 3;
+		grid-column: 1 / 3;
 		padding: 0;
 		overflow: hidden;
 	}
