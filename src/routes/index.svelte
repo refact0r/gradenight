@@ -21,6 +21,10 @@
 {#if $session.student && $session.gradebook}
 	<div class="layout">
 		<h1>Hello, {$session.student.FormattedName.split(' ')[0]}!</h1>
+		<div class="period box">
+			Quarter 3&nbsp;&nbsp;
+			<i class="bi bi-chevron-down" />
+		</div>
 		<div class="average value box">
 			<h1>{$session.average.toFixed(1)}%</h1>
 			<div class="value-label">Average grade<br />&nbsp;</div>
@@ -53,14 +57,13 @@
 			<a href="/grades"><h2>Grades</h2></a>
 			<table class="grades-table">
 				{#each $session.gradebook.Courses.Course as course, index}
+					{@const scoreRaw = parseFloat(course.Marks.Mark.CalculatedScoreRaw)}
+					{@const score = scoreRaw.toFixed(1) + (scoreRaw >= 4.0 ? '%' : '')}
+					{@const grade = course.Marks.Mark.CalculatedScoreString}
 					<tr>
 						<td class="course-name"><a href={'/course/' + index}>{course.Title}</a></td>
-						<td class="course-score">
-							{parseFloat(course.Marks.Mark.CalculatedScoreRaw).toFixed(
-								1
-							)}{parseFloat(course.Marks.Mark.CalculatedScoreRaw) >= 4.0 ? '%' : ''}
-						</td>
-						<td class="course-grade">{course.Marks.Mark.CalculatedScoreString}</td>
+						<td class="course-score">{score}</td>
+						<td class="course-grade">{grade}</td>
 					</tr>
 				{/each}
 			</table>
@@ -90,13 +93,18 @@
 		display: grid;
 		height: 100%;
 		gap: var(--spacing);
-		grid-template-columns: 1fr 1fr 1fr 1fr 2.1fr;
+		grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
 		grid-template-rows: auto auto 1fr;
 	}
 
 	h1 {
 		margin-bottom: 0px;
 		grid-column: 1 / 5;
+	}
+
+	.period {
+		grid-row: 1;
+		grid-column: 5;
 	}
 
 	.value {
@@ -125,7 +133,7 @@
 	.assignments {
 		padding: 0;
 		grid-column: 5;
-		grid-row: 1 / 4;
+		grid-row: 2 / 4;
 		overflow: hidden;
 	}
 

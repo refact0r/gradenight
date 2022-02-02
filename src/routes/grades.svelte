@@ -20,19 +20,24 @@
 
 {#if $session.student && $session.gradebook}
 	<div class="layout">
-		<h1>Grades</h1>
+		<div class="heading-container">
+			<h1>Grades</h1>
+			<div class="period box">
+				Quarter 3&nbsp;&nbsp;
+				<i class="bi bi-chevron-down" />
+			</div>
+		</div>
 		<div class="content box">
 			<table>
 				{#each $session.gradebook.Courses.Course as course, index}
+					{@const scoreRaw = parseFloat(course.Marks.Mark.CalculatedScoreRaw)}
+					{@const score = scoreRaw.toFixed(1) + (scoreRaw >= 4.0 ? '%' : '')}
+					{@const grade = course.Marks.Mark.CalculatedScoreString}
 					<tr>
 						<td class="course-name"><a href={'/course/' + index}>{course.Title}</a></td>
 						<td class="course-staff">{course.Staff}</td>
-						<td class="course-score">
-							{parseFloat(course.Marks.Mark.CalculatedScoreRaw).toFixed(
-								1
-							)}{parseFloat(course.Marks.Mark.CalculatedScoreRaw) >= 4.0 ? '%' : ''}
-						</td>
-						<td class="course-grade">{course.Marks.Mark.CalculatedScoreString}</td>
+						<td class="course-score">{score}</td>
+						<td class="course-grade">{grade}</td>
 					</tr>
 				{/each}
 			</table>

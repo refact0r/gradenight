@@ -1,10 +1,15 @@
-export function parseData(session, student, gradebook) {
-	gradebook.Courses.Course.map(
-		(course) => (course.Title = course.Title.replace(/ \([\s\S]*?\)/g, ''))
-	)
+export function parseData(session, json) {
+	const { student, periods, currentPeriod } = json
+	periods.forEach((period) => {
+		period.Courses.Course.map(
+			(course) => (course.Title = course.Title.replace(/ \([\s\S]*?\)/g, ''))
+		)
+	})
+	const gradebook = periods[currentPeriod]
 	return {
 		...session,
 		student,
+		periods,
 		gradebook,
 		assignments: getAssignments(gradebook),
 		average: getAverage(gradebook),
