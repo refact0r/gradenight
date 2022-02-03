@@ -12,38 +12,36 @@
 
 <script>
 	import { session } from '$app/stores'
+	import PeriodSelect from '$lib/PeriodSelect.svelte'
+	let period = $session.currentPeriod
+	$: gradebook = $session.periods[period]
 </script>
 
 <svelte:head>
 	<title>Grades</title>
 </svelte:head>
 
-{#if $session.student && $session.gradebook}
-	<div class="layout">
-		<div class="heading-container">
-			<h1>Grades</h1>
-			<div class="period box">
-				Quarter 3&nbsp;&nbsp;
-				<i class="bi bi-chevron-down" />
-			</div>
-		</div>
-		<div class="content box">
-			<table>
-				{#each $session.gradebook.Courses.Course as course, index}
-					{@const scoreRaw = parseFloat(course.Marks.Mark.CalculatedScoreRaw)}
-					{@const score = scoreRaw.toFixed(1) + (scoreRaw >= 4.0 ? '%' : '')}
-					{@const grade = course.Marks.Mark.CalculatedScoreString}
-					<tr>
-						<td class="course-name"><a href={'/course/' + index}>{course.Title}</a></td>
-						<td class="course-staff">{course.Staff}</td>
-						<td class="course-score">{score}</td>
-						<td class="course-grade">{grade}</td>
-					</tr>
-				{/each}
-			</table>
-		</div>
+<div class="layout">
+	<div class="heading-container">
+		<h1>Grades</h1>
+		<PeriodSelect bind:period />
 	</div>
-{/if}
+	<div class="content box">
+		<table>
+			{#each gradebook.Courses.Course as course, index}
+				{@const scoreRaw = parseFloat(course.Marks.Mark.CalculatedScoreRaw)}
+				{@const score = scoreRaw.toFixed(1) + (scoreRaw >= 4.0 ? '%' : '')}
+				{@const grade = course.Marks.Mark.CalculatedScoreString}
+				<tr>
+					<td class="course-name"><a href={'/course/' + index}>{course.Title}</a></td>
+					<td class="course-staff">{course.Staff}</td>
+					<td class="course-score">{score}</td>
+					<td class="course-grade">{grade}</td>
+				</tr>
+			{/each}
+		</table>
+	</div>
+</div>
 
 <style>
 	.layout {

@@ -4,16 +4,16 @@ export function parseData(session, json) {
 		period.Courses.Course.map(
 			(course) => (course.Title = course.Title.replace(/ \([\s\S]*?\)/g, ''))
 		)
+		period.days = Math.round((new Date(period.ReportingPeriod.EndDate) - new Date()) / 86400000)
+		period.assignments = getAssignments(period)
+		period.average = getAverage(period)
 	})
-	const gradebook = periods[currentPeriod]
 	return {
 		...session,
 		student,
 		periods,
-		gradebook,
-		assignments: getAssignments(gradebook),
-		average: getAverage(gradebook),
-		days: Math.round((new Date(gradebook.ReportingPeriod.EndDate) - new Date()) / 86400000)
+		currentPeriod,
+		gradebook: periods[currentPeriod]
 	}
 }
 

@@ -12,6 +12,7 @@
 
 <script>
 	import { session } from '$app/stores'
+	import PeriodSelect from '$lib/PeriodSelect.svelte'
 </script>
 
 <svelte:head>
@@ -21,32 +22,28 @@
 {#if $session.student && $session.gradebook}
 	<div class="layout">
 		<h1>Hello, {$session.student.FormattedName.split(' ')[0]}!</h1>
-		<div class="period box">
-			Quarter 3&nbsp;&nbsp;
-			<i class="bi bi-chevron-down" />
-		</div>
 		<div class="average value box">
-			<h1>{$session.average.toFixed(1)}%</h1>
+			<h1>{$session.gradebook.average.toFixed(1)}%</h1>
 			<div class="value-label">Average grade<br />&nbsp;</div>
 		</div>
 		<div class="improvement value box">
 			<h1>
-				{$session.assignments.weekAverage
-					? $session.assignments.weekAverage.toFixed(1) + '%'
+				{$session.gradebook.assignments.weekAverage
+					? $session.gradebook.assignments.weekAverage.toFixed(1) + '%'
 					: '-'}
 			</h1>
 			<div class="value-label">Average grade<br />this week</div>
 		</div>
 		<div class="week-assignments value box">
-			<h1>{$session.assignments.week.length}</h1>
+			<h1>{$session.gradebook.assignments.week.length}</h1>
 			<div class="value-label">
-				{$session.assignments.week.length === 1 ? 'Assignment' : 'Assignments'}
+				{$session.gradebook.assignments.week.length === 1 ? 'Assignment' : 'Assignments'}
 				<br />this week
 			</div>
 		</div>
 		<div class="days value box">
 			<h1>
-				{$session.days}
+				{$session.gradebook.days}
 			</h1>
 			<div class="value-label">
 				{$session.days === 1 ? 'Day' : 'Days'} left in
@@ -72,7 +69,7 @@
 			<div class="assignments-scroll">
 				<a href="/assignments"><h2>Assignments</h2></a>
 				<table class="assignments-table">
-					{#each $session.assignments.list as assignment, index}
+					{#each $session.gradebook.assignments.list as assignment, index}
 						{#if assignment.scoreValue}
 							<tr>
 								<td class="assignment-name">{assignment.Measure}</td>
@@ -102,11 +99,6 @@
 		grid-column: 1 / 5;
 	}
 
-	.period {
-		grid-row: 1;
-		grid-column: 5;
-	}
-
 	.value {
 		aspect-ratio: 1;
 		text-align: center;
@@ -133,7 +125,7 @@
 	.assignments {
 		padding: 0;
 		grid-column: 5;
-		grid-row: 2 / 4;
+		grid-row: 1 / 4;
 		overflow: hidden;
 	}
 
