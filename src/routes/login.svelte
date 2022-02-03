@@ -44,7 +44,7 @@
 				username,
 				password
 			}
-			$session = parseData($session, json.student, json.gradebook)
+			$session = parseData($session, json)
 			goto('/')
 		} else {
 			error = 'Invalid login credentials.'
