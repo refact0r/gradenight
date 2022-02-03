@@ -16,9 +16,11 @@
 
 <script>
 	import { session } from '$app/stores'
+	import PeriodSelect from '$lib/PeriodSelect.svelte'
 
 	export let courseIndex
-	$: course = $session.gradebook.Courses.Course[courseIndex]
+	let period = $session.currentPeriod
+	$: course = $session.periods[period].Courses.Course[courseIndex]
 </script>
 
 <svelte:head>
@@ -26,7 +28,10 @@
 </svelte:head>
 
 <div class="layout">
-	<h1 class="title">{course.Title}</h1>
+	<div class="heading-container">
+		<h1 class="title">{course.Title}</h1>
+		<PeriodSelect bind:period />
+	</div>
 	<div class="grade box">
 		<h1 class="grade-letter">
 			{course.Marks.Mark.CalculatedScoreString}
@@ -66,7 +71,7 @@
 		height: 100%;
 	}
 
-	.title {
+	.heading-container {
 		grid-column: 1 / 3;
 		margin-top: calc(var(--spacing) / 2);
 		margin-bottom: 0;
