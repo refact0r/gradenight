@@ -13,6 +13,7 @@ export async function post({ request }) {
 		client.getGradebook(2).then((value) => JSON.parse(value).Gradebook),
 		client.getGradebook(3).then((value) => JSON.parse(value).Gradebook)
 	])
+	console.log(result)
 	if (!result[0]) {
 		return {
 			status: 401
