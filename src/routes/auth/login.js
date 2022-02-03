@@ -1,5 +1,6 @@
 import { login } from 'studentvue.js'
 import cookie from 'cookie'
+console.log(login)
 
 export async function post({ request }) {
 	const body = await request.json()
