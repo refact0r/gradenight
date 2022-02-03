@@ -18,46 +18,44 @@
 	import { session } from '$app/stores'
 
 	export let courseIndex
-	$: course = $session.gradebook ? $session.gradebook.Courses.Course[courseIndex] : null
+	$: course = $session.gradebook.Courses.Course[courseIndex]
 </script>
 
 <svelte:head>
 	<title>{course.Title}</title>
 </svelte:head>
 
-{#if course}
-	<div class="layout">
-		<h1 class="title">{course.Title}</h1>
-		<div class="grade box">
-			<h1 class="grade-letter">
-				{course.Marks.Mark.CalculatedScoreString}
-			</h1>
-			<div>{course.Marks.Mark.CalculatedScoreRaw}%</div>
-		</div>
-		<div class="graph box" />
-		<div class="assignments box">
-			<div class="scroll">
-				<h2>Assignments</h2>
-				<table>
-					{#if course.Marks.Mark.Assignments.Assignment}
-						{#each course.Marks.Mark.Assignments.Assignment as assignment, index}
-							<tr>
-								<td class="assignment-name">{assignment.Measure}</td>
-								<td class="assignment-course">{assignment.Type}</td>
-								<td class="assignment-date">{assignment.DueDate}</td>
-								<td class="assignment-score">
-									{assignment.scoreValue
-										? assignment.scoreValue + '/' + assignment.totalValue
-										: 'Not Graded'}
-								</td>
-							</tr>
-						{/each}
-					{/if}
-				</table>
-			</div>
+<div class="layout">
+	<h1 class="title">{course.Title}</h1>
+	<div class="grade box">
+		<h1 class="grade-letter">
+			{course.Marks.Mark.CalculatedScoreString}
+		</h1>
+		<div>{course.Marks.Mark.CalculatedScoreRaw}%</div>
+	</div>
+	<div class="graph box" />
+	<div class="assignments box">
+		<div class="scroll">
+			<h2>Assignments</h2>
+			<table>
+				{#if course.Marks.Mark.Assignments.Assignment}
+					{#each course.Marks.Mark.Assignments.Assignment as assignment, index}
+						<tr>
+							<td class="assignment-name">{assignment.Measure}</td>
+							<td class="assignment-course">{assignment.Type}</td>
+							<td class="assignment-date">{assignment.DueDate}</td>
+							<td class="assignment-score">
+								{assignment.scoreValue
+									? assignment.scoreValue + '/' + assignment.totalValue
+									: 'Not Graded'}
+							</td>
+						</tr>
+					{/each}
+				{/if}
+			</table>
 		</div>
 	</div>
-{/if}
+</div>
 
 <style>
 	.layout {

@@ -18,71 +18,69 @@
 	<title>Home</title>
 </svelte:head>
 
-{#if $session.student && $session.gradebook}
-	<div class="layout">
-		<h1>Hello, {$session.student.FormattedName.split(' ')[0]}!</h1>
-		<div class="average value box">
-			<h1>{$session.gradebook.average.toFixed(1)}%</h1>
-			<div class="value-label">Average grade<br />&nbsp;</div>
+<div class="layout">
+	<h1>Hello, {$session.student.FormattedName.split(' ')[0]}!</h1>
+	<div class="average value box">
+		<h1>{$session.gradebook.average.toFixed(1)}%</h1>
+		<div class="value-label">Average grade<br />&nbsp;</div>
+	</div>
+	<div class="improvement value box">
+		<h1>
+			{$session.gradebook.assignments.weekAverage
+				? $session.gradebook.assignments.weekAverage.toFixed(1)
+				: '0.0'}%
+		</h1>
+		<div class="value-label">Average grade<br />this week</div>
+	</div>
+	<div class="week-assignments value box">
+		<h1>{$session.gradebook.assignments.week.length}</h1>
+		<div class="value-label">
+			{$session.gradebook.assignments.week.length === 1 ? 'Assignment' : 'Assignments'}
+			<br />this week
 		</div>
-		<div class="improvement value box">
-			<h1>
-				{$session.gradebook.assignments.weekAverage
-					? $session.gradebook.assignments.weekAverage.toFixed(1) + '%'
-					: '-'}
-			</h1>
-			<div class="value-label">Average grade<br />this week</div>
+	</div>
+	<div class="days value box">
+		<h1>
+			{$session.gradebook.days}
+		</h1>
+		<div class="value-label">
+			{$session.days === 1 ? 'Day' : 'Days'} left in
+			<br />{$session.gradebook.ReportingPeriod.GradePeriod}
 		</div>
-		<div class="week-assignments value box">
-			<h1>{$session.gradebook.assignments.week.length}</h1>
-			<div class="value-label">
-				{$session.gradebook.assignments.week.length === 1 ? 'Assignment' : 'Assignments'}
-				<br />this week
-			</div>
-		</div>
-		<div class="days value box">
-			<h1>
-				{$session.gradebook.days}
-			</h1>
-			<div class="value-label">
-				{$session.days === 1 ? 'Day' : 'Days'} left in
-				<br />{$session.gradebook.ReportingPeriod.GradePeriod}
-			</div>
-		</div>
-		<div class="grades box">
-			<a href="/grades"><h2>Grades</h2></a>
-			<table class="grades-table">
-				{#each $session.gradebook.Courses.Course as course, index}
-					{@const scoreRaw = parseFloat(course.Marks.Mark.CalculatedScoreRaw)}
-					{@const score = scoreRaw.toFixed(1) + (scoreRaw >= 4.0 ? '%' : '')}
-					{@const grade = course.Marks.Mark.CalculatedScoreString}
-					<tr>
-						<td class="course-name"><a href={'/course/' + index}>{course.Title}</a></td>
-						<td class="course-score">{score}</td>
-						<td class="course-grade">{grade}</td>
-					</tr>
+	</div>
+	<div class="grades box">
+		<a href="/grades"><h2>Grades</h2></a>
+		<table class="grades-table">
+			{#each $session.gradebook.Courses.Course as course, index}
+				{@const scoreRaw = parseFloat(course.Marks.Mark.CalculatedScoreRaw)}
+				{@const score = scoreRaw.toFixed(1) + (scoreRaw >= 4.0 ? '%' : '')}
+				{@const grade = course.Marks.Mark.CalculatedScoreString}
+				<tr>
+					<td class="course-name"><a href={'/course/' + index}>{course.Title}</a></td>
+					<td class="course-score">{score}</td>
+					<td class="course-grade">{grade}</td>
+				</tr>
+			{/each}
+		</table>
+	</div>
+	<div class="assignments box">
+		<div class="assignments-scroll">
+			<a href="/assignments"><h2>Assignments</h2></a>
+			<table class="assignments-table">
+				{#each $session.gradebook.assignments.list as assignment, index}
+					{#if assignment.scoreValue}
+						<tr>
+							<td class="assignment-name">{assignment.Measure}</td>
+							<td class="assignment-score">
+								{assignment.scoreValue}/{assignment.totalValue}
+							</td>
+						</tr>
+					{/if}
 				{/each}
 			</table>
 		</div>
-		<div class="assignments box">
-			<div class="assignments-scroll">
-				<a href="/assignments"><h2>Assignments</h2></a>
-				<table class="assignments-table">
-					{#each $session.gradebook.assignments.list as assignment, index}
-						{#if assignment.scoreValue}
-							<tr>
-								<td class="assignment-name">{assignment.Measure}</td>
-								<td class="assignment-score">
-									{assignment.scoreValue}/{assignment.totalValue}
-								</td>
-							</tr>
-						{/if}
-					{/each}
-				</table>
-			</div>
-		</div>
 	</div>
-{/if}
+</div>
 
 <style>
 	.layout {
