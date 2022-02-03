@@ -11,7 +11,7 @@
 
 <style>
 	select {
-		padding: calc(var(--spacing) * 0.8);
+		padding: calc(var(--spacing) * 0.5);
 		width: fit-content;
 		margin-left: auto;
 	}
