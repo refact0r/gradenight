@@ -12,48 +12,46 @@
 
 <script>
 	import { session } from '$app/stores'
+	import PeriodSelect from '$lib/PeriodSelect.svelte'
+	let period = $session.currentPeriod
+	$: gradebook = $session.periods[period]
 </script>
 
 <svelte:head>
 	<title>Assignments</title>
 </svelte:head>
 
-{#if $session.student && $session.gradebook}
-	<div class="layout">
-		<div class="heading-container">
-			<h1>Assignments</h1>
-			<div class="period box">
-				Quarter 3&nbsp;&nbsp;
-				<i class="bi bi-chevron-down" />
-			</div>
-		</div>
-		<div class="content box">
-			<div class="scroll">
-				<table>
-					{#each $session.assignments.list as assignment}
-						{@const percentage = (
-							(assignment.scoreValue / assignment.totalValue) *
-							100
-						).toFixed(1)}
-						<tr>
-							<td class="assignment-name">{assignment.Measure}</td>
-							<td class="assignment-course">{assignment.course}</td>
-							<td class="assignment-date">{assignment.DueDate}</td>
-							<td class="assignment-percentage">
-								{assignment.totalValue != 0 ? percentage : '-'}
-							</td>
-							<td class="assignment-score">
-								{assignment.scoreValue
-									? assignment.scoreValue + '/' + assignment.totalValue
-									: 'Not Graded'}
-							</td>
-						</tr>
-					{/each}
-				</table>
-			</div>
+<div class="layout">
+	<div class="heading-container">
+		<h1>Assignments</h1>
+		<PeriodSelect bind:period />
+	</div>
+	<div class="content box">
+		<div class="scroll">
+			<table>
+				{#each gradebook.assignments.list as assignment}
+					{@const percentage = (
+						(assignment.scoreValue / assignment.totalValue) *
+						100
+					).toFixed(1)}
+					<tr>
+						<td class="assignment-name">{assignment.Measure}</td>
+						<td class="assignment-course">{assignment.course}</td>
+						<td class="assignment-date">{assignment.DueDate}</td>
+						<td class="assignment-percentage">
+							{assignment.totalValue != 0 ? percentage : '-'}
+						</td>
+						<td class="assignment-score">
+							{assignment.scoreValue
+								? assignment.scoreValue + '/' + assignment.totalValue
+								: 'Not Graded'}
+						</td>
+					</tr>
+				{/each}
+			</table>
 		</div>
 	</div>
-{/if}
+</div>
 
 <style>
 	.layout {

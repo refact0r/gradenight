@@ -1,5 +1,5 @@
 :root {
-	font-family: 'Outfit';
+	font-family: 'Outfit', sans-serif;
 	font-weight: 300;
 	font-size: 112.5%;
 	--bg-color-1: hsl(220, 17%, 9%);
@@ -49,6 +49,12 @@ button:hover {
 	cursor: pointer;
 }
 
+select {
+	border: none;
+	font: inherit;
+	color: inherit;
+}
+
 a {
 	text-decoration: none;
 }
@@ -82,10 +88,4 @@ td {
 .heading-container {
 	display: flex;
 	margin-bottom: var(--spacing);
-}
-
-.period {
-	padding: calc(var(--spacing) * 0.8);
-	width: fit-content;
-	margin-left: auto;
 }

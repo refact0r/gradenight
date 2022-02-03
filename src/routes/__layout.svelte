@@ -19,7 +19,6 @@
 			const res = await fetch('/data')
 			const json = await res.json()
 			$session = parseData($session, json)
-			console.log($session)
 		}
 	})
 
