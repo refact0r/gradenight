@@ -54,7 +54,7 @@
 </script>
 
 <svelte:head>
-	<title>Login to StudentVue</title>
+	<title>StudentVue</title>
 </svelte:head>
 
 <div class="content">

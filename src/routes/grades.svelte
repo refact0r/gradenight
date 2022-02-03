@@ -13,6 +13,7 @@
 <script>
 	import { session } from '$app/stores'
 	import PeriodSelect from '$lib/PeriodSelect.svelte'
+
 	let period = $session.currentPeriod
 	$: gradebook = $session.periods[period]
 </script>
