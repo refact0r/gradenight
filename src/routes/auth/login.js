@@ -1,12 +1,13 @@
 import { login } from 'studentvue.js'
 import cookie from 'cookie'
+console.log(login)
 
 export async function post({ request }) {
 	const body = await request.json()
+	console.log(body)
 
-	let result
 	let client = await login('https://wa-bsd405-psv.edupoint.com/', body.username, body.password)
-	result = await Promise.all([
+	let result = await Promise.all([
 		client.getStudentInfo().then((value) => JSON.parse(value).StudentInfo),
 		client.getGradebook(0).then((value) => JSON.parse(value).Gradebook),
 		client.getGradebook(1).then((value) => JSON.parse(value).Gradebook),
