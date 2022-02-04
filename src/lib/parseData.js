@@ -1,13 +1,26 @@
 export function parseData(session, json) {
 	const { student, periods, currentPeriod } = json
+
 	periods.forEach((period) => {
-		period.Courses.Course.map(
-			(course) => (course.Title = course.Title.replace(/ \([\s\S]*?\)/g, ''))
-		)
+		period.Courses.Course.forEach((course) => {
+			course.Title = course.Title.replace(/ \([\s\S]*?\)/g, '')
+
+			course.scoreRaw = parseFloat(course.Marks.Mark.CalculatedScoreRaw)
+			course.scorePercent = course.scoreRaw
+			course.score = course.scoreRaw.toFixed(1) + '%'
+			if (course.scoreRaw > 0 && course.scoreRaw <= 4.0) {
+				course.scorePercent = fourToPercent(course.scoreRaw)
+				course.score = course.scoreRaw.toFixed(1)
+			}
+
+			course.color = getColor(course.scorePercent)
+		})
+
 		period.days = Math.round((new Date(period.ReportingPeriod.EndDate) - new Date()) / 86400000)
 		period.assignments = getAssignments(period)
 		period.average = getAverage(period)
 	})
+
 	return {
 		...session,
 		student,
@@ -60,6 +73,20 @@ function getAverage(gradebook) {
 		else grades.push(fourToPercent(parseFloat(course.Marks.Mark.CalculatedScoreRaw)))
 	}
 	return grades.reduce((a, b) => a + b) / grades.length
+}
+
+function getColor(percent) {
+	if (percent === 0) {
+		return null
+	}
+	let hue = 0
+	let darkness = 60
+	if (percent >= 60) {
+		hue = 4 * (percent - 60)
+	} else {
+		darkness = percent
+	}
+	return `color: hsl(${hue}, 60%, ${darkness}%);`
 }
 
 function fourToPercent(grade) {
