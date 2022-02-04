@@ -52,13 +52,12 @@
 		<a href="/grades"><h2>Grades</h2></a>
 		<table class="grades-table">
 			{#each $session.gradebook.Courses.Course as course, index}
-				{@const scoreRaw = parseFloat(course.Marks.Mark.CalculatedScoreRaw)}
-				{@const score = scoreRaw.toFixed(1) + (scoreRaw >= 4.0 ? '%' : '')}
-				{@const grade = course.Marks.Mark.CalculatedScoreString}
 				<tr>
 					<td class="course-name"><a href={'/course/' + index}>{course.Title}</a></td>
-					<td class="course-score">{score}</td>
-					<td class="course-grade">{grade}</td>
+					<td class="course-grade" style={course.color}>
+						{course.Marks.Mark.CalculatedScoreString}
+					</td>
+					<td class="course-score" style={course.color}>{course.score}</td>
 				</tr>
 			{/each}
 		</table>
@@ -161,12 +160,12 @@
 		padding-left: 10px;
 	}
 
-	.course-name {
-		padding-right: auto;
-	}
 	.course-grade {
-		text-align: right;
 		padding: 0;
 		font-weight: bold;
+	}
+
+	.course-score {
+		text-align: right;
 	}
 </style>
