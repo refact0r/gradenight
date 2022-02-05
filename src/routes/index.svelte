@@ -21,21 +21,23 @@
 <div class="layout">
 	<h1>Hello, {$session.student.FormattedName.split(' ')[0]}!</h1>
 	<div class="average value box">
-		<h1>{$session.gradebook.average.toFixed(1)}%</h1>
+		<h1 style={$session.gradebook.averageColor}>
+			{$session.gradebook.average >= 0 ? $session.gradebook.average + '%' : '-'}
+		</h1>
 		<div class="value-label">Average grade<br />&nbsp;</div>
 	</div>
 	<div class="improvement value box">
-		<h1>
-			{$session.gradebook.assignments.weekAverage
-				? $session.gradebook.assignments.weekAverage.toFixed(1)
-				: '0.0'}%
+		<h1 style={$session.gradebook.week.averageColor}>
+			{$session.gradebook.week.average >= 0
+				? $session.gradebook.week.average.toFixed(1) + '%'
+				: '-'}
 		</h1>
 		<div class="value-label">Average grade<br />this week</div>
 	</div>
 	<div class="week-assignments value box">
-		<h1>{$session.gradebook.assignments.week.length}</h1>
+		<h1>{$session.gradebook.week.length}</h1>
 		<div class="value-label">
-			{$session.gradebook.assignments.week.length === 1 ? 'Assignment' : 'Assignments'}
+			{$session.gradebook.week.length === 1 ? 'Assignment' : 'Assignments'}
 			<br />this week
 		</div>
 	</div>
@@ -66,12 +68,12 @@
 		<div class="assignments-scroll">
 			<a href="/assignments"><h2>Assignments</h2></a>
 			<table class="assignments-table">
-				{#each $session.gradebook.assignments.list as assignment, index}
-					{#if assignment.scoreValue}
+				{#each $session.gradebook.assignments as assignment}
+					{#if assignment.scorePercent >= 0}
 						<tr>
 							<td class="assignment-name">{assignment.Measure}</td>
-							<td class="assignment-score">
-								{assignment.scoreValue}/{assignment.totalValue}
+							<td class="assignment-score" style={assignment.color}>
+								{assignment.score}
 							</td>
 						</tr>
 					{/if}
