@@ -30,22 +30,16 @@
 	<div class="content box">
 		<div class="scroll">
 			<table>
-				{#each gradebook.assignments.list as assignment}
-					{@const percentage = (
-						(assignment.scoreValue / assignment.totalValue) *
-						100
-					).toFixed(1)}
+				{#each gradebook.assignments as assignment}
 					<tr>
 						<td class="assignment-name">{assignment.Measure}</td>
 						<td class="assignment-course">{assignment.course}</td>
 						<td class="assignment-date">{assignment.DueDate}</td>
-						<td class="assignment-percentage">
-							{assignment.totalValue != 0 ? percentage : '-'}
+						<td class="assignment-score" style={assignment.color}>
+							{assignment.score}
 						</td>
-						<td class="assignment-score">
-							{assignment.scoreValue
-								? assignment.scoreValue + '/' + assignment.totalValue
-								: 'Not Graded'}
+						<td class="assignment-percentage" style={assignment.color}>
+							{assignment.percent}
 						</td>
 					</tr>
 				{/each}
@@ -79,7 +73,16 @@
 		padding-bottom: 10px;
 	}
 
+	.assignment-score,
+	.assignment-date {
+		padding: 10px 20px;
+	}
+
 	.assignment-score {
+		text-align: center;
+	}
+
+	.assignment-percentage {
 		text-align: right;
 	}
 </style>

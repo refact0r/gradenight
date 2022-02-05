@@ -55,6 +55,10 @@
 		font-size: 1.2em;
 	}
 
+	table {
+		height: 100%;
+	}
+
 	.course-score {
 		text-align: right;
 	}

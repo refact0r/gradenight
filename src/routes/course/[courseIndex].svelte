@@ -73,7 +73,6 @@
 
 	.heading-container {
 		grid-column: 1 / 3;
-		margin-top: calc(var(--spacing) / 2);
 		margin-bottom: 0;
 	}
 
