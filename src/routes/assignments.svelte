@@ -83,6 +83,7 @@
 	}
 
 	.assignment-percentage {
+		padding-left: 20px;
 		text-align: right;
 	}
 </style>
