@@ -33,10 +33,10 @@
 		<PeriodSelect bind:period />
 	</div>
 	<div class="grade box">
-		<h1 class="grade-letter">
+		<h1 class="grade-letter" style={course.color}>
 			{course.Marks.Mark.CalculatedScoreString}
 		</h1>
-		<div>{course.Marks.Mark.CalculatedScoreRaw}%</div>
+		<div style={course.color}>{course.score}</div>
 	</div>
 	<div class="graph box" />
 	<div class="assignments box">
@@ -49,10 +49,11 @@
 							<td class="assignment-name">{assignment.Measure}</td>
 							<td class="assignment-course">{assignment.Type}</td>
 							<td class="assignment-date">{assignment.DueDate}</td>
-							<td class="assignment-score">
-								{assignment.scoreValue
-									? assignment.scoreValue + '/' + assignment.totalValue
-									: 'Not Graded'}
+							<td class="assignment-score" style={assignment.color}>
+								{assignment.score}
+							</td>
+							<td class="assignment-percentage" style={assignment.color}>
+								{assignment.percent}
 							</td>
 						</tr>
 					{/each}
@@ -109,7 +110,17 @@
 		padding-bottom: 10px;
 	}
 
+	.assignment-score,
+	.assignment-date {
+		padding: 10px 20px;
+	}
+
 	.assignment-score {
+		text-align: center;
+	}
+
+	.assignment-percentage {
+		padding-left: 20px;
 		text-align: right;
 	}
 </style>
