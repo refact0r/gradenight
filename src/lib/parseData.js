@@ -23,10 +23,13 @@ export function parseData(session, json) {
 		}
 
 		period.days = Math.round((new Date(period.ReportingPeriod.EndDate) - new Date()) / 86400000)
+
 		period.assignments = getAssignments(period)
 		period.week = getWeek(period.assignments)
-		period.average = getAverage(period)
-		period.averageColor = getColor(period.average)
+
+		let averageRaw = getAverage(period)
+		period.averageColor = getColor(averageRaw)
+		period.average = averageRaw >= 0 ? averageRaw + '%' : '-'
 	}
 
 	return {
@@ -83,9 +86,10 @@ function getWeek(assignments) {
 		return new Date(a.DueDate) > lastSunday && a.scorePercent >= 0
 	})
 	let average = -1
-	if (week.length > 0) average = week.reduce((a, b) => a + b.scorePercent, 0) / week.length
+	if (week.length > 0)
+		average = (week.reduce((a, b) => a + b.scorePercent, 0) / week.length).toFixed(1)
 	return {
-		average,
+		average: average >= 0 ? average + '%' : '-',
 		averageColor: getColor(average),
 		length: week.length
 	}

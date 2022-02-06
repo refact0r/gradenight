@@ -22,15 +22,13 @@
 	<h1>Hello, {$session.student.FormattedName.split(' ')[0]}!</h1>
 	<div class="average value box">
 		<h1 style={$session.gradebook.averageColor}>
-			{$session.gradebook.average >= 0 ? $session.gradebook.average + '%' : '-'}
+			{$session.gradebook.average}
 		</h1>
 		<div class="value-label">Average grade<br />&nbsp;</div>
 	</div>
 	<div class="improvement value box">
 		<h1 style={$session.gradebook.week.averageColor}>
-			{$session.gradebook.week.average >= 0
-				? $session.gradebook.week.average.toFixed(1) + '%'
-				: '-'}
+			{$session.gradebook.week.average}
 		</h1>
 		<div class="value-label">Average grade<br />this week</div>
 	</div>
