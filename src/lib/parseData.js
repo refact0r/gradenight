@@ -37,6 +37,7 @@ export function parseData(session, json) {
 		student,
 		periods,
 		currentPeriod,
+		selectedPeriod: currentPeriod,
 		gradebook: periods[currentPeriod]
 	}
 }

@@ -19,8 +19,7 @@
 	import PeriodSelect from '$lib/PeriodSelect.svelte'
 
 	export let courseIndex
-	let period = $session.currentPeriod
-	$: course = $session.periods[period].Courses.Course[courseIndex]
+	$: course = $session.selected.Courses.Course[courseIndex]
 </script>
 
 <svelte:head>
@@ -30,7 +29,7 @@
 <div class="layout">
 	<div class="heading-container">
 		<h1 class="title">{course.Title}</h1>
-		<PeriodSelect bind:period />
+		<PeriodSelect bind:period={$session.selectedPeriod} />
 	</div>
 	<div class="grade box">
 		<h1 class="grade-letter" style={course.color}>

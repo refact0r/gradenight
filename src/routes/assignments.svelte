@@ -12,10 +12,7 @@
 
 <script>
 	import { session } from '$app/stores'
-
 	import PeriodSelect from '$lib/PeriodSelect.svelte'
-	let period = $session.currentPeriod
-	$: gradebook = $session.periods[period]
 </script>
 
 <svelte:head>
@@ -25,12 +22,12 @@
 <div class="layout">
 	<div class="heading-container">
 		<h1>Assignments</h1>
-		<PeriodSelect bind:period />
+		<PeriodSelect bind:period={$session.selectedPeriod} />
 	</div>
 	<div class="content box">
 		<div class="scroll">
 			<table>
-				{#each gradebook.assignments as assignment}
+				{#each $session.selected.assignments as assignment}
 					<tr>
 						<td class="assignment-name">{assignment.Measure}</td>
 						<td class="assignment-course">{assignment.course}</td>

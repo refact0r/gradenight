@@ -22,6 +22,10 @@
 		}
 	})
 
+	$: if ($session.gradebook) {
+		$session.selected = $session.periods[$session.selectedPeriod]
+	}
+
 	async function logout() {
 		$session.user = null
 		await fetch('/auth/logout', {
