@@ -57,6 +57,20 @@
 				plugins: {
 					legend: {
 						display: false
+					},
+					tooltip: {
+						callbacks: {
+							title: function (value) {
+								return new Date(value[0].raw.x).toLocaleDateString('en-US', {
+									month: 'short',
+									day: 'numeric',
+									year: 'numeric'
+								})
+							},
+							label: function (value) {
+								return value.raw.y.toFixed(1) + '%'
+							}
+						}
 					}
 				},
 				scales: {

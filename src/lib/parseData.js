@@ -42,7 +42,7 @@ export function parseData(session, json) {
 		selectedPeriod: currentPeriod,
 		selected: periods[currentPeriod],
 		gradebook: periods[currentPeriod]
-	}
+	}	
 }
 
 function getAssignments(gradebook) {
@@ -60,7 +60,7 @@ function getAssignments(gradebook) {
 		let currentTotal = 0
 		course.chartData = []
 
-		for (let assignment of course.Marks.Mark.Assignments.Assignment) {
+		for (let assignment of course.Marks.Mark.Assignments.Assignment.reverse()) {
 			assignment.course = course.Title
 			assignment.style = null
 			assignment.scorePercent = -1
