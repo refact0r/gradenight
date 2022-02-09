@@ -32,10 +32,10 @@
 						<td class="assignment-name">{assignment.Measure}</td>
 						<td class="assignment-course">{assignment.course}</td>
 						<td class="assignment-date">{assignment.DueDate}</td>
-						<td class="assignment-score" style={assignment.color}>
+						<td class="assignment-score" style={assignment.style}>
 							{assignment.score}
 						</td>
-						<td class="assignment-percentage" style={assignment.color}>
+						<td class="assignment-percentage" style={assignment.style}>
 							{assignment.percent}
 						</td>
 					</tr>

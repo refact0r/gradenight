@@ -15,11 +15,71 @@
 </script>
 
 <script>
+	import { onMount } from 'svelte'
+	import { tick } from 'svelte'
 	import { session } from '$app/stores'
+	import Chart from 'chart.js/auto'
 	import PeriodSelect from '$lib/PeriodSelect.svelte'
 
 	export let courseIndex
 	$: course = $session.selected.Courses.Course[courseIndex]
+
+	let chartCanvas
+	let gradeLetter
+	let chart
+	$: if (course && chart) {
+		console.log('chart update')
+		console.log(course.chartData)
+		chart.data.datasets[0].data = course.chartData
+		chart.data.datasets[0].borderColor = course.color
+		chart.update()
+	}
+
+	onMount(async (promise) => {
+		Chart.defaults.font.family = 'Outfit'
+		Chart.defaults.font.weight = 300
+		Chart.defaults.font.size = 14
+		Chart.defaults.color = getComputedStyle(chartCanvas).getPropertyValue('--sub-color')
+		chart = new Chart(chartCanvas, {
+			type: 'line',
+			data: {
+				datasets: [
+					{
+						borderColor: getComputedStyle(gradeLetter).getPropertyValue('color'),
+						tension: 0.3,
+						data: course.chartData
+					}
+				]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				plugins: {
+					legend: {
+						display: false
+					}
+				},
+				scales: {
+					x: {
+						type: 'linear',
+						ticks: {
+							callback: function (value) {
+								return new Date(value).toLocaleDateString('en-US', {
+									month: 'short',
+									day: 'numeric'
+								})
+							}
+						}
+					},
+					y: {
+						type: 'linear',
+						suggestedMax: 100,
+						suggestedMin: 60
+					}
+				}
+			}
+		})
+	})
 </script>
 
 <svelte:head>
@@ -32,12 +92,16 @@
 		<PeriodSelect bind:period={$session.selectedPeriod} />
 	</div>
 	<div class="grade box">
-		<h1 class="grade-letter" style={course.color}>
+		<h1 class="grade-letter" style={course.style} bind:this={gradeLetter}>
 			{course.Marks.Mark.CalculatedScoreString}
 		</h1>
-		<div style={course.color}>{course.score}</div>
+		<div style={course.style}>{course.score}</div>
 	</div>
-	<div class="graph box" />
+	<div class="chart box">
+		<div class="chart-container">
+			<canvas bind:this={chartCanvas} />
+		</div>
+	</div>
 	<div class="assignments box">
 		<div class="scroll">
 			<h2>Assignments</h2>
@@ -48,10 +112,10 @@
 							<td class="assignment-name">{assignment.Measure}</td>
 							<td class="assignment-course">{assignment.Type}</td>
 							<td class="assignment-date">{assignment.DueDate}</td>
-							<td class="assignment-score" style={assignment.color}>
+							<td class="assignment-score" style={assignment.style}>
 								{assignment.score}
 							</td>
-							<td class="assignment-percentage" style={assignment.color}>
+							<td class="assignment-percentage" style={assignment.style}>
 								{assignment.percent}
 							</td>
 						</tr>
@@ -66,7 +130,7 @@
 	.layout {
 		display: grid;
 		gap: var(--spacing);
-		grid-template-columns: 1fr 6fr;
+		grid-template-columns: 1fr 5fr;
 		grid-template-rows: auto auto 1fr;
 		height: 100%;
 	}
@@ -121,5 +185,10 @@
 	.assignment-percentage {
 		padding-left: 20px;
 		text-align: right;
+	}
+
+	.chart-container {
+		position: relative;
+		height: 100%;
 	}
 </style>

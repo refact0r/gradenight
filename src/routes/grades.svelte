@@ -30,10 +30,10 @@
 				<tr>
 					<td class="course-name"><a href={'/course/' + index}>{course.Title}</a></td>
 					<td class="course-staff">{course.Staff}</td>
-					<td class="course-grade" style={course.color}>
+					<td class="course-grade" style={course.style}>
 						{course.Marks.Mark.CalculatedScoreString}
 					</td>
-					<td class="course-score" style={course.color}>{course.score}</td>
+					<td class="course-score" style={course.style}>{course.score}</td>
 				</tr>
 			{/each}
 		</table>

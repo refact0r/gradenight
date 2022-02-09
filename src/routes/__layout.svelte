@@ -22,7 +22,7 @@
 		}
 	})
 
-	$: if ($session.gradebook) {
+	$: if ($session.periods) {
 		$session.selected = $session.periods[$session.selectedPeriod]
 	}
 

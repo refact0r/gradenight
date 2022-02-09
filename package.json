@@ -21,6 +21,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"chart.js": "^3.7.0",
 		"cookie": "^0.4.1",
 		"studentvue.js": "^0.1.1"
 	}
