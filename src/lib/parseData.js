@@ -1,3 +1,5 @@
+import { getColor, fourToPercent } from './utils.js'
+
 export function parseData(session, json) {
 	let { student, periods, currentPeriod } = json
 
@@ -20,15 +22,15 @@ export function parseData(session, json) {
 				course.score = '-'
 			}
 			course.color = getColor(course.scorePercent)
+			course.style = `color: ${course.color};`
 		}
 
 		period.days = Math.round((new Date(period.ReportingPeriod.EndDate) - new Date()) / 86400000)
-
 		period.assignments = getAssignments(period)
 		period.week = getWeek(period.assignments)
 
 		let averageRaw = getAverage(period)
-		period.averageColor = getColor(averageRaw)
+		period.averageStyle = `color: ${getColor(averageRaw)};`
 		period.average = averageRaw >= 0 ? averageRaw + '%' : '-'
 	}
 
@@ -38,27 +40,39 @@ export function parseData(session, json) {
 		periods,
 		currentPeriod,
 		selectedPeriod: currentPeriod,
+		selected: periods[currentPeriod],
 		gradebook: periods[currentPeriod]
 	}
 }
 
 function getAssignments(gradebook) {
-	let list = []
+	let all = []
+
 	for (const course of gradebook.Courses.Course) {
 		if (!course.Marks.Mark.Assignments.Assignment) {
 			continue
 		}
+		if (!Array.isArray(course.Marks.Mark.Assignments.Assignment)) {
+			course.Marks.Mark.Assignments.Assignment = [course.Marks.Mark.Assignments.Assignment]
+		}
+
+		let currentScore = 0
+		let currentTotal = 0
+		course.chartData = []
+
 		for (let assignment of course.Marks.Mark.Assignments.Assignment) {
 			assignment.course = course.Title
-			assignment.color = null
+			assignment.style = null
 			assignment.scorePercent = -1
 			assignment.percent = '?'
 			assignment.score = 'Not Graded'
+
 			if (assignment.Points.includes(' / ')) {
 				let split = assignment.Points.split(' / ')
 				let scoreValue = parseFloat(split[0])
 				let totalValue = parseFloat(split[1])
 				assignment.score = scoreValue + ' / ' + totalValue
+
 				if (scoreValue === 0 && totalValue === 0) {
 					assignment.scorePercent = 0
 					assignment.percent = '-'
@@ -67,16 +81,32 @@ function getAssignments(gradebook) {
 					assignment.percent = assignment.scorePercent
 						? assignment.scorePercent.toFixed(1) + '%'
 						: '0.0%'
-					assignment.color = getColor(assignment.scorePercent)
+					assignment.style = `color: ${getColor(assignment.scorePercent)};`
+
+					currentScore += scoreValue
+					currentTotal += totalValue
+					let date = new Date(assignment.DueDate)
+					if (
+						course.chartData.length > 0 &&
+						+course.chartData[course.chartData.length - 1].x === +date
+					) {
+						course.chartData[course.chartData.length - 1].y =
+							(currentScore / currentTotal) * 100
+					} else {
+						course.chartData.push({
+							x: date,
+							y: (currentScore / currentTotal) * 100
+						})
+					}
 				}
 			}
-			list.push(assignment)
+
+			all.push(assignment)
 		}
 	}
 
-	list.sort((a, b) => new Date(b.DueDate) - new Date(a.DueDate))
-
-	return list
+	all.sort((a, b) => new Date(b.DueDate) - new Date(a.DueDate))
+	return all
 }
 
 function getWeek(assignments) {
@@ -91,7 +121,7 @@ function getWeek(assignments) {
 		average = (week.reduce((a, b) => a + b.scorePercent, 0) / week.length).toFixed(1)
 	return {
 		average: average >= 0 ? average + '%' : '-',
-		averageColor: getColor(average),
+		averageStyle: `color: ${getColor(average)};`,
 		length: week.length
 	}
 }
@@ -107,19 +137,4 @@ function getAverage(gradebook) {
 	}
 	if (grades.length === 0) return -1
 	return (grades.reduce((a, b) => a + b) / grades.length).toFixed(1)
-}
-
-function getColor(percent) {
-	if (percent < 0) return null
-	let hue = 0
-	let darkness = 60
-	if (percent >= 60) hue = 4 * (percent - 60)
-	else darkness = percent / 3 + 40
-	return `color: hsl(${hue}, 60%, ${darkness}%);`
-}
-
-function fourToPercent(grade) {
-	if (grade === 4.0) return 100
-	else if (grade === 0) return 0
-	else return grade * 10 + 55
 }

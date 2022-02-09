@@ -21,13 +21,13 @@
 <div class="layout">
 	<h1>Hello, {$session.student.FormattedName.split(' ')[0]}!</h1>
 	<div class="average value box">
-		<h1 style={$session.gradebook.averageColor}>
+		<h1 style={$session.gradebook.averageStyle}>
 			{$session.gradebook.average}
 		</h1>
 		<div class="value-label">Average grade<br />&nbsp;</div>
 	</div>
 	<div class="improvement value box">
-		<h1 style={$session.gradebook.week.averageColor}>
+		<h1 style={$session.gradebook.week.averageStyle}>
 			{$session.gradebook.week.average}
 		</h1>
 		<div class="value-label">Average grade<br />this week</div>
@@ -54,10 +54,10 @@
 			{#each $session.gradebook.Courses.Course as course, index}
 				<tr>
 					<td class="course-name"><a href={'/course/' + index}>{course.Title}</a></td>
-					<td class="course-grade" style={course.color}>
+					<td class="course-grade" style={course.style}>
 						{course.Marks.Mark.CalculatedScoreString}
 					</td>
-					<td class="course-score" style={course.color}>{course.score}</td>
+					<td class="course-score" style={course.style}>{course.score}</td>
 				</tr>
 			{/each}
 		</table>
@@ -70,7 +70,7 @@
 					{#if assignment.scorePercent >= 0}
 						<tr>
 							<td class="assignment-name">{assignment.Measure}</td>
-							<td class="assignment-score" style={assignment.color}>
+							<td class="assignment-score" style={assignment.style}>
 								{assignment.score}
 							</td>
 						</tr>
