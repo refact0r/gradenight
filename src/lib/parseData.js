@@ -2,6 +2,7 @@ import { getColor, fourToPercent } from './utils.js'
 
 export function parseData(session, json) {
 	let { student, periods, currentPeriod } = json
+	console.log(json)
 
 	for (let period of periods) {
 		for (let course of period.Courses.Course) {
@@ -42,7 +43,7 @@ export function parseData(session, json) {
 		selectedPeriod: currentPeriod,
 		selected: periods[currentPeriod],
 		gradebook: periods[currentPeriod]
-	}	
+	}
 }
 
 function getAssignments(gradebook) {
@@ -55,10 +56,29 @@ function getAssignments(gradebook) {
 		if (!Array.isArray(course.Marks.Mark.Assignments.Assignment)) {
 			course.Marks.Mark.Assignments.Assignment = [course.Marks.Mark.Assignments.Assignment]
 		}
-
-		let currentScore = 0
-		let currentTotal = 0
+		let weighted = false
+		let scoreTypes = {}
+		if (course.Marks.Mark.GradeCalculationSummary.AssignmentGradeCalc) {
+			weighted = true
+			for (let type of course.Marks.Mark.GradeCalculationSummary.AssignmentGradeCalc) {
+				if (parseInt(type.Weight) !== 100.0) {
+					scoreTypes[type.Type] = {
+						score: 0,
+						total: 0,
+						weight: parseInt(type.Weight)
+					}
+				}
+			}
+		} else {
+			scoreTypes.all = {
+				score: 0,
+				total: 0,
+				weight: 100
+			}
+		}
 		course.chartData = []
+		console.log(course.Marks.Mark.GradeCalculationSummary.AssignmentGradeCalc)
+		console.log(scoreTypes)
 
 		for (let assignment of course.Marks.Mark.Assignments.Assignment.reverse()) {
 			assignment.course = course.Title
@@ -83,24 +103,34 @@ function getAssignments(gradebook) {
 						: '0.0%'
 					assignment.style = `color: ${getColor(assignment.scorePercent)};`
 
-					currentScore += scoreValue
-					currentTotal += totalValue
+					console.log(assignment)
+					if (weighted) {
+						if (scoreTypes[assignment.Type]) {
+							scoreTypes[assignment.Type].score += scoreValue
+							scoreTypes[assignment.Type].total += totalValue
+						}
+					} else {
+						scoreTypes.all.score += scoreValue
+						scoreTypes.all.total += totalValue
+					}
 					let date = new Date(assignment.DueDate)
+					let grade = Object.values(scoreTypes).reduce((a, b) => {
+						return a + (b.total === 0 ? b.weight : (b.score / b.total) * b.weight)
+					}, 0)
+
 					if (
 						course.chartData.length > 0 &&
 						+course.chartData[course.chartData.length - 1].x === +date
 					) {
-						course.chartData[course.chartData.length - 1].y =
-							(currentScore / currentTotal) * 100
+						course.chartData[course.chartData.length - 1].y = grade
 					} else {
 						course.chartData.push({
 							x: date,
-							y: (currentScore / currentTotal) * 100
+							y: grade
 						})
 					}
 				}
 			}
-
 			all.push(assignment)
 		}
 	}
@@ -129,7 +159,7 @@ function getWeek(assignments) {
 function getAverage(gradebook) {
 	let grades = []
 	for (const course of gradebook.Courses.Course) {
-		if (course.Marks.Mark.Assignments.Assignment) {
+		if (course.Marks.Mark.CalculatedScoreString !== 'N/A') {
 			if (course.Marks.Mark.CalculatedScoreRaw >= 4.0)
 				grades.push(parseFloat(course.Marks.Mark.CalculatedScoreRaw))
 			else grades.push(fourToPercent(parseFloat(course.Marks.Mark.CalculatedScoreRaw)))
