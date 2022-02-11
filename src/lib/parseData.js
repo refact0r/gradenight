@@ -10,6 +10,7 @@ export function parseData(session, json) {
 			course.scoreRaw = parseFloat(course.Marks.Mark.CalculatedScoreRaw).toFixed(1)
 			course.scorePercent = course.scoreRaw
 			course.score = course.scoreRaw + '%'
+			course.fourPoint = false
 			if (
 				course.scoreRaw > 0 &&
 				course.scoreRaw <= 4.0 &&
@@ -17,6 +18,7 @@ export function parseData(session, json) {
 			) {
 				course.scorePercent = fourToPercent(course.scoreRaw)
 				course.score = course.scoreRaw
+				course.fourPoint = true
 			}
 			if (course.Marks.Mark.CalculatedScoreString === 'N/A') {
 				course.scorePercent = -1
@@ -77,8 +79,6 @@ function getAssignments(gradebook) {
 			}
 		}
 		course.chartData = []
-		console.log(course.Marks.Mark.GradeCalculationSummary.AssignmentGradeCalc)
-		console.log(scoreTypes)
 
 		for (let assignment of course.Marks.Mark.Assignments.Assignment.reverse()) {
 			assignment.course = course.Title
@@ -102,8 +102,6 @@ function getAssignments(gradebook) {
 						? assignment.scorePercent.toFixed(1) + '%'
 						: '0.0%'
 					assignment.style = `color: ${getColor(assignment.scorePercent)};`
-
-					console.log(assignment)
 					if (weighted) {
 						if (scoreTypes[assignment.Type]) {
 							scoreTypes[assignment.Type].score += scoreValue
@@ -115,7 +113,10 @@ function getAssignments(gradebook) {
 					}
 					let date = new Date(assignment.DueDate)
 					let grade = Object.values(scoreTypes).reduce((a, b) => {
-						return a + (b.total === 0 ? b.weight : (b.score / b.total) * b.weight)
+						let value = (b.score / b.total) * b.weight
+						if (b.total === 0) value = b.weight
+						if (course.fourPoint) value = (value / 100) * 4
+						return a + value
 					}, 0)
 
 					if (
