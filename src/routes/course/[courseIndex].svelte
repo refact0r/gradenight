@@ -32,6 +32,8 @@
 		console.log(course.chartData)
 		chart.data.datasets[0].data = course.chartData
 		chart.data.datasets[0].borderColor = course.color
+		chart.options.scales.y.suggestedMax = course.fourPoint ? 4.0 : 100
+		chart.options.scales.y.suggestedMin = course.fourPoint ? 1.0 : 60
 		chart.update()
 	}
 
@@ -68,7 +70,7 @@
 								})
 							},
 							label: function (value) {
-								return value.raw.y.toFixed(1) + '%'
+								return value.raw.y.toFixed(1) + (!course.fourPoint ? '%' : '')
 							}
 						}
 					}
@@ -87,8 +89,8 @@
 					},
 					y: {
 						type: 'linear',
-						suggestedMax: 100,
-						suggestedMin: 60
+						suggestedMax: course.fourPoint ? 4.0 : 100,
+						suggestedMin: course.fourPoint ? 1.0 : 60
 					}
 				}
 			}
