@@ -5,36 +5,47 @@ export function parseData(session, json) {
 	console.log(json)
 
 	for (let period of periods) {
+		let grades = []
+
 		for (let course of period.Courses.Course) {
 			course.Title = course.Title.replace(/ \([\s\S]*?\)/g, '')
-			course.scoreRaw = parseFloat(course.Marks.Mark.CalculatedScoreRaw).toFixed(1)
-			course.scorePercent = course.scoreRaw
-			course.score = course.scoreRaw + '%'
 			course.fourPoint = false
-			if (
-				course.scoreRaw > 0 &&
-				course.scoreRaw <= 4.0 &&
-				course.Marks.Mark.CalculatedScoreString != 'F'
-			) {
-				course.scorePercent = fourToPercent(course.scoreRaw)
-				course.score = course.scoreRaw
-				course.fourPoint = true
-			}
+
 			if (course.Marks.Mark.CalculatedScoreString === 'N/A') {
 				course.scorePercent = -1
 				course.score = '-'
+			} else {
+				let scoreRaw = parseFloat(course.Marks.Mark.CalculatedScoreRaw)
+
+				if (
+					scoreRaw > 0 &&
+					scoreRaw <= 4.0 &&
+					course.Marks.Mark.CalculatedScoreString != 'F'
+				) {
+					course.scorePercent = fourToPercent(scoreRaw)
+					course.score = scoreRaw.toFixed(1)
+					course.fourPoint = true
+				} else {
+					course.scorePercent = scoreRaw
+					course.score = scoreRaw.toFixed(1) + '%'
+				}
+
+				grades.push(course.scorePercent)
 			}
+
 			course.color = getColor(course.scorePercent)
 			course.style = `color: ${course.color};`
+			console.log(course.scorePercent)
 		}
+
+		let averageRaw = -1
+		if (grades.length > 0) averageRaw = grades.reduce((a, b) => a + b) / grades.length
+		period.averageStyle = `color: ${getColor(averageRaw)};`
+		period.average = averageRaw >= 0 ? averageRaw.toFixed(1) + '%' : '-'
 
 		period.days = Math.round((new Date(period.ReportingPeriod.EndDate) - new Date()) / 86400000)
 		period.assignments = getAssignments(period)
 		period.week = getWeek(period.assignments)
-
-		let averageRaw = getAverage(period)
-		period.averageStyle = `color: ${getColor(averageRaw)};`
-		period.average = averageRaw >= 0 ? averageRaw + '%' : '-'
 	}
 
 	return {
@@ -49,7 +60,7 @@ export function parseData(session, json) {
 }
 
 function getAssignments(gradebook) {
-	let all = []
+	let assignments = []
 
 	for (const course of gradebook.Courses.Course) {
 		if (!course.Marks.Mark.Assignments.Assignment) {
@@ -132,12 +143,12 @@ function getAssignments(gradebook) {
 					}
 				}
 			}
-			all.push(assignment)
+			assignments.push(assignment)
 		}
 	}
 
-	all.sort((a, b) => new Date(b.DueDate) - new Date(a.DueDate))
-	return all
+	assignments.sort((a, b) => new Date(b.DueDate) - new Date(a.DueDate))
+	return assignments
 }
 
 function getWeek(assignments) {
@@ -155,17 +166,4 @@ function getWeek(assignments) {
 		averageStyle: `color: ${getColor(average)};`,
 		length: week.length
 	}
-}
-
-function getAverage(gradebook) {
-	let grades = []
-	for (const course of gradebook.Courses.Course) {
-		if (course.Marks.Mark.CalculatedScoreString !== 'N/A') {
-			if (course.Marks.Mark.CalculatedScoreRaw >= 4.0)
-				grades.push(parseFloat(course.Marks.Mark.CalculatedScoreRaw))
-			else grades.push(fourToPercent(parseFloat(course.Marks.Mark.CalculatedScoreRaw)))
-		}
-	}
-	if (grades.length === 0) return -1
-	return (grades.reduce((a, b) => a + b) / grades.length).toFixed(1)
 }
