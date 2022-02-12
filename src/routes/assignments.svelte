@@ -30,7 +30,11 @@
 				{#each $session.selected.assignments as assignment}
 					<tr>
 						<td class="assignment-name">{assignment.Measure}</td>
-						<td class="assignment-course">{assignment.course}</td>
+						<td class="assignment-course">
+							<a class="link" href={'/course/' + assignment.courseIndex}>
+								{assignment.course}
+							</a>
+						</td>
 						<td class="assignment-date">{assignment.DueDate}</td>
 						<td class="assignment-score" style={assignment.style}>
 							{assignment.score}

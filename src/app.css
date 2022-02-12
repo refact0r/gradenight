@@ -89,3 +89,13 @@ td {
 	display: flex;
 	margin-bottom: var(--spacing);
 }
+
+.link {
+	display: inline-block;
+}
+.link:hover {
+	color: var(--sub-color);
+}
+.link:active {
+	transform: scale(0.95);
+}

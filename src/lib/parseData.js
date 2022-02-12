@@ -61,7 +61,7 @@ export function parseData(session, json) {
 function getAssignments(gradebook) {
 	let assignments = []
 
-	for (const course of gradebook.Courses.Course) {
+	for (const [index, course] of gradebook.Courses.Course.entries()) {
 		if (!course.Marks.Mark.Assignments.Assignment) {
 			continue
 		}
@@ -92,6 +92,7 @@ function getAssignments(gradebook) {
 
 		for (let assignment of course.Marks.Mark.Assignments.Assignment.reverse()) {
 			assignment.course = course.Title
+			assignment.courseIndex = index
 			assignment.style = null
 			assignment.scorePercent = -1
 			assignment.percent = '?'
