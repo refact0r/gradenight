@@ -1,5 +1,5 @@
 # studentvue
 
-A little test of [StudentVue.js](https://github.com/StudentVue/StudentVue.js) using SvelteKit.
+A better looking and easier to use version of StudentVue using [StudentVue.js](https://github.com/StudentVue/StudentVue.js).
 
-The goal is to make a better looking, easier to use version of StudentVue.
+Currently only supports bsd405 logins.
