@@ -85,6 +85,7 @@
 	.layout {
 		display: grid;
 		height: 100%;
+		width: 100%;
 		gap: var(--spacing);
 		grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
 		grid-template-rows: auto auto 1fr;

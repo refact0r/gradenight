@@ -1,6 +1,10 @@
 <script context="module">
-	export async function load({}) {
-		return {}
+	export async function load({ url }) {
+		return {
+			props: {
+				key: url
+			}
+		}
 	}
 </script>
 
@@ -10,8 +14,11 @@
 	import { session } from '$app/stores'
 	import { goto } from '$app/navigation'
 	import { onMount } from 'svelte'
+	import { fly } from 'svelte/transition'
 	import { parseData } from '$lib/parseData.js'
 	import Spinner from '$lib/Spinner.svelte'
+
+	export let key
 
 	onMount(async () => {
 		if ($session.user) {
@@ -59,7 +66,15 @@
 			</a>
 		</nav>
 		<main>
-			<slot />
+			{#key key}
+				<div
+					class="transition-container"
+					in:fly={{ y: -5, duration: 200, delay: 200 }}
+					out:fly|local={{ y: 5, duration: 200 }}
+				>
+					<slot />
+				</div>
+			{/key}
 		</main>
 	{:else}
 		<div class="loading-container">
@@ -75,19 +90,28 @@
 	nav {
 		display: flex;
 		flex-direction: column;
-		justify-items: center;
+		align-items: center;
 		width: min-content;
 		padding: calc(var(--spacing) / 2);
 	}
 
 	main {
 		width: 100%;
+		height: 100%;
 		background-color: var(--bg-color-1);
 		height: calc(100vh - 2 * var(--spacing));
 		margin-left: var(--spacing);
 	}
 
+	.transition-container {
+		width: 100%;
+		height: 100%;
+		position: relative;
+	}
+
 	.loading-container {
+		width: 100%;
+		height: 100%;
 		width: max-content;
 		margin: auto;
 		display: flex;
@@ -108,10 +132,14 @@
 	}
 
 	a {
-		position: relative;
-		height: 25px;
-		margin-top: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 50px;
+		width: 50px;
+		margin-top: 30px;
 		text-align: center;
+		border-radius: 50%;
 	}
 	a:first-of-type {
 		margin-top: 50px;
@@ -119,6 +147,18 @@
 	a:last-of-type {
 		margin-top: auto;
 		margin-bottom: 12.5px;
+	}
+	/* a:hover {
+		background: var(--bg-color-2-5);
+	} */
+	a:hover i {
+		color: var(--sub-color);
+	}
+	/* a:active {
+		background: var(--bg-color-3);
+	} */
+	a:active i {
+		transform: scale(0.9);
 	}
 
 	i {
