@@ -11,6 +11,7 @@
 </script>
 
 <script>
+	import { fade } from 'svelte/transition'
 	import { session } from '$app/stores'
 	import { goto } from '$app/navigation'
 	import { parseData } from '$lib/parseData.js'
@@ -57,7 +58,7 @@
 	<title>StudentVue</title>
 </svelte:head>
 
-<div class="content">
+<div class="content" out:fade={{ duration: 200 }}>
 	<form on:submit|preventDefault={login}>
 		<h2>StudentVue</h2>
 		<input type="text" placeholder="Username" bind:value={username} />
@@ -71,7 +72,11 @@
 
 <style>
 	.content {
+		position: absolute;
+		top: 0;
+		left: 0;
 		width: 100%;
+		height: 100%;
 		display: flex;
 		justify-content: center;
 		align-items: center;

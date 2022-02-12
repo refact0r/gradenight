@@ -15,6 +15,7 @@
 	import { goto } from '$app/navigation'
 	import { onMount } from 'svelte'
 	import { fly } from 'svelte/transition'
+	import { fade } from 'svelte/transition'
 	import { parseData } from '$lib/parseData.js'
 	import Spinner from '$lib/Spinner.svelte'
 
@@ -44,7 +45,7 @@
 
 {#if $session.user}
 	{#if $session.gradebook && $session.student}
-		<nav class="box">
+		<nav class="box" in:fade={{ duration: 200, delay: 200 }}>
 			{#if $session.student}
 				<img
 					alt="profile"
@@ -65,7 +66,7 @@
 				<i class="bi bi-gear" />
 			</a>
 		</nav>
-		<main>
+		<main in:fade={{ duration: 200, delay: 200 }}>
 			{#key key}
 				<div
 					class="transition-container"
@@ -77,9 +78,11 @@
 			{/key}
 		</main>
 	{:else}
-		<div class="loading-container">
-			<Spinner />
-			<div class="spinner-label">Fetching student info...</div>
+		<div class="loading-container" out:fade={{ duration: 200 }}>
+			<div class="loading">
+				<Spinner />
+				<div class="spinner-label">Fetching student info...</div>
+			</div>
 		</div>
 	{/if}
 {:else}
@@ -106,12 +109,18 @@
 	.transition-container {
 		width: 100%;
 		height: 100%;
-		position: relative;
 	}
 
 	.loading-container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: flex;
 		width: 100%;
 		height: 100%;
+	}
+
+	.loading {
 		width: max-content;
 		margin: auto;
 		display: flex;
