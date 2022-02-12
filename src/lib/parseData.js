@@ -35,7 +35,6 @@ export function parseData(session, json) {
 
 			course.color = getColor(course.scorePercent)
 			course.style = `color: ${course.color};`
-			console.log(course.scorePercent)
 		}
 
 		let averageRaw = -1
@@ -104,7 +103,10 @@ function getAssignments(gradebook) {
 				let totalValue = parseFloat(split[1])
 				assignment.score = scoreValue + ' / ' + totalValue
 
-				if (scoreValue === 0 && totalValue === 0) {
+				if (
+					(scoreValue === 0 && totalValue === 0) ||
+					assignment.Notes.toLowerCase().includes('not for grading')
+				) {
 					assignment.scorePercent = 0
 					assignment.percent = '-'
 				} else {
@@ -123,12 +125,15 @@ function getAssignments(gradebook) {
 						scoreTypes.all.total += totalValue
 					}
 					let date = new Date(assignment.DueDate)
-					let grade = Object.values(scoreTypes).reduce((a, b) => {
-						let value = (b.score / b.total) * b.weight
-						if (b.total === 0) value = b.weight
-						if (course.fourPoint) value = (value / 100) * 4
-						return a + value
-					}, 0)
+					let score = 0
+					let total = 0
+					for (let type of Object.values(scoreTypes)) {
+						if (type.total > 0) {
+							score += (type.score / type.total) * type.weight
+							total += type.weight
+						}
+					}
+					let grade = (score / total) * (course.fourPoint ? 4 : 100)
 
 					if (
 						course.chartData.length > 0 &&

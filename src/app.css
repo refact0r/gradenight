@@ -23,6 +23,7 @@ body {
 	height: 100vh;
 	background: var(--bg-color-1);
 	color: var(--font-color);
+	overflow: hidden;
 }
 
 #svelte {
