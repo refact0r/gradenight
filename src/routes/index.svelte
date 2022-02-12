@@ -49,11 +49,13 @@
 		</div>
 	</div>
 	<div class="grades box">
-		<a href="/grades"><h2>Grades</h2></a>
+		<a class="link" href="/grades"><h2>Grades</h2></a>
 		<table class="grades-table">
 			{#each $session.gradebook.Courses.Course as course, index}
 				<tr>
-					<td class="course-name"><a href={'/course/' + index}>{course.Title}</a></td>
+					<td class="course-name">
+						<a class="link" href={'/course/' + index}> {course.Title}</a>
+					</td>
 					<td class="course-grade" style={course.style}>
 						{course.Marks.Mark.CalculatedScoreString}
 					</td>
@@ -64,7 +66,7 @@
 	</div>
 	<div class="assignments box">
 		<div class="assignments-scroll">
-			<a href="/assignments"><h2>Assignments</h2></a>
+			<a class="link" href="/assignments"><h2>Assignments</h2></a>
 			<table class="assignments-table">
 				{#each $session.gradebook.assignments as assignment}
 					{#if assignment.scorePercent >= 0}

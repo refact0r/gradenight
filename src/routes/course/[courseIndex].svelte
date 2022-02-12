@@ -123,7 +123,7 @@
 			<h2>Assignments</h2>
 			<table>
 				{#if course.Marks.Mark.Assignments.Assignment}
-					{#each course.Marks.Mark.Assignments.Assignment as assignment, index}
+					{#each [...course.Marks.Mark.Assignments.Assignment].reverse() as assignment, index}
 						<tr>
 							<td class="assignment-name">{assignment.Measure}</td>
 							<td class="assignment-course">{assignment.Type}</td>
