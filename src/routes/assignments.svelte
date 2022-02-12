@@ -31,7 +31,7 @@
 					<tr>
 						<td class="assignment-name">{assignment.Measure}</td>
 						<td class="assignment-course">
-							<a class="link" href={'/course/' + assignment.courseIndex}>
+							<a class="link" sveltekit:prefetch href={'/course/' + assignment.courseIndex}>
 								{assignment.course}
 							</a>
 						</td>

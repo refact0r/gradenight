@@ -53,16 +53,16 @@
 					on:click={logout}
 				/>
 			{/if}
-			<a href="/">
+			<a sveltekit:prefetch href="/">
 				<i class="bi bi-house" />
 			</a>
-			<a href="/grades">
+			<a sveltekit:prefetch href="/grades">
 				<i class="bi bi-list-ol" />
 			</a>
-			<a href="/assignments">
+			<a sveltekit:prefetch href="/assignments">
 				<i class="bi bi-pen" />
 			</a>
-			<a href="/settings">
+			<a sveltekit:prefetch href="/settings">
 				<i class="bi bi-gear" />
 			</a>
 		</nav>

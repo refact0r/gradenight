@@ -29,7 +29,7 @@
 			{#each $session.selected.Courses.Course as course, index}
 				<tr>
 					<td class="course-name">
-						<a class="link" href={'/course/' + index}>{course.Title}</a>
+						<a class="link" sveltekit:prefetch href={'/course/' + index}>{course.Title}</a>
 					</td>
 					<td class="course-staff">{course.Staff}</td>
 					<td class="course-grade" style={course.style}>
