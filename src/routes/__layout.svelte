@@ -2,7 +2,7 @@
 	export async function load({ url }) {
 		return {
 			props: {
-				key: url
+				key: url.href
 			}
 		}
 	}
