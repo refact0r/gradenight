@@ -16,6 +16,7 @@
 	import { goto } from '$app/navigation'
 	import { parseData } from '$lib/parseData.js'
 
+	let districtUrl = 'https://wa-bsd405-psv.edupoint.com/'
 	let username
 	let password
 	let error
@@ -36,14 +37,16 @@
 			method: 'POST',
 			body: JSON.stringify({
 				username,
-				password
+				password,
+				districtUrl
 			})
 		})
 		if (res.ok) {
 			const json = await res.json()
 			$session.user = {
 				username,
-				password
+				password,
+				districtUrl
 			}
 			$session = parseData($session, json)
 			goto('/')
@@ -61,6 +64,7 @@
 <div class="content" out:fade={{ duration: 200 }}>
 	<form on:submit|preventDefault={login}>
 		<h2>StudentVue</h2>
+		<input type="text" placeholder="District URL" bind:value={districtUrl} />
 		<input type="text" placeholder="Username" bind:value={username} />
 		<input type="password" placeholder="Password" bind:value={password} />
 		<div class="error">

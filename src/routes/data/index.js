@@ -4,9 +4,9 @@ import * as cookie from 'cookie'
 export async function get(event) {
 	console.log('get all')
 	let client = await login(
-		'https://wa-bsd405-psv.edupoint.com/',
-		event.locals.user.username,
-		event.locals.user.password
+		Buffer.from(event.locals.user.districtUrl, 'base64').toString('ascii'),
+		Buffer.from(event.locals.user.username, 'base64').toString('ascii'),
+		Buffer.from(event.locals.user.password, 'base64').toString('ascii')
 	)
 	// let student = JSON.parse(await client.getStudentInfo()).StudentInfo
 	// let gradebook = JSON.parse(await client.getGradebook()).Gradebook
