@@ -7,7 +7,8 @@ export const handle = async ({ event, resolve }) => {
 		const auth = cookies.auth.split(':')
 		event.locals.user = {
 			username: auth[0],
-			password: auth[1]
+			password: auth[1],
+			districtUrl: auth[2]
 		}
 	}
 
