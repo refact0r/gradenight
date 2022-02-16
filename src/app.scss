@@ -8,9 +8,10 @@
 	--bg-color-1-5: hsl(220, 19%, 10.5%);
 	--bg-color-2: hsl(220, 18%, 12%);
 	--bg-color-2-5: hsl(220, 17%, 14.5%);
-	--bg-color-3: hsl(220, 17%, 17%);
-	--bg-color-3-5: hsl(220, 17%, 21.5%);
-	--sub-color: hsl(220, 18%, 34%);
+	--bg-color-3: hsl(220, 17%, 16%);
+	--bg-color-3-5: hsl(220, 17%, 18%);
+	--font-color-3: hsl(220, 18%, 26%);
+	--font-color-2: hsl(220, 18%, 34%);
 	--font-color: hsl(220, 37%, 68%);
 	--spacing: 25px;
 }
@@ -36,29 +37,31 @@ body {
 
 ::placeholder,
 ::-webkit-input-placeholder {
-	color: var(--sub-color);
+	color: var(--font-color-2);
 }
 
 button,
 a,
-input {
+input,
+select,
+option {
 	font: inherit;
 	color: inherit;
 	border: none;
-	padding: 0;
-}
-button {
-	padding: 10px;
-	border-radius: 12px;
-}
-button:hover {
-	cursor: pointer;
+	outline: none;
 }
 
-select {
-	border: none;
-	font: inherit;
-	color: inherit;
+button {
+	background: var(--bg-color-1);
+	padding: 10px;
+	border-radius: 12px;
+	&:hover {
+		background: var(--bg-color-1-5);
+		cursor: pointer;
+	}
+	&:active {
+		transform: scale(0.95);
+	}
 }
 
 a {
@@ -97,10 +100,11 @@ td {
 
 .link {
 	display: inline-block;
-}
-.link:hover {
-	color: var(--sub-color);
-}
-.link:active {
-	transform: scale(0.95);
+	&:hover {
+		color: var(--font-color-2);
+	}
+	&:active {
+		color: var(--font-color-3);
+		transform: scale(0.95);
+	}
 }

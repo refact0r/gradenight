@@ -97,7 +97,7 @@
 
 	.error {
 		margin: 20px 0;
-		color: var(--sub-color);
+		color: var(--font-color-2);
 		font-size: 0.8em;
 		text-align: center;
 	}
