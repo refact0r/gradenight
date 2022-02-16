@@ -85,7 +85,7 @@
 	</div>
 </div>
 
-<style>
+<style lang="scss">
 	.layout {
 		display: grid;
 		height: 100%;

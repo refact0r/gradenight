@@ -142,7 +142,7 @@
 	</div>
 </div>
 
-<style>
+<style lang="scss">
 	.layout {
 		display: grid;
 		gap: var(--spacing);
