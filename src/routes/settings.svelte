@@ -49,14 +49,4 @@
 		flex-grow: 1;
 		padding: var(--spacing);
 	}
-
-	button {
-		background: var(--bg-color-1);
-	}
-	button:hover {
-		background: var(--bg-color-1-5);
-	}
-	button:active {
-		transform: scale(0.95);
-	}
 </style>

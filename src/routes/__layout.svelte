@@ -11,7 +11,7 @@
 <script>
 	import '../app.scss'
 	import '../bootstrap-icons.css'
-	import { session } from '$app/stores'
+	import { session, page } from '$app/stores'
 	import { goto } from '$app/navigation'
 	import { onMount } from 'svelte'
 	import { fly } from 'svelte/transition'
@@ -53,16 +53,24 @@
 					on:click={logout}
 				/>
 			{/if}
-			<a sveltekit:prefetch href="/">
+			<a class:active={$page.url.pathname === '/'} sveltekit:prefetch href="/">
 				<i class="bi bi-house" />
 			</a>
-			<a sveltekit:prefetch href="/grades">
+			<a class:active={$page.url.pathname === '/grades'} sveltekit:prefetch href="/grades">
 				<i class="bi bi-list-ol" />
 			</a>
-			<a sveltekit:prefetch href="/assignments">
+			<a
+				class:active={$page.url.pathname === '/assignments'}
+				sveltekit:prefetch
+				href="/assignments"
+			>
 				<i class="bi bi-pen" />
 			</a>
-			<a sveltekit:prefetch href="/settings">
+			<a
+				class:active={$page.url.pathname === '/settings'}
+				sveltekit:prefetch
+				href="/settings"
+			>
 				<i class="bi bi-gear" />
 			</a>
 		</nav>
@@ -149,25 +157,29 @@
 		margin-top: 30px;
 		text-align: center;
 		border-radius: 50%;
-	}
-	a:first-of-type {
-		margin-top: 50px;
-	}
-	a:last-of-type {
-		margin-top: auto;
-		margin-bottom: 12.5px;
-	}
-	/* a:hover {
-		background: var(--bg-color-2-5);
-	} */
-	a:hover i {
-		color: var(--sub-color);
-	}
-	/* a:active {
-		background: var(--bg-color-3);
-	} */
-	a:active i {
-		transform: scale(0.9);
+		color: var(--font-color);
+		&:first-of-type {
+			margin-top: 50px;
+		}
+		&:last-of-type {
+			margin-top: auto;
+			margin-bottom: 12.5px;
+		}
+		&:hover {
+			// background: var(--bg-color-1-5);
+			color: var(--font-color-2);
+		}
+		&:active {
+			// background: var(--bg-color-1);
+			color: var(--font-color-3);
+			i {
+				transform: scale(0.9);
+			}
+		}
+		&.active {
+			// background: var(--bg-color-1);
+			color: var(--font-color-3);
+		}
 	}
 
 	i {

@@ -41,7 +41,7 @@
 		Chart.defaults.font.family = 'Outfit'
 		Chart.defaults.font.weight = 300
 		Chart.defaults.font.size = 14
-		Chart.defaults.color = getComputedStyle(chartCanvas).getPropertyValue('--sub-color')
+		Chart.defaults.color = getComputedStyle(chartCanvas).getPropertyValue('--font-color-2')
 		chart = new Chart(chartCanvas, {
 			type: 'line',
 			data: {
@@ -161,13 +161,13 @@
 		display: flex;
 		flex-direction: column;
 		aspect-ratio: 1;
-	}
-	.grade h1 {
-		margin-top: auto;
-		margin-bottom: 10px;
-	}
-	.grade div {
-		margin-bottom: auto;
+		h1 {
+			margin-top: auto;
+			margin-bottom: 10px;
+		}
+		div {
+			margin-bottom: auto;
+		}
 	}
 
 	.assignments {
