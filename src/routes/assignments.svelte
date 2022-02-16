@@ -49,7 +49,7 @@
 	</div>
 </div>
 
-<style>
+<style lang="scss">
 	.layout {
 		display: flex;
 		height: 100%;

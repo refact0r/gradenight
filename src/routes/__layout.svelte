@@ -9,7 +9,7 @@
 </script>
 
 <script>
-	import '../app.css'
+	import '../app.scss'
 	import '../bootstrap-icons.css'
 	import { session } from '$app/stores'
 	import { goto } from '$app/navigation'
@@ -89,7 +89,7 @@
 	<slot />
 {/if}
 
-<style>
+<style lang="scss">
 	nav {
 		display: flex;
 		flex-direction: column;

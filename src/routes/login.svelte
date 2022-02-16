@@ -74,7 +74,7 @@
 	</form>
 </div>
 
-<style>
+<style lang="scss">
 	.content {
 		position: absolute;
 		top: 0;
