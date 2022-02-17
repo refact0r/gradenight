@@ -64,10 +64,6 @@ button {
 	}
 }
 
-a {
-	text-decoration: none;
-}
-
 h1 {
 	line-height: 50px;
 	margin-top: calc(var(--spacing) / 2);
@@ -99,6 +95,7 @@ td {
 }
 
 .link {
+	text-decoration: none;
 	display: inline-block;
 	&:hover {
 		color: var(--font-color-2);

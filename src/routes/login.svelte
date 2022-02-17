@@ -68,7 +68,13 @@
 		<input type="text" placeholder="Username" bind:value={username} />
 		<input type="password" placeholder="Password" bind:value={password} />
 		<div class="error">
-			{error ? error : 'Your login info will not be saved anywhere except your browser.'}
+			{#if error}
+				{error}
+			{:else}
+				Your login info will not be saved anywhere except your browser.<br />
+				You can see all the code on the
+				<a href="https:/github.com/refact0r/studentvue">github</a>.
+			{/if}
 		</div>
 		<button type="submit">{status ? status : 'Login'}</button>
 	</form>
