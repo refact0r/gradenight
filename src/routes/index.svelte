@@ -12,6 +12,9 @@
 
 <script>
 	import { session } from '$app/stores'
+
+	let date = new Date()
+	let greeting = date.getHours() < 12 ? 'morning' : date.getHours() < 18 ? 'afternoon' : 'evening'
 </script>
 
 <svelte:head>
@@ -19,7 +22,7 @@
 </svelte:head>
 
 <div class="layout">
-	<h1>Hello, {$session.student.FormattedName.split(' ')[0]}!</h1>
+	<h1>Good {greeting}, {$session.student.FormattedName.split(' ')[0]}!</h1>
 	<div class="average value box">
 		<h1 style={$session.gradebook.averageStyle}>
 			{$session.gradebook.average}

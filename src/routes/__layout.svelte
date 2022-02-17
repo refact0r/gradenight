@@ -33,25 +33,13 @@
 	$: if ($session.periods) {
 		$session.selected = $session.periods[$session.selectedPeriod]
 	}
-
-	async function logout() {
-		$session.user = null
-		await fetch('/auth/logout', {
-			method: 'POST'
-		})
-		goto('/login')
-	}
 </script>
 
 {#if $session.user}
 	{#if $session.gradebook && $session.student}
 		<nav class="box" in:fade={{ duration: 200, delay: 200 }}>
 			{#if $session.student}
-				<img
-					alt="profile"
-					src={'data:image/jpeg;base64,' + $session.student.Photo}
-					on:click={logout}
-				/>
+				<img alt="profile" src={'data:image/jpeg;base64,' + $session.student.Photo} />
 			{/if}
 			<a class:active={$page.url.pathname === '/'} sveltekit:prefetch href="/">
 				<i class="bi bi-house" />
@@ -152,6 +140,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		text-decoration: none;
 		height: 50px;
 		width: 50px;
 		margin-top: 30px;
