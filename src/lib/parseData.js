@@ -97,6 +97,7 @@ function getAssignments(gradebook) {
 			assignment.scorePercent = -1
 			assignment.percent = '?'
 			assignment.score = 'Not Graded'
+			assignment.Measure = assignment.Measure.replace('&amp;', '&')
 
 			if (assignment.Points.includes(' / ')) {
 				let split = assignment.Points.split(' / ')
