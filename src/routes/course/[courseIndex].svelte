@@ -71,7 +71,6 @@
 		Chart.defaults.font.weight = 300
 		Chart.defaults.font.size = 14
 		Chart.defaults.color = getComputedStyle(chartCanvas).getPropertyValue('--font-color-2')
-
 		chart = new Chart(chartCanvas, {
 			type: 'line',
 			data: {
@@ -109,6 +108,9 @@
 					x: {
 						type: 'linear',
 						bounds: 'data',
+						grid: {
+							color: getComputedStyle(chartCanvas).getPropertyValue('--bg-color-3')
+						},
 						ticks: {
 							callback: function (value) {
 								return new Date(value).toLocaleDateString('en-US', {
@@ -121,7 +123,10 @@
 					y: {
 						type: 'linear',
 						suggestedMax: course.fourPoint ? 4.0 : 100,
-						suggestedMin: course.fourPoint ? 1.0 : 60
+						suggestedMin: course.fourPoint ? 1.0 : 60,
+						grid: {
+							color: getComputedStyle(chartCanvas).getPropertyValue('--bg-color-3')
+						}
 					}
 				}
 			}
