@@ -27,14 +27,43 @@
 	let chartCanvas
 	let gradeLetter
 	let chart
+	let gradient
 	$: if (course && chart) {
 		console.log('chart update')
 		console.log(course.chartData)
 		chart.data.datasets[0].data = course.chartData
-		chart.data.datasets[0].borderColor = course.color
+
+		gradient = chartCanvas
+			.getContext('2d')
+			.createLinearGradient(chart.chartArea.left, 0, chart.chartArea.right, 0)
+		addColorStops(gradient)
+
 		chart.options.scales.y.suggestedMax = course.fourPoint ? 4.0 : 100
 		chart.options.scales.y.suggestedMin = course.fourPoint ? 1.0 : 60
 		chart.update()
+	}
+
+	function getGradient(context) {
+		const { ctx, chartArea } = context.chart
+		if (!gradient && chartArea) {
+			gradient = ctx.createLinearGradient(chartArea.left, 0, chartArea.right, 0)
+			addColorStops(gradient)
+		}
+		return gradient
+	}
+
+	function addColorStops(gradient) {
+		let first = course.chartData[0]
+		let last = course.chartData[course.chartData.length - 1]
+		let range = last.x - first.x
+		if (range === 0) {
+			gradient.addColorStop(0, first.color)
+			gradient.addColorStop(1, first.color)
+		} else {
+			for (let point of course.chartData) {
+				gradient.addColorStop((point.x - first.x) / range, point.color)
+			}
+		}
 	}
 
 	onMount(async (promise) => {
@@ -42,12 +71,13 @@
 		Chart.defaults.font.weight = 300
 		Chart.defaults.font.size = 14
 		Chart.defaults.color = getComputedStyle(chartCanvas).getPropertyValue('--font-color-2')
+
 		chart = new Chart(chartCanvas, {
 			type: 'line',
 			data: {
 				datasets: [
 					{
-						borderColor: getComputedStyle(gradeLetter).getPropertyValue('color'),
+						borderColor: getGradient,
 						tension: 0.3,
 						data: course.chartData
 					}
@@ -78,6 +108,7 @@
 				scales: {
 					x: {
 						type: 'linear',
+						bounds: 'data',
 						ticks: {
 							callback: function (value) {
 								return new Date(value).toLocaleDateString('en-US', {
