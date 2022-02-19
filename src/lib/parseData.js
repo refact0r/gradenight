@@ -134,6 +134,7 @@ function getAssignments(gradebook) {
 							total += type.weight
 						}
 					}
+					let color = getColor((score / total) * 100)
 					let grade = (score / total) * (course.fourPoint ? 4 : 100)
 
 					if (
@@ -141,10 +142,12 @@ function getAssignments(gradebook) {
 						+course.chartData[course.chartData.length - 1].x === +date
 					) {
 						course.chartData[course.chartData.length - 1].y = grade
+						course.chartData[course.chartData.length - 1].color = color
 					} else {
 						course.chartData.push({
 							x: date,
-							y: grade
+							y: grade,
+							color: color
 						})
 					}
 				}
