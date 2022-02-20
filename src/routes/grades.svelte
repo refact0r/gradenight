@@ -24,7 +24,7 @@
 		<h1>Grades</h1>
 		<PeriodSelect bind:period={$session.selectedPeriod} />
 	</div>
-	<div class="content box">
+	<div class="content">
 		<table>
 			{#each $session.selected.Courses.Course as course, index}
 				<tr>
@@ -52,6 +52,7 @@
 	}
 
 	.content {
+		@include box;
 		flex-grow: 1;
 		font-size: 1.2em;
 	}

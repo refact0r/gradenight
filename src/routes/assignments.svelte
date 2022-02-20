@@ -24,14 +24,18 @@
 		<h1>Assignments</h1>
 		<PeriodSelect bind:period={$session.selectedPeriod} />
 	</div>
-	<div class="content box">
+	<div class="content">
 		<div class="scroll">
 			<table>
 				{#each $session.selected.assignments as assignment}
 					<tr>
 						<td class="assignment-name">{assignment.Measure}</td>
 						<td class="assignment-course">
-							<a class="link" sveltekit:prefetch href={'/course/' + assignment.courseIndex}>
+							<a
+								class="link"
+								sveltekit:prefetch
+								href={'/course/' + assignment.courseIndex}
+							>
 								{assignment.course}
 							</a>
 						</td>
@@ -57,6 +61,7 @@
 	}
 
 	.content {
+		@include box;
 		flex-grow: 1;
 		padding: 0;
 		overflow: hidden;
@@ -66,7 +71,7 @@
 		height: 100%;
 		overflow-y: auto;
 		scrollbar-color: var(--bg-color-2-5) transparent;
-		padding: var(--spacing);
+		padding: $spacing;
 	}
 
 	td {

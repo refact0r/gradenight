@@ -4,7 +4,6 @@ console.log(login)
 
 export async function post({ request }) {
 	const body = await request.json()
-	console.log(body)
 
 	let client = await login(body.districtUrl, body.username, body.password)
 	let result = await Promise.all([

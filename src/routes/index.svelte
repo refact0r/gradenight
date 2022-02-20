@@ -23,26 +23,26 @@
 
 <div class="layout">
 	<h1>Good {greeting}, {$session.student.FormattedName.split(' ')[0]}!</h1>
-	<div class="average value box">
+	<div class="average value">
 		<h1 style={$session.gradebook.averageStyle}>
 			{$session.gradebook.average}
 		</h1>
 		<div class="value-label">Average grade<br />&nbsp;</div>
 	</div>
-	<div class="improvement value box">
+	<div class="improvement value">
 		<h1 style={$session.gradebook.week.averageStyle}>
 			{$session.gradebook.week.average}
 		</h1>
 		<div class="value-label">Average grade<br />this week</div>
 	</div>
-	<div class="week-assignments value box">
+	<div class="week-assignments value">
 		<h1>{$session.gradebook.week.length}</h1>
 		<div class="value-label">
 			{$session.gradebook.week.length === 1 ? 'Assignment' : 'Assignments'}
 			<br />this week
 		</div>
 	</div>
-	<div class="days value box">
+	<div class="days value">
 		<h1>
 			{$session.gradebook.days}
 		</h1>
@@ -51,7 +51,7 @@
 			<br />{$session.gradebook.ReportingPeriod.GradePeriod}
 		</div>
 	</div>
-	<div class="grades box">
+	<div class="grades">
 		<a class="link" sveltekit:prefetch href="/grades"><h2>Grades</h2></a>
 		<table class="grades-table">
 			{#each $session.gradebook.Courses.Course as course, index}
@@ -69,7 +69,7 @@
 			{/each}
 		</table>
 	</div>
-	<div class="assignments box">
+	<div class="assignments">
 		<div class="assignments-scroll">
 			<a class="link" sveltekit:prefetch href="/assignments"><h2>Assignments</h2></a>
 			<table class="assignments-table">
@@ -93,7 +93,7 @@
 		display: grid;
 		height: 100%;
 		width: 100%;
-		gap: var(--spacing);
+		gap: $spacing;
 		grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
 		grid-template-rows: auto auto 1fr;
 	}
@@ -104,6 +104,7 @@
 	}
 
 	.value {
+		@include box;
 		aspect-ratio: 1;
 		text-align: center;
 		display: flex;
@@ -113,20 +114,22 @@
 		overflow: hidden;
 		font-size: 0.9em;
 		padding: 0;
-	}
-	.value h1 {
-		margin-top: auto;
-		margin-bottom: 10px;
-	}
-	.value div {
-		margin-bottom: auto;
+		h1 {
+			margin-top: auto;
+			margin-bottom: 10px;
+		}
+		div {
+			margin-bottom: auto;
+		}
 	}
 
 	.grades {
+		@include box;
 		grid-column: 1 / 5;
 	}
 
 	.assignments {
+		@include box;
 		padding: 0;
 		grid-column: 5;
 		grid-row: 1 / 4;
@@ -137,11 +140,11 @@
 		height: 100%;
 		overflow-y: auto;
 		scrollbar-color: var(--bg-color-2-5) transparent;
-		padding: var(--spacing);
+		padding: $spacing;
 	}
 
 	.grades-table {
-		height: calc(100% - 2 * var(--spacing));
+		height: calc(100% - 2 * $spacing);
 	}
 
 	.assignments-table {

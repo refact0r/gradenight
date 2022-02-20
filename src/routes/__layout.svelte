@@ -37,7 +37,7 @@
 
 {#if $session.user}
 	{#if $session.gradebook && $session.student}
-		<nav class="box" in:fade={{ duration: 200, delay: 200 }}>
+		<nav in:fade={{ duration: 200, delay: 200 }}>
 			{#if $session.student}
 				<img alt="profile" src={'data:image/jpeg;base64,' + $session.student.Photo} />
 			{/if}
@@ -87,19 +87,20 @@
 
 <style lang="scss">
 	nav {
+		@include box;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		width: min-content;
-		padding: calc(var(--spacing) / 2);
+		padding: $spacing-small;
 	}
 
 	main {
 		width: 100%;
 		height: 100%;
 		background-color: var(--bg-color-1);
-		height: calc(100vh - 2 * var(--spacing));
-		margin-left: var(--spacing);
+		height: calc(100vh - 2 * $spacing);
+		margin-left: $spacing;
 	}
 
 	.transition-container {

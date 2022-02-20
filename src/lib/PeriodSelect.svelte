@@ -3,15 +3,16 @@
 	export let period
 </script>
 
-<select class="period box" bind:value={period}>
+<select bind:value={period}>
 	{#each $session.gradebook.ReportingPeriods.ReportPeriod as period, index}
 		<option value={index}>{period.GradePeriod}</option>
 	{/each}
 </select>
 
-<style>
+<style lang="scss">
 	select {
-		padding: calc(var(--spacing) * 0.5);
+		@include box;
+		padding: $spacing-small;
 		width: fit-content;
 		margin-left: auto;
 	}
