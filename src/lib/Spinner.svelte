@@ -2,7 +2,7 @@
 	<div class="loader" />
 </div>
 
-<style>
+<style lang="scss">
 	.container {
 		width: min-content;
 	}

@@ -143,18 +143,18 @@
 		<h1 class="title">{course.Title}</h1>
 		<PeriodSelect bind:period={$session.selectedPeriod} />
 	</div>
-	<div class="grade box">
+	<div class="grade">
 		<h1 class="grade-letter" style={course.style} bind:this={gradeLetter}>
 			{course.Marks.Mark.CalculatedScoreString}
 		</h1>
 		<div style={course.style}>{course.score}</div>
 	</div>
-	<div class="chart box">
+	<div class="chart">
 		<div class="chart-container">
 			<canvas bind:this={chartCanvas} />
 		</div>
 	</div>
-	<div class="assignments box">
+	<div class="assignments">
 		<div class="scroll">
 			<h2>Assignments</h2>
 			<table>
@@ -181,7 +181,7 @@
 <style lang="scss">
 	.layout {
 		display: grid;
-		gap: var(--spacing);
+		gap: $spacing;
 		grid-template-columns: 1fr 5fr;
 		grid-template-rows: auto auto 1fr;
 		height: 100%;
@@ -193,6 +193,7 @@
 	}
 
 	.grade {
+		@include box;
 		text-align: center;
 		display: flex;
 		flex-direction: column;
@@ -206,7 +207,12 @@
 		}
 	}
 
+	.chart {
+		@include box;
+	}
+
 	.assignments {
+		@include box;
 		grid-row: 3;
 		grid-column: 1 / 3;
 		padding: 0;
@@ -217,7 +223,7 @@
 		height: 100%;
 		overflow-y: auto;
 		scrollbar-color: var(--bg-color-2-5) transparent;
-		padding: var(--spacing);
+		padding: $spacing;
 	}
 
 	td {

@@ -29,7 +29,7 @@
 
 <div class="layout">
 	<h1>Settings</h1>
-	<div class="content box">
+	<div class="content">
 		<button on:click={logout}>Logout</button>
 	</div>
 </div>
@@ -42,11 +42,12 @@
 	}
 
 	h1 {
-		margin-bottom: var(--spacing);
+		margin-bottom: $spacing;
 	}
 
 	.content {
+		@include box;
 		flex-grow: 1;
-		padding: var(--spacing);
+		padding: $spacing;
 	}
 </style>
