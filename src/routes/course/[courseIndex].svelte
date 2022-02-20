@@ -92,11 +92,14 @@
 					tooltip: {
 						callbacks: {
 							title: function (value) {
-								return new Date(value[0].raw.x).toLocaleDateString('en-US', {
-									month: 'short',
-									day: 'numeric',
-									year: 'numeric'
-								})
+								return new Date(value[0].raw.x * 8.64e7).toLocaleDateString(
+									'en-US',
+									{
+										month: 'short',
+										day: 'numeric',
+										year: 'numeric'
+									}
+								)
 							},
 							label: function (value) {
 								return value.raw.y.toFixed(1) + (!course.fourPoint ? '%' : '')
@@ -112,8 +115,9 @@
 							color: getComputedStyle(chartCanvas).getPropertyValue('--bg-color-3')
 						},
 						ticks: {
+							precision: 0,
 							callback: function (value) {
-								return new Date(value).toLocaleDateString('en-US', {
+								return new Date(value * 8.64e7).toLocaleDateString('en-US', {
 									month: 'short',
 									day: 'numeric'
 								})

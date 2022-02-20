@@ -140,13 +140,14 @@ function getAssignments(gradebook) {
 
 					if (
 						course.chartData.length > 0 &&
-						+course.chartData[course.chartData.length - 1].x === +date
+						course.chartData[course.chartData.length - 1].x ===
+							Math.floor(date / 8.64e7)
 					) {
 						course.chartData[course.chartData.length - 1].y = grade
 						course.chartData[course.chartData.length - 1].color = color
 					} else {
 						course.chartData.push({
-							x: date,
+							x: Math.floor(date / 8.64e7),
 							y: grade,
 							color: color
 						})
