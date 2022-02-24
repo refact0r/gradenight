@@ -62,6 +62,7 @@ function getAssignments(gradebook) {
 	let assignments = []
 
 	for (const [index, course] of gradebook.Courses.Course.entries()) {
+		course.chartData = []
 		if (!course.Marks.Mark.Assignments.Assignment) {
 			continue
 		}
@@ -88,7 +89,6 @@ function getAssignments(gradebook) {
 				weight: 100
 			}
 		}
-		course.chartData = []
 
 		for (let assignment of course.Marks.Mark.Assignments.Assignment.reverse()) {
 			assignment.course = course.Title

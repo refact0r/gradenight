@@ -30,7 +30,7 @@
 	let gradient
 	$: if (course && chart) {
 		console.log('chart update')
-		console.log(course.chartData)
+		console.log(course)
 		chart.data.datasets[0].data = course.chartData
 
 		gradient = chartCanvas
@@ -53,6 +53,9 @@
 	}
 
 	function addColorStops(gradient) {
+		if (course.chartData.length === 0) {
+			return
+		}
 		let first = course.chartData[0]
 		let last = course.chartData[course.chartData.length - 1]
 		let range = last.x - first.x
