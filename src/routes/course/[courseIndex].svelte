@@ -100,7 +100,8 @@
 									{
 										month: 'short',
 										day: 'numeric',
-										year: 'numeric'
+										year: 'numeric',
+										timeZone: 'UTC'
 									}
 								)
 							},
@@ -122,7 +123,8 @@
 							callback: function (value) {
 								return new Date(value * 8.64e7).toLocaleDateString('en-US', {
 									month: 'short',
-									day: 'numeric'
+									day: 'numeric',
+									timeZone: 'UTC'
 								})
 							}
 						}
