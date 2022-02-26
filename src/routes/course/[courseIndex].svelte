@@ -171,17 +171,17 @@
 					<tr>
 						<td class="type-name">{name}</td>
 						<td class="type-points" style={type.style}>{type.score} / {type.total}</td>
-						<td class="type-weight">{type.weight}%</td>
 						<td class="type-score" style={type.style}>{type.scorePercent}%</td>
+						<td class="type-weight">{type.weight}%</td>
 					</tr>
 				{/each}
 				<tr>
 					<td class="type-name">Total</td>
 					<td class="type-points" />
-					<td class="type-weight">100%</td>
 					<td class="type-score" style={course.style}>
 						{course.scorePercent.toFixed(1)}%
 					</td>
+					<td class="type-weight">100%</td>
 				</tr>
 			</table>
 		</div>
