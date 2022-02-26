@@ -164,23 +164,27 @@
 		</div>
 	</div>
 	<div class="summary">
-		<h2>Summary</h2>
-		<table>
-			{#each Object.entries(course.scoreTypes) as [name, type]}
+		<div class="scroll">
+			<h2>Summary</h2>
+			<table>
+				{#each Object.entries(course.scoreTypes) as [name, type]}
+					<tr>
+						<td class="type-name">{name}</td>
+						<td class="type-points" style={type.style}>{type.score} / {type.total}</td>
+						<td class="type-weight">{type.weight}%</td>
+						<td class="type-score" style={type.style}>{type.scorePercent}%</td>
+					</tr>
+				{/each}
 				<tr>
-					<td>{name}</td>
-					<td>{type.score} / {type.total}</td>
-					<td>{type.weight}%</td>
-					<td style={type.style}>{type.scorePercent}%</td>
+					<td class="type-name">Total</td>
+					<td class="type-points" />
+					<td class="type-weight">100%</td>
+					<td class="type-score" style={course.style}>
+						{course.scorePercent.toFixed(1)}%
+					</td>
 				</tr>
-			{/each}
-			<tr>
-				<td>Total</td>
-				<td />
-				<td>100%</td>
-				<td>{course.scorePercent.toFixed(1)}%</td>
-			</tr>
-		</table>
+			</table>
+		</div>
 	</div>
 	<div class="assignments">
 		<div class="scroll">
@@ -192,7 +196,7 @@
 							<td class="assignment-name">{assignment.Measure}</td>
 							<td class="assignment-course">{assignment.Type}</td>
 							<td class="assignment-date">{assignment.DueDate}</td>
-							<td class="assignment-score" style={assignment.style}>
+							<td class="assignment-points" style={assignment.style}>
 								{assignment.score}
 							</td>
 							<td class="assignment-percentage" style={assignment.style}>
@@ -256,6 +260,9 @@
 		@include box;
 		grid-row: 2;
 		grid-column: 3;
+		padding: 0;
+		max-height: 300px;
+		overflow: auto;
 	}
 
 	.scroll {
@@ -270,16 +277,19 @@
 		padding-bottom: 10px;
 	}
 
-	.assignment-score,
+	.assignment-points,
 	.assignment-date {
 		padding: 10px 20px;
 	}
 
-	.assignment-score {
+	.assignment-points,
+	.type-points {
 		text-align: center;
 	}
 
-	.assignment-percentage {
+	.assignment-percentage,
+	.type-weight,
+	.type-score {
 		padding-left: 20px;
 		text-align: right;
 	}
