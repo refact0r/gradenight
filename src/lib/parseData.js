@@ -64,7 +64,7 @@ export function parseData(session, json) {
 					}
 				}
 			} else {
-				course.scoreTypes.all = {
+				course.scoreTypes.All = {
 					score: 0,
 					total: 0,
 					weight: 100
@@ -105,8 +105,8 @@ export function parseData(session, json) {
 								course.scoreTypes[assignment.Type].total += totalValue
 							}
 						} else {
-							course.scoreTypes.all.score += scoreValue
-							course.scoreTypes.all.total += totalValue
+							course.scoreTypes.All.score += scoreValue
+							course.scoreTypes.All.total += totalValue
 						}
 
 						let date = new Date(assignment.DueDate)
