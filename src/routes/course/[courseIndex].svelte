@@ -163,6 +163,25 @@
 			<canvas bind:this={chartCanvas} />
 		</div>
 	</div>
+	<div class="summary">
+		<h2>Summary</h2>
+		<table>
+			{#each Object.entries(course.scoreTypes) as [name, type]}
+				<tr>
+					<td>{name}</td>
+					<td>{type.score} / {type.total}</td>
+					<td>{type.weight}%</td>
+					<td style={type.style}>{type.scorePercent}%</td>
+				</tr>
+			{/each}
+			<tr>
+				<td>Total</td>
+				<td />
+				<td>100%</td>
+				<td>{course.scorePercent.toFixed(1)}%</td>
+			</tr>
+		</table>
+	</div>
 	<div class="assignments">
 		<div class="scroll">
 			<h2>Assignments</h2>
@@ -191,18 +210,21 @@
 	.layout {
 		display: grid;
 		gap: $spacing;
-		grid-template-columns: 1fr 5fr;
+		grid-template-columns: 1fr 3fr 2fr;
 		grid-template-rows: auto auto 1fr;
 		height: 100%;
 	}
 
 	.heading-container {
-		grid-column: 1 / 3;
+		grid-row: 1;
+		grid-column: 1 / 4;
 		margin-bottom: 0;
 	}
 
 	.grade {
 		@include box;
+		grid-row: 2;
+		grid-column: 1;
 		text-align: center;
 		display: flex;
 		flex-direction: column;
@@ -218,14 +240,22 @@
 
 	.chart {
 		@include box;
+		grid-row: 2;
+		grid-column: 2;
 	}
 
 	.assignments {
 		@include box;
 		grid-row: 3;
-		grid-column: 1 / 3;
+		grid-column: 1 / 4;
 		padding: 0;
 		overflow: hidden;
+	}
+
+	.summary {
+		@include box;
+		grid-row: 2;
+		grid-column: 3;
 	}
 
 	.scroll {

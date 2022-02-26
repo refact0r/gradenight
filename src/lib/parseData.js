@@ -49,14 +49,14 @@ export function parseData(session, json) {
 			}
 
 			let weighted = false
-			let scoreTypes = {}
+			course.scoreTypes = {}
 
 			if (course.Marks.Mark.GradeCalculationSummary.AssignmentGradeCalc) {
 				weighted = true
 
 				for (let type of course.Marks.Mark.GradeCalculationSummary.AssignmentGradeCalc) {
 					if (parseInt(type.Weight) !== 100.0) {
-						scoreTypes[type.Type] = {
+						course.scoreTypes[type.Type] = {
 							score: 0,
 							total: 0,
 							weight: parseInt(type.Weight)
@@ -64,7 +64,7 @@ export function parseData(session, json) {
 					}
 				}
 			} else {
-				scoreTypes.all = {
+				course.scoreTypes.all = {
 					score: 0,
 					total: 0,
 					weight: 100
@@ -100,20 +100,20 @@ export function parseData(session, json) {
 						assignment.style = `color: ${getColor(assignment.scorePercent)};`
 
 						if (weighted) {
-							if (scoreTypes[assignment.Type]) {
-								scoreTypes[assignment.Type].score += scoreValue
-								scoreTypes[assignment.Type].total += totalValue
+							if (course.scoreTypes[assignment.Type]) {
+								course.scoreTypes[assignment.Type].score += scoreValue
+								course.scoreTypes[assignment.Type].total += totalValue
 							}
 						} else {
-							scoreTypes.all.score += scoreValue
-							scoreTypes.all.total += totalValue
+							course.scoreTypes.all.score += scoreValue
+							course.scoreTypes.all.total += totalValue
 						}
 
 						let date = new Date(assignment.DueDate)
 						let score = 0
 						let total = 0
 
-						for (let type of Object.values(scoreTypes)) {
+						for (let type of Object.values(course.scoreTypes)) {
 							if (type.total > 0) {
 								score += (type.score / type.total) * type.weight
 								total += type.weight
@@ -140,6 +140,19 @@ export function parseData(session, json) {
 					}
 				}
 				assignments.push(assignment)
+			}
+			let totalWeight = 0
+			for (let type of Object.values(course.scoreTypes)) {
+				if (type.total === 0) {
+					type.weight = 0
+				}
+				totalWeight += type.weight
+			}
+			for (let type of Object.values(course.scoreTypes)) {
+				type.weight = ((type.weight / totalWeight) * 100).toFixed(1)
+				let percent = type.total ? type.score / type.total : 0
+				type.scorePercent = (percent * type.weight).toFixed(1)
+				type.color = type.style = `color: ${percent ? getColor(percent * 100) : 0};`
 			}
 		}
 
