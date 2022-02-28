@@ -15,5 +15,9 @@
 		padding: $spacing-small;
 		width: fit-content;
 		margin-left: auto;
+		&:hover {
+			cursor: pointer;
+			background-color: var(--bg-color-2-5);
+		}
 	}
 </style>
