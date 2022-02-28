@@ -170,7 +170,9 @@
 				{#each Object.entries(course.scoreTypes) as [name, type]}
 					<tr>
 						<td class="type-name">{name}</td>
-						<td class="type-points" style={type.style}>{type.score} / {type.total}</td>
+						<td class="type-points" style={type.style}>
+							{Math.round(type.score * 10) / 10} / {type.total}
+						</td>
 						<td class="type-score" style={type.style}>{type.scorePercent}%</td>
 						<td class="type-weight">{type.weight}%</td>
 					</tr>
@@ -181,7 +183,7 @@
 					<td class="type-score" style={course.style}>
 						{course.scorePercent.toFixed(1)}%
 					</td>
-					<td class="type-weight">100%</td>
+					<td class="type-weight">100.0%</td>
 				</tr>
 			</table>
 		</div>
