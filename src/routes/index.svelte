@@ -18,7 +18,7 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>StudentVue</title>
 </svelte:head>
 
 <div class="layout">

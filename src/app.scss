@@ -40,6 +40,22 @@ body {
 	color: var(--font-color-2);
 }
 
+::-webkit-scrollbar {
+	width: 10px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: var(--bg-color-2-5);
+}
+::-webkit-scrollbar-thumb:hover {
+	background: var(--bg-color-3);
+}
+::-webkit-scrollbar-thumb:active {
+	background: var(--bg-color-3-5);
+}
+
 button,
 a,
 input,
