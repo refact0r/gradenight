@@ -14,7 +14,7 @@
 	import { fade } from 'svelte/transition'
 	import { session } from '$app/stores'
 	import { goto } from '$app/navigation'
-	import { parseData } from '$lib/parseData.js'
+	import { parseData } from '$lib/js/parseData.js'
 
 	let districtUrl = 'https://wa-bsd405-psv.edupoint.com/'
 	let username

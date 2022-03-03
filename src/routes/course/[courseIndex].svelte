@@ -19,7 +19,7 @@
 	import { tick } from 'svelte'
 	import { session } from '$app/stores'
 	import Chart from 'chart.js/auto'
-	import PeriodSelect from '$lib/PeriodSelect.svelte'
+	import PeriodSelect from '$lib/components/PeriodSelect.svelte'
 
 	export let courseIndex
 	$: course = $session.selected.Courses.Course[courseIndex]
