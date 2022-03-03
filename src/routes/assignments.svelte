@@ -12,7 +12,7 @@
 
 <script>
 	import { session } from '$app/stores'
-	import PeriodSelect from '$lib/PeriodSelect.svelte'
+	import PeriodSelect from '$lib/components/PeriodSelect.svelte'
 </script>
 
 <svelte:head>

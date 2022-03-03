@@ -10,14 +10,14 @@
 
 <script>
 	import '../app.scss'
-	import '../bootstrap-icons.css'
-	import { session, page } from '$app/stores'
-	import { goto } from '$app/navigation'
 	import { onMount } from 'svelte'
 	import { fly } from 'svelte/transition'
 	import { fade } from 'svelte/transition'
-	import { parseData } from '$lib/parseData.js'
-	import Spinner from '$lib/Spinner.svelte'
+	import { session, page } from '$app/stores'
+	import { browser } from '$app/env'
+	import { parseData } from '$lib/js/parseData.js'
+	import { theme } from '$lib/js/stores.js'
+	import Spinner from '$lib/components/Spinner.svelte'
 
 	export let key
 
@@ -34,6 +34,11 @@
 		$session.selected = $session.periods[$session.selectedPeriod]
 	}
 </script>
+
+<svelte:head>
+	<meta name="color-scheme" content={$theme} />
+	<link rel="stylesheet" href={`/themes/${$theme}.css`} />
+</svelte:head>
 
 {#if $session.user}
 	{#if $session.gradebook && $session.student}
