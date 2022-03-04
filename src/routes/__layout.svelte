@@ -21,8 +21,6 @@
 
 	export let key
 
-	$: console.log($settings)
-
 	onMount(async () => {
 		if ($session.user) {
 			console.log('fetch')

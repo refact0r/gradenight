@@ -25,7 +25,6 @@
 	}
 
 	async function changeSetting(name, value) {
-		console.log($settings[name])
 		$settings[name] = value
 		parseData($session)
 	}
@@ -85,6 +84,7 @@
 		height: 40px;
 		border-radius: 40px;
 		border: 2px solid transparent;
+		margin-right: 5px;
 		&.active {
 			border-color: var(--font-color);
 		}
