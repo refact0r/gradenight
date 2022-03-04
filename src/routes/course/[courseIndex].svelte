@@ -30,7 +30,6 @@
 	let gradient
 	$: if (course && chart) {
 		console.log('chart update')
-		console.log(course)
 		chart.data.datasets[0].data = course.chartData
 
 		gradient = chartCanvas
