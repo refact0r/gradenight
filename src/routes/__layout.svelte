@@ -28,7 +28,17 @@
 			console.log('fetch')
 			const res = await fetch('/data')
 			const json = await res.json()
-			$session = parseData($session, json)
+			let { student, periods, currentPeriod } = json
+			$session = {
+				...$session,
+				student,
+				periods,
+				currentPeriod,
+				selectedPeriod: currentPeriod,
+				selected: periods[currentPeriod],
+				gradebook: periods[currentPeriod]
+			}
+			parseData($session)
 		}
 	})
 

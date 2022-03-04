@@ -1,10 +1,17 @@
+import { get } from 'svelte/store'
+import { settings } from './settings.js'
+
+const darkThemes = ['dark']
+
 export function getColor(percent) {
+	const isDark = darkThemes.indexOf(get(settings).theme) !== -1
 	if (percent < 0) return null
 	let hue = 0
-	let darkness = 0.6
+	let sat = isDark ? 0.8 : 1
+	let light = isDark ? 0.6 : 0.35
 	if (percent >= 60) hue = 4 * (percent - 60)
-	else darkness = (percent / 3 + 40) / 100
-	return HSLtoRGB(hue, 0.6, darkness)
+	else light = (percent / 3 + (isDark ? 40 : 5)) / 100
+	return HSLtoRGB(hue, sat, light)
 }
 
 export function fourToPercent(grade) {
