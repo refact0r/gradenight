@@ -16,10 +16,12 @@
 	import { session, page } from '$app/stores'
 	import { browser } from '$app/env'
 	import { parseData } from '$lib/js/parseData.js'
-	import { theme } from '$lib/js/stores.js'
+	import { settings } from '$lib/js/settings.js'
 	import Spinner from '$lib/components/Spinner.svelte'
 
 	export let key
+
+	$: console.log($settings)
 
 	onMount(async () => {
 		if ($session.user) {
@@ -36,8 +38,8 @@
 </script>
 
 <svelte:head>
-	<meta name="color-scheme" content={$theme} />
-	<link rel="stylesheet" href={`/themes/${$theme}.css`} />
+	<meta name="color-scheme" content={$settings.theme} />
+	<link rel="stylesheet" href={`/themes/${$settings.theme}.css`} />
 </svelte:head>
 
 {#if $session.user}
