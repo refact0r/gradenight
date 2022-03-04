@@ -14,6 +14,7 @@
 	import { session } from '$app/stores'
 	import { goto } from '$app/navigation'
 	import { settings } from '$lib/js/settings.js'
+	import { parseData } from '$lib/js/parseData.js'
 
 	async function logout() {
 		$session.user = null
@@ -21,6 +22,12 @@
 			method: 'POST'
 		})
 		goto('/login')
+	}
+
+	async function changeSetting(name, value) {
+		console.log($settings[name])
+		$settings[name] = value
+		parseData($session)
 	}
 </script>
 
@@ -37,11 +44,11 @@
 		<div class="themes">
 			<button
 				class={'theme dark' + ($settings.theme === 'dark' ? ' active' : '')}
-				on:click={() => ($settings.theme = 'dark')}
+				on:click={() => changeSetting('theme', 'dark')}
 			/>
 			<button
 				class={'theme light' + ($settings.theme === 'light' ? ' active' : '')}
-				on:click={() => ($settings.theme = 'light')}
+				on:click={() => changeSetting('theme', 'light')}
 			/>
 		</div>
 	</div>

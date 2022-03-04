@@ -1,10 +1,9 @@
 import { getColor, fourToPercent } from './utils.js'
 
-export function parseData(session, json) {
-	let { student, periods, currentPeriod } = json
-	console.log(json)
+export function parseData(session) {
+	console.log(session)
 
-	for (let period of periods) {
+	for (let period of session.periods) {
 		let grades = []
 		let assignments = []
 
@@ -166,16 +165,6 @@ export function parseData(session, json) {
 		assignments.sort((a, b) => new Date(b.DueDate) - new Date(a.DueDate))
 		period.assignments = assignments
 		period.week = getWeek(period.assignments)
-	}
-
-	return {
-		...session,
-		student,
-		periods,
-		currentPeriod,
-		selectedPeriod: currentPeriod,
-		selected: periods[currentPeriod],
-		gradebook: periods[currentPeriod]
 	}
 }
 
