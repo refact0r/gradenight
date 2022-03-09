@@ -215,8 +215,8 @@
 	.layout {
 		display: grid;
 		gap: $spacing;
-		grid-template-columns: 1fr 3fr 2fr;
-		grid-template-rows: auto auto 1fr;
+		grid-template-columns: 2fr 5fr 4fr;
+		grid-template-rows: auto 1fr 2fr;
 		height: 100%;
 	}
 
@@ -262,7 +262,6 @@
 		grid-row: 2;
 		grid-column: 3;
 		padding: 0;
-		max-height: 300px;
 		overflow: auto;
 	}
 
@@ -276,6 +275,11 @@
 	td {
 		padding-top: 10px;
 		padding-bottom: 10px;
+		white-space: nowrap;
+	}
+
+	.type-name {
+		white-space: normal;
 	}
 
 	.assignment-points,

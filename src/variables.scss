@@ -1,6 +1,6 @@
 /* Variables and mixins declared here will be available in all other SCSS files */
-$spacing: 25px;
-$spacing-small: 12.5px;
+$spacing: 20px;
+$spacing-small: 10px;
 
 @mixin box {
 	background-color: var(--bg-color-2);
