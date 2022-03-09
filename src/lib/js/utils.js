@@ -10,7 +10,7 @@ export function getColor(percent) {
 	let sat = isDark ? 0.8 : 1
 	let light = isDark ? 0.6 : 0.35
 	if (percent >= 60) hue = 4 * (percent - 60)
-	else light = (percent / 3 + (isDark ? 40 : 5)) / 100
+	else light = (percent / 5 + (isDark ? 48 : 23)) / 100
 	return HSLtoRGB(hue, sat, light)
 }
 
