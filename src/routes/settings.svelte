@@ -49,6 +49,10 @@
 				class={'theme light' + ($settings.theme === 'light' ? ' active' : '')}
 				on:click={() => changeSetting('theme', 'light')}
 			/>
+			<button
+				class={'theme olivia' + ($settings.theme === 'olivia' ? ' active' : '')}
+				on:click={() => changeSetting('theme', 'olivia')}
+			/>
 		</div>
 	</div>
 </div>
@@ -70,12 +74,8 @@
 		padding: $spacing;
 	}
 
-	h3 {
-		margin-top: $spacing;
-		margin-bottom: $spacing-small;
-		&:first-of-type {
-			margin-top: 0;
-		}
+	h3:first-of-type {
+		margin-top: 0;
 	}
 
 	.theme {
@@ -86,13 +86,16 @@
 		border: 2px solid transparent;
 		margin-right: 5px;
 		&.active {
-			border-color: var(--font-color);
+			border-color: var(--accent-color);
 		}
 		&.dark {
 			background: linear-gradient(135deg, #192024 0%, #192024 50%, #13161b 50%, #13161b 100%);
 		}
 		&.light {
 			background: linear-gradient(135deg, #e8edf7 0%, #e8edf7 50%, #d1d8e6 50%, #d1d8e6 100%);
+		}
+		&.olivia {
+			background: linear-gradient(135deg, #1f1d20 0%, #1f1d20 50%, #1a181b 50%, #1a181b 100%);
 		}
 	}
 </style>

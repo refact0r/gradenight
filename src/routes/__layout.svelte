@@ -113,7 +113,6 @@
 	main {
 		width: 100%;
 		height: 100%;
-		background-color: var(--bg-color-1);
 		height: calc(100vh - 2 * $spacing);
 		margin-left: $spacing;
 	}
@@ -192,5 +191,6 @@
 		height: 25px;
 		font-size: 25px;
 		line-height: 25px;
+		color: var(--accent-color);
 	}
 </style>

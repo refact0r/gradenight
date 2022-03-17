@@ -1,0 +1,12 @@
+:root {
+	--bg-color-1: hsl(270deg 3% 10%);
+	--bg-color-1-5: hsl(270deg 3% 11%);
+	--bg-color-2: hsl(270deg 3% 12%);
+	--bg-color-2-5: hsl(270deg 4% 13%);
+	--bg-color-3: hsl(270deg 4% 14%);
+	--bg-color-3-5: hsl(270deg 4% 15%);
+	--font-color-3: hsl(0deg 11% 27%);
+	--font-color-2: hsl(11deg 14% 44%);
+	--font-color: hsl(24deg 16% 94%);
+	--accent-color: hsl(17deg 50% 74%);
+}
