@@ -9,7 +9,7 @@
 
 	.loader {
 		border: 3px solid var(--bg-color-2);
-		border-top: 3px solid var(--font-color);
+		border-top: 3px solid var(--accent-color);
 		border-radius: 50%;
 		width: 50px;
 		height: 50px;

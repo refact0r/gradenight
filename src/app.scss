@@ -71,13 +71,21 @@ button {
 }
 
 h1 {
+	color: var(--accent-color);
 	line-height: 50px;
 	margin-top: $spacing-small;
 	margin-bottom: 0;
 }
 
 h2 {
+	color: var(--accent-color);
 	margin-top: 0;
+	margin-bottom: $spacing-small;
+}
+
+h3 {
+	color: var(--accent-color);
+	margin-top: $spacing;
 	margin-bottom: $spacing-small;
 }
 
@@ -101,6 +109,13 @@ td {
 		color: var(--font-color-2);
 	}
 	&:active {
+		color: var(--font-color-3);
+		transform: scale(0.95);
+	}
+	*:hover {
+		color: var(--font-color-2);
+	}
+	*:active {
 		color: var(--font-color-3);
 		transform: scale(0.95);
 	}
