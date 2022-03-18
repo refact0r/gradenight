@@ -22,3 +22,17 @@ body {
 	background-image: url(../img/backdrop.jpg) !important;
 	background-size: cover;
 }
+
+option {
+	color: black !important;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--bg-color-1-5);
+}
+::-webkit-scrollbar-thumb:hover {
+	background: var(--bg-color-1);
+}
+::-webkit-scrollbar-thumb:active {
+	background: var(--bg-color-2);
+}
