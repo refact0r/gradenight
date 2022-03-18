@@ -1,0 +1,24 @@
+:root {
+	--bg-color-1: hsla(0deg 0% 100% / 10%);
+	--bg-color-1-5: hsla(0deg 0% 100% / 5%);
+	--bg-color-2: hsla(0deg 0% 100% / 20%);
+	--bg-color-2-5: hsla(0deg 0% 100% / 25%);
+	--bg-color-3: hsla(0deg 0% 100% / 30%);
+	--bg-color-3-5: hsla(0deg 0% 100% / 30%);
+	--font-color-3: hsla(0deg 0% 100% / 50%);
+	--font-color-2: hsla(0deg 0% 100% / 70%);
+	--font-color: hsl(0, 0%, 95%);
+	--accent-color: hsl(0, 0%, 90%);
+	--border: 1px solid hsla(0deg 0% 100% / 20%);
+	--filter: blur(20px);
+}
+
+body {
+	background-image: url(https://images.pling.com/img/00/00/62/69/92/1701699/digital-art-neon-bubbles1.jpg);
+	background-size: cover;
+}
+
+.loading-container {
+	background-image: url(https://images.pling.com/img/00/00/62/69/92/1701699/digital-art-neon-bubbles1.jpg);
+	background-size: cover;
+}

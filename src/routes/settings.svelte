@@ -42,16 +42,24 @@
 		<h3>Theme</h3>
 		<div class="themes">
 			<button
-				class={'theme dark' + ($settings.theme === 'dark' ? ' active' : '')}
+				class={'theme' + ($settings.theme === 'dark' ? ' active' : '')}
+				style="background: linear-gradient(45deg, #192024 0% 50%, #13161b 50% 100%);"
 				on:click={() => changeSetting('theme', 'dark')}
 			/>
 			<button
-				class={'theme light' + ($settings.theme === 'light' ? ' active' : '')}
+				class={'theme' + ($settings.theme === 'light' ? ' active' : '')}
+				style="background: linear-gradient(45deg, #e8edf7 0% 50%, #d1d8e6 50% 100%);"
 				on:click={() => changeSetting('theme', 'light')}
 			/>
 			<button
-				class={'theme olivia' + ($settings.theme === 'olivia' ? ' active' : '')}
+				class={'theme' + ($settings.theme === 'olivia' ? ' active' : '')}
+				style="background: linear-gradient(45deg, #1f1d20 0% 50%, #1a181b 50% 100%);"
 				on:click={() => changeSetting('theme', 'olivia')}
+			/>
+			<button
+				class={'theme' + ($settings.theme === 'glass' ? ' active' : '')}
+				style="background: linear-gradient(45deg, #567EC1 0% ,#bd5077 100%);"
+				on:click={() => changeSetting('theme', 'glass')}
 			/>
 		</div>
 	</div>
@@ -82,20 +90,10 @@
 		padding: 0;
 		width: 40px;
 		height: 40px;
-		border-radius: 40px;
-		border: 2px solid transparent;
+		border-radius: 50%;
 		margin-right: 5px;
 		&.active {
-			border-color: var(--accent-color);
-		}
-		&.dark {
-			background: linear-gradient(135deg, #192024 0%, #192024 50%, #13161b 50%, #13161b 100%);
-		}
-		&.light {
-			background: linear-gradient(135deg, #e8edf7 0%, #e8edf7 50%, #d1d8e6 50%, #d1d8e6 100%);
-		}
-		&.olivia {
-			background: linear-gradient(135deg, #1f1d20 0%, #1f1d20 50%, #1a181b 50%, #1a181b 100%);
+			box-shadow: 0 0 0 2px var(--accent-color);
 		}
 	}
 </style>
