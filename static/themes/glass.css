@@ -14,11 +14,11 @@
 }
 
 body {
-	background: url(../img/backdrop.jpg) !important;
+	background-image: url(../img/backdrop.jpg) !important;
 	background-size: cover;
 }
 
 .loading-container {
-	background: url(../img/backdrop.jpg) !important;
+	background-image: url(../img/backdrop.jpg) !important;
 	background-size: cover;
 }
