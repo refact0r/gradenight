@@ -15,12 +15,12 @@
 
 body {
 	background-image: url(../img/backdrop.jpg) !important;
-	background-size: cover;
+	background-size: cover !important;
 }
 
 .loading-container {
 	background-image: url(../img/backdrop.jpg) !important;
-	background-size: cover;
+	background-size: cover !important;
 }
 
 option {
