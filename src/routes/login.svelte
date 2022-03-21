@@ -48,7 +48,17 @@
 				password,
 				districtUrl
 			}
-			$session = parseData($session, json)
+			let { student, periods, currentPeriod } = json
+			$session = {
+				...$session,
+				student,
+				periods,
+				currentPeriod,
+				selectedPeriod: currentPeriod,
+				selected: periods[currentPeriod],
+				gradebook: periods[currentPeriod]
+			}
+			parseData($session)
 			goto('/')
 		} else {
 			error = 'Invalid login credentials.'
