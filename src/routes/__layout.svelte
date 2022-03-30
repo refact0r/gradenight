@@ -20,28 +20,39 @@
 	import Spinner from '$lib/components/Spinner.svelte'
 
 	export let key
+	let spinning = false
 
 	onMount(async () => {
 		if ($session.user) {
 			console.log('fetch')
-			const res = await fetch('/data')
-			const json = await res.json()
-			let { student, periods, currentPeriod } = json
-			$session = {
-				...$session,
-				student,
-				periods,
-				currentPeriod,
-				selectedPeriod: currentPeriod,
-				selected: periods[currentPeriod],
-				gradebook: periods[currentPeriod]
-			}
-			parseData($session)
+			await load()
 		}
 	})
 
 	$: if ($session.periods) {
 		$session.selected = $session.periods[$session.selectedPeriod]
+	}
+
+	async function load() {
+		const res = await fetch('/data')
+		const json = await res.json()
+		let { student, periods, currentPeriod } = json
+		$session = {
+			...$session,
+			student,
+			periods,
+			currentPeriod,
+			selectedPeriod: currentPeriod,
+			selected: periods[currentPeriod],
+			gradebook: periods[currentPeriod]
+		}
+		parseData($session)
+	}
+
+	async function refresh() {
+		spinning = true
+		await load()
+		spinning = false
 	}
 </script>
 
@@ -69,6 +80,9 @@
 			>
 				<i class="bi bi-pen" />
 			</a>
+			<button class={'refresh' + (spinning ? ' spinning' : '')} on:click={refresh}>
+				<i class="bi bi-arrow-repeat" />
+			</button>
 			<a
 				class:active={$page.url.pathname === '/settings'}
 				sveltekit:prefetch
@@ -151,7 +165,23 @@
 		border-radius: 50px;
 	}
 
-	a {
+	a:first-of-type {
+		margin-top: 50px;
+	}
+
+	a:last-of-type {
+		margin-bottom: 12.5px;
+	}
+
+	.refresh {
+		margin-top: auto;
+		&.spinning i {
+			animation: spin 1s linear infinite;
+		}
+	}
+
+	a,
+	button {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -162,13 +192,7 @@
 		text-align: center;
 		border-radius: 50%;
 		color: var(--font-color);
-		&:first-of-type {
-			margin-top: 50px;
-		}
-		&:last-of-type {
-			margin-top: auto;
-			margin-bottom: 12.5px;
-		}
+		background: transparent;
 		&:hover {
 			background: var(--bg-color-1-5);
 			// color: var(--font-color-2);
@@ -180,10 +204,6 @@
 				transform: scale(0.9);
 			}
 		}
-		&.active {
-			background: var(--bg-color-1);
-			// color: var(--font-color-3);
-		}
 	}
 
 	i {
@@ -192,5 +212,14 @@
 		font-size: 25px;
 		line-height: 25px;
 		color: var(--accent-color);
+	}
+
+	@keyframes spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
 	}
 </style>
