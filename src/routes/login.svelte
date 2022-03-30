@@ -43,14 +43,14 @@
 		})
 		if (res.ok) {
 			const json = await res.json()
-			$session.user = {
-				username,
-				password,
-				districtUrl
-			}
 			let { student, periods, currentPeriod } = json
 			$session = {
 				...$session,
+				user: {
+					username,
+					password,
+					districtUrl
+				},
 				student,
 				periods,
 				currentPeriod,

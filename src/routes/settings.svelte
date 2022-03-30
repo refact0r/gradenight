@@ -93,7 +93,7 @@
 		border-radius: 50%;
 		margin-right: 5px;
 		&.active {
-			box-shadow: 0 0 0 2px var(--accent-color);
+			border: 2px solid var(--accent-color);
 		}
 	}
 </style>
