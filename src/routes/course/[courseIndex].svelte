@@ -194,7 +194,12 @@
 				{#if course.Marks.Mark.Assignments.Assignment}
 					{#each [...course.Marks.Mark.Assignments.Assignment].reverse() as assignment, index}
 						<tr>
-							<td class="assignment-name">{assignment.Measure}</td>
+							<td
+								class="assignment-name"
+								style={assignment.new ? 'font-weight: bold;' : ''}
+							>
+								{assignment.Measure}
+							</td>
 							<td class="assignment-course">{assignment.Type}</td>
 							<td class="assignment-date">{assignment.DueDate}</td>
 							<td class="assignment-points" style={assignment.style}>

@@ -76,7 +76,12 @@
 				{#each $session.gradebook.assignments as assignment}
 					{#if assignment.scorePercent >= 0}
 						<tr>
-							<td class="assignment-name">{assignment.Measure}</td>
+							<td
+								class="assignment-name"
+								style={assignment.new ? 'font-weight: bold;' : ''}
+							>
+								{assignment.Measure}
+							</td>
 							<td class="assignment-score" style={assignment.style}>
 								{assignment.score}
 							</td>

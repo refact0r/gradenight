@@ -17,6 +17,7 @@
 	import { browser } from '$app/env'
 	import { parseData } from '$lib/js/parseData.js'
 	import { settings } from '$lib/js/settings.js'
+	import { oldAssignments } from '$lib/js/oldAssignments.js'
 	import Spinner from '$lib/components/Spinner.svelte'
 
 	export let key
@@ -46,7 +47,9 @@
 			selected: periods[currentPeriod],
 			gradebook: periods[currentPeriod]
 		}
-		parseData($session)
+		console.log(Array.from($oldAssignments).toString())
+		parseData($session, $oldAssignments)
+		$oldAssignments = $oldAssignments
 	}
 
 	async function refresh() {
