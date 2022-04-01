@@ -29,7 +29,12 @@
 			<table>
 				{#each $session.selected.assignments as assignment}
 					<tr>
-						<td class="assignment-name">{assignment.Measure}</td>
+						<td
+							class="assignment-name"
+							style={assignment.new ? 'font-weight: bold;' : ''}
+						>
+							{assignment.Measure}
+						</td>
 						<td class="assignment-course">
 							<a
 								class="link"

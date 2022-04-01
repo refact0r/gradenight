@@ -1,6 +1,6 @@
 import { getColor, fourToPercent } from './utils.js'
 
-export function parseData(session) {
+export function parseData(session, oldAssignments) {
 	console.log(session)
 
 	for (let period of session.periods) {
@@ -71,13 +71,17 @@ export function parseData(session) {
 			}
 
 			for (let assignment of course.Marks.Mark.Assignments.Assignment.reverse()) {
+				assignment.Measure = assignment.Measure.replace('&amp;', '&')
 				assignment.course = course.Title
 				assignment.courseIndex = index
 				assignment.style = null
 				assignment.scorePercent = -1
 				assignment.percent = '?'
 				assignment.score = 'Not Graded'
-				assignment.Measure = assignment.Measure.replace('&amp;', '&')
+				if (assignment.new !== true) {
+					assignment.new = !oldAssignments.has(assignment.GradebookID)
+				}
+				oldAssignments.add(assignment.GradebookID)
 
 				if (assignment.Points.includes(' / ')) {
 					let split = assignment.Points.split(' / ')
