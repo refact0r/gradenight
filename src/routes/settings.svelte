@@ -40,6 +40,7 @@
 		<h3>Account</h3>
 		<button on:click={logout}>Logout</button>
 		<h3>Theme</h3>
+		<div>{$settings.theme.charAt(0).toUpperCase() + $settings.theme.substring(1)}</div>
 		<div class="themes">
 			<button
 				class={'theme' + ($settings.theme === 'dark' ? ' active' : '')}
@@ -91,6 +92,7 @@
 		width: 40px;
 		height: 40px;
 		border-radius: 50%;
+		margin-top: 10px;
 		margin-right: 5px;
 		&.active {
 			border: 2px solid var(--accent-color);
