@@ -76,8 +76,13 @@ export function parseData(session, oldAssignments) {
 				assignment.courseIndex = index
 				assignment.style = null
 				assignment.scorePercent = -1
-				assignment.percent = '?'
-				assignment.score = 'Not Graded'
+				if (assignment.Points.includes('Points Possible')) {
+					assignment.percent = '?'
+					assignment.score = 'Not Graded'
+				} else {
+					assignment.percent = '-'
+					assignment.score = assignment.Points
+				}
 				if (assignment.new !== true) {
 					assignment.new = !oldAssignments.has(assignment.GradebookID)
 				}
