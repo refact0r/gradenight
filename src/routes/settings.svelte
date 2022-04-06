@@ -15,6 +15,7 @@
 	import { goto } from '$app/navigation'
 	import { settings } from '$lib/js/settings.js'
 	import { parseData } from '$lib/js/parseData.js'
+	import { oldAssignments } from '$lib/js/oldAssignments.js'
 
 	async function logout() {
 		$session.user = null
@@ -26,7 +27,9 @@
 
 	async function changeSetting(name, value) {
 		$settings[name] = value
-		parseData($session)
+		if (name === 'theme') {
+			parseData($session, $oldAssignments)
+		}
 	}
 </script>
 
@@ -92,7 +95,7 @@
 		width: 40px;
 		height: 40px;
 		border-radius: 50%;
-		margin-top: 10px;
+		margin-top: $spacing-small;
 		margin-right: 5px;
 		&.active {
 			border: 2px solid var(--accent-color);

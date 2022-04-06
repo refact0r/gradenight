@@ -15,6 +15,7 @@
 	import { session } from '$app/stores'
 	import { goto } from '$app/navigation'
 	import { parseData } from '$lib/js/parseData.js'
+	import { oldAssignments } from '$lib/js/oldAssignments.js'
 
 	let districtUrl = 'https://wa-bsd405-psv.edupoint.com/'
 	let username
@@ -58,7 +59,7 @@
 				selected: periods[currentPeriod],
 				gradebook: periods[currentPeriod]
 			}
-			parseData($session)
+			parseData($session, $oldAssignments)
 			goto('/')
 		} else {
 			error = 'Invalid login credentials.'
@@ -104,8 +105,8 @@
 
 	form {
 		width: 500px;
-		padding: 20px;
-		border-radius: 18px;
+		padding: $spacing;
+		border-radius: $roundness;
 		background: var(--bg-color-2);
 		display: flex;
 		flex-direction: column;
@@ -118,19 +119,12 @@
 		text-align: center;
 	}
 
-	input,
-	button {
-		border-radius: 12px;
-		padding: 10px;
-		background: var(--bg-color-1);
-	}
-
 	button:hover {
 		background: var(--bg-color-1-5);
 	}
 
 	input {
-		margin-top: 10px;
+		margin-top: $spacing-small;
 	}
 
 	h2 {
