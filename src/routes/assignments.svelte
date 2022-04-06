@@ -80,13 +80,13 @@
 	}
 
 	td {
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding-top: $spacing-small;
+		padding-bottom: $spacing-small;
 	}
 
 	.assignment-score,
 	.assignment-date {
-		padding: 10px 20px;
+		padding: $spacing-small 20px;
 	}
 
 	.assignment-score {

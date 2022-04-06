@@ -47,7 +47,6 @@
 			selected: periods[currentPeriod],
 			gradebook: periods[currentPeriod]
 		}
-		console.log(Array.from($oldAssignments).toString())
 		parseData($session, $oldAssignments)
 		$oldAssignments = $oldAssignments
 	}
@@ -157,7 +156,7 @@
 	}
 
 	.spinner-label {
-		margin-top: 10px;
+		margin-top: $spacing-small;
 	}
 
 	img {

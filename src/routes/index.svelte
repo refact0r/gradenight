@@ -121,7 +121,7 @@
 		padding: 0;
 		h1 {
 			margin-top: auto;
-			margin-bottom: 10px;
+			margin-bottom: $spacing-small;
 		}
 		div {
 			margin-bottom: auto;
@@ -158,8 +158,8 @@
 	}
 
 	.assignments-table td {
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding-top: $spacing-small;
+		padding-bottom: $spacing-small;
 	}
 
 	.assignment-name {

@@ -2,6 +2,7 @@
 $spacing: 20px;
 $spacing-small: 10px;
 $roundness: 20px;
+$roundness-small: 12px;
 
 @mixin box {
 	background: var(--bg-color-2);

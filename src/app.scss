@@ -57,10 +57,16 @@ option {
 	outline: none;
 }
 
+input {
+	background: var(--bg-color-1);
+	padding: $spacing-small;
+	border-radius: $roundness-small;
+}
+
 button {
 	background: var(--bg-color-1);
-	padding: 10px;
-	border-radius: 12px;
+	padding: $spacing-small;
+	border-radius: $roundness-small;
 	&:hover {
 		background: var(--bg-color-1-5);
 		cursor: pointer;
@@ -97,9 +103,18 @@ td {
 	padding: 0;
 }
 
-.heading-container {
+.grid-heading-container {
 	display: flex;
 	margin-bottom: $spacing;
+}
+
+.heading-container {
+	display: flex;
+	align-items: center;
+	margin-bottom: $spacing-small;
+	& h2 {
+		margin: 0;
+	}
 }
 
 .link {

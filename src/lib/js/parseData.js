@@ -9,6 +9,7 @@ export function parseData(session, oldAssignments) {
 
 		for (let [index, course] of period.Courses.Course.entries()) {
 			course.Title = course.Title.replace(/ \([\s\S]*?\)/g, '')
+			course.index = index
 			course.fourPoint = false
 
 			if (course.Marks.Mark.CalculatedScoreString === 'N/A') {
