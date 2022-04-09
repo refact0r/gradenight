@@ -28,7 +28,7 @@
 	async function changeSetting(name, value) {
 		$settings[name] = value
 		if (name === 'theme') {
-			parseData($session, $oldAssignments)
+			parseData($session, null)
 		}
 	}
 </script>

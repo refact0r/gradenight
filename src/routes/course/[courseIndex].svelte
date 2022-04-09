@@ -16,16 +16,20 @@
 
 <script>
 	import { onMount } from 'svelte'
-	import { tick } from 'svelte'
 	import { session } from '$app/stores'
 	import Chart from 'chart.js/auto'
 	import PeriodSelect from '$lib/components/PeriodSelect.svelte'
+	import FakeAssignmentModal from '$lib/components/FakeAssignmentModal.svelte'
 
 	export let courseIndex
 	$: course = $session.selected.Courses.Course[courseIndex]
 
+	let modal
+	function createFakeAssignment() {
+		modal.show()
+	}
+
 	let chartCanvas
-	let gradeLetter
 	let chart
 	let gradient
 	$: if (course && chart) {
@@ -58,11 +62,13 @@
 		let first = course.chartData[0]
 		let last = course.chartData[course.chartData.length - 1]
 		let range = last.x - first.x
+		console.log(last.x, first.x, course.chartData)
 		if (range === 0) {
 			gradient.addColorStop(0, first.color)
 			gradient.addColorStop(1, first.color)
 		} else {
 			for (let point of course.chartData) {
+				console.log(point, (point.x - first.x) / range)
 				gradient.addColorStop((point.x - first.x) / range, point.color)
 			}
 		}
@@ -147,12 +153,12 @@
 </svelte:head>
 
 <div class="layout">
-	<div class="heading-container">
+	<div class="grid-heading-container">
 		<h1 class="title">{course.Title}</h1>
 		<PeriodSelect bind:period={$session.selectedPeriod} />
 	</div>
 	<div class="grade">
-		<h1 class="grade-letter" style={course.style} bind:this={gradeLetter}>
+		<h1 class="grade-letter" style={course.style}>
 			{course.Marks.Mark.CalculatedScoreString}
 		</h1>
 		<div style={course.style}>{course.score}</div>
@@ -189,10 +195,13 @@
 	</div>
 	<div class="assignments">
 		<div class="scroll">
-			<h2>Assignments</h2>
+			<div class="heading-container">
+				<h2>Assignments</h2>
+				<button class="fake" on:click={createFakeAssignment}> Add Fake Assignment </button>
+			</div>
 			<table>
 				{#if course.Marks.Mark.Assignments.Assignment}
-					{#each [...course.Marks.Mark.Assignments.Assignment].reverse() as assignment, index}
+					{#each course.Marks.Mark.Assignments.Assignment as assignment, index}
 						<tr>
 							<td
 								class="assignment-name"
@@ -215,6 +224,7 @@
 		</div>
 	</div>
 </div>
+<FakeAssignmentModal bind:this={modal} {course} />
 
 <style lang="scss">
 	.layout {
@@ -225,7 +235,7 @@
 		height: 100%;
 	}
 
-	.heading-container {
+	.grid-heading-container {
 		grid-row: 1;
 		grid-column: 1 / 4;
 		margin-bottom: 0;
@@ -241,7 +251,7 @@
 		aspect-ratio: 1;
 		h1 {
 			margin-top: auto;
-			margin-bottom: 10px;
+			margin-bottom: $spacing-small;
 		}
 		div {
 			margin-bottom: auto;
@@ -278,8 +288,8 @@
 	}
 
 	td {
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding-top: $spacing-small;
+		padding-bottom: $spacing-small;
 		white-space: nowrap;
 	}
 
@@ -289,7 +299,7 @@
 
 	.assignment-points,
 	.assignment-date {
-		padding: 10px 20px;
+		padding: $spacing-small 20px;
 	}
 
 	.assignment-points,
@@ -307,5 +317,9 @@
 	.chart-container {
 		position: relative;
 		height: 100%;
+	}
+
+	.fake {
+		margin-left: auto;
 	}
 </style>
