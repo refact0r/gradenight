@@ -39,10 +39,6 @@
 			Points: score + ' / ' + total,
 			Notes: ''
 		}
-		console.log(
-			$session.periods[$session.selectedPeriod].Courses.Course[course.index].Marks.Mark
-				.Assignments.Assignment
-		)
 		$session.periods[$session.selectedPeriod].Courses.Course[
 			course.index
 		].Marks.Mark.Assignments.Assignment.unshift(assignment)
