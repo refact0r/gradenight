@@ -71,7 +71,7 @@ export function parseData(session, oldAssignments) {
 				}
 			}
 
-			for (let assignment of course.Marks.Mark.Assignments.Assignment.reverse()) {
+			for (let assignment of [...course.Marks.Mark.Assignments.Assignment].reverse()) {
 				assignment.Measure = assignment.Measure.replace('&amp;', '&')
 				assignment.course = course.Title
 				assignment.courseIndex = index
@@ -84,10 +84,12 @@ export function parseData(session, oldAssignments) {
 					assignment.percent = '-'
 					assignment.score = assignment.Points
 				}
-				if (assignment.new !== true) {
-					assignment.new = !oldAssignments.has(assignment.GradebookID)
+				if (oldAssignments) {
+					if (assignment.new !== true) {
+						assignment.new = !oldAssignments.has(assignment.GradebookID)
+					}
+					oldAssignments.add(assignment.GradebookID)
 				}
-				oldAssignments.add(assignment.GradebookID)
 
 				if (assignment.Points.includes(' / ')) {
 					let split = assignment.Points.split(' / ')
