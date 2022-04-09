@@ -22,7 +22,6 @@ export function parseData(session, oldAssignments) {
 					course.fourPoint = true
 				}
 			}
-			console.log(course, course.fourPoint)
 
 			if (course.Marks.Mark.Assignments.Assignment) {
 				if (!Array.isArray(course.Marks.Mark.Assignments.Assignment)) {
@@ -31,12 +30,8 @@ export function parseData(session, oldAssignments) {
 					]
 				}
 
-				let weighted = false
 				course.scoreTypes = {}
-
 				if (course.Marks.Mark.GradeCalculationSummary.AssignmentGradeCalc) {
-					weighted = true
-
 					for (let type of course.Marks.Mark.GradeCalculationSummary
 						.AssignmentGradeCalc) {
 						if (parseInt(type.Weight) !== 100.0) {
@@ -92,9 +87,8 @@ export function parseData(session, oldAssignments) {
 							assignment.percent = assignment.scorePercent
 								? assignment.scorePercent.toFixed(1) + '%'
 								: '0.0%'
-							assignment.style = `color: ${getColor(assignment.scorePercent)};`
 
-							if (weighted) {
+							if (course.Marks.Mark.GradeCalculationSummary.AssignmentGradeCalc) {
 								if (course.scoreTypes[assignment.Type]) {
 									course.scoreTypes[assignment.Type].score += scoreValue
 									course.scoreTypes[assignment.Type].total += totalValue
@@ -133,6 +127,7 @@ export function parseData(session, oldAssignments) {
 								})
 							}
 						}
+						assignment.style = `color: ${getColor(assignment.scorePercent)};`
 					}
 					assignments.push(assignment)
 				}

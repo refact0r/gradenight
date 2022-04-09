@@ -10,14 +10,14 @@
 	today = today.getMonth() + 1 + '/' + today.getDate() + '/' + today.getFullYear()
 
 	let shown = false
+	let error = ''
 	let name = null
-	let score = null
+	let points = null
 	let total = null
+	let type = Object.keys(course.scoreTypes)[0]
 
 	export function show() {
-		name = null
-		score = null
-		total = null
+		reset()
 		shown = true
 	}
 
@@ -26,18 +26,32 @@
 	}
 
 	function add() {
+		if (points == null) {
+			error = 'Please enter a point value.'
+			return
+		}
+		if (total == null) {
+			error = 'Please enter a total value.'
+			return
+		}
+		if (points < 0) {
+			error = 'Points cannot be negative.'
+			return
+		}
+		if (total < 0) {
+			error = 'Total cannot be negative.'
+			return
+		}
 		shown = false
 		name ??= 'Fake Assignment'
-		score ??= 0
-		total ??= 0
 		let assignment = {
 			GradebookID: '-',
 			Measure: name,
-			Type: Object.keys(course.scoreTypes)[0],
+			Type: type,
 			Date: today,
 			DueDate: today,
 			ScoreType: course.fourPoint ? 'Rubric 0-4' : 'Raw Score',
-			Points: score + ' / ' + total,
+			Points: points + ' / ' + total,
 			Notes: '',
 			fake: true
 		}
@@ -47,6 +61,14 @@
 		// sort assignments
 		parseData($session, null)
 		$session = $session
+	}
+
+	function reset() {
+		error = ''
+		name = null
+		points = null
+		total = null
+		type = Object.keys(course.scoreTypes)[0]
 	}
 </script>
 
@@ -59,18 +81,35 @@
 		>
 			<h3>Fake Assignment</h3>
 			<input class="name" type="string" placeholder="Name" bind:value={name} />
-			<input class="score" type="number" placeholder="Score" bind:value={score} />
-			<input class="total" type="number" placeholder="Total" bind:value={total} />
-			<br />
-			<button on:click={cancel}>Cancel</button>
-			<button on:click={add}>Add</button>
+			<div class="row">
+				<select bind:value={type}>
+					{#each Object.keys(course.scoreTypes) as scoreType}
+						<option value={scoreType}>{scoreType}</option>
+					{/each}
+				</select>
+				<input
+					class="points"
+					type="number"
+					min="0"
+					placeholder="Points"
+					bind:value={points}
+				/>
+				<input class="total" type="number" min="0" placeholder="Total" bind:value={total} />
+			</div>
+			{#if error}
+				<div class="error">{error}</div>
+			{/if}
+			<div class="row">
+				<button on:click={cancel}>Cancel</button>
+				<button on:click={add}>Add</button>
+			</div>
 		</div>
 	</div>
 {/if}
 
 <style lang="scss">
 	h3 {
-		margin: 0 0 $spacing 0;
+		margin: 0 0 $spacing-small 0;
 	}
 
 	.background {
@@ -87,23 +126,29 @@
 	.modal {
 		@include box;
 		margin: auto;
+		width: 500px;
 	}
 
-	input {
-		margin-left: $spacing-small;
-		&:first-of-type {
-			margin-left: 0;
-		}
-		&[type='number'] {
-			width: 100px;
-		}
-	}
-
+	input,
 	button {
-		margin-left: $spacing-small;
-		margin-top: $spacing-small;
-		&:first-of-type {
-			margin-left: auto;
+		width: 100%;
+	}
+
+	select {
+		background: var(--bg-color-1);
+		&:hover {
+			cursor: pointer;
+			background: var(--bg-color-1-5);
 		}
+	}
+
+	.row {
+		display: flex;
+		gap: $spacing-small;
+		margin-top: $spacing-small;
+	}
+
+	.error {
+		margin-top: $spacing-small;
 	}
 </style>

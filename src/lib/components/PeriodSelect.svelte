@@ -20,8 +20,4 @@
 			background: var(--bg-color-2-5);
 		}
 	}
-
-	option {
-		background: var(--bg-color-2);
-	}
 </style>
