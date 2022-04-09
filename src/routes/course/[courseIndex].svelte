@@ -33,7 +33,6 @@
 	let chart
 	let gradient
 	$: if (course && chart) {
-		console.log('chart update')
 		chart.data.datasets[0].data = course.chartData
 
 		gradient = chartCanvas
@@ -62,13 +61,11 @@
 		let first = course.chartData[0]
 		let last = course.chartData[course.chartData.length - 1]
 		let range = last.x - first.x
-		console.log(last.x, first.x, course.chartData)
 		if (range === 0) {
 			gradient.addColorStop(0, first.color)
 			gradient.addColorStop(1, first.color)
 		} else {
 			for (let point of course.chartData) {
-				console.log(point, (point.x - first.x) / range)
 				gradient.addColorStop((point.x - first.x) / range, point.color)
 			}
 		}
@@ -197,7 +194,7 @@
 		<div class="scroll">
 			<div class="heading-container">
 				<h2>Assignments</h2>
-				<button class="fake" on:click={createFakeAssignment}> Add Fake Assignment </button>
+				<button class="fake" on:click={createFakeAssignment}>Add Fake Assignment</button>
 			</div>
 			<table>
 				{#if course.Marks.Mark.Assignments.Assignment}
