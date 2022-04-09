@@ -37,7 +37,8 @@
 			Date: today,
 			DueDate: today,
 			Points: score + ' / ' + total,
-			Notes: ''
+			Notes: '',
+			fake: true
 		}
 		$session.periods[$session.selectedPeriod].Courses.Course[
 			course.index
@@ -55,7 +56,7 @@
 			in:fly={{ y: -5, duration: 200 }}
 			out:fly|local={{ y: 5, duration: 200 }}
 		>
-			<h4>Fake Assignment</h4>
+			<h3>Fake Assignment</h3>
 			<input class="name" type="string" placeholder="Name" bind:value={name} />
 			<input class="score" type="number" placeholder="Score" bind:value={score} />
 			<input class="total" type="number" placeholder="Total" bind:value={total} />
@@ -67,8 +68,8 @@
 {/if}
 
 <style lang="scss">
-	h4 {
-		margin: 0 0 $spacing-small 0;
+	h3 {
+		margin: 0 0 $spacing 0;
 	}
 
 	.background {
