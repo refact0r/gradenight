@@ -163,7 +163,7 @@ export function parseData(session, oldAssignments) {
 					course.score += '%'
 				}
 				grades.push(course.scorePercent)
-				course.CalculatedScoreString = percentToLetter(course.scorePercent)
+				course.Marks.Mark.CalculatedScoreString = percentToLetter(course.scorePercent)
 			}
 			course.color = getColor(course.scorePercent)
 			course.style = `color: ${course.color};`

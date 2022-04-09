@@ -199,7 +199,7 @@
 			<table>
 				{#if course.Marks.Mark.Assignments.Assignment}
 					{#each course.Marks.Mark.Assignments.Assignment as assignment, index}
-						<tr>
+						<tr style={assignment.fake ? 'color: var(--font-color-2);' : ''}>
 							<td
 								class="assignment-name"
 								style={assignment.new ? 'font-weight: bold;' : ''}
