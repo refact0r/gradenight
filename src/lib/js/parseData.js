@@ -85,7 +85,7 @@ export function parseData(session, oldAssignments) {
 							(scoreValue === 0 && totalValue === 0) ||
 							assignment.Notes.toLowerCase().includes('not for grading')
 						) {
-							assignment.scorePercent = 0
+							assignment.scorePercent = -1
 							assignment.percent = '-'
 						} else {
 							assignment.scorePercent = (scoreValue / totalValue) * 100
