@@ -36,6 +36,7 @@
 			Type: Object.keys(course.scoreTypes)[0],
 			Date: today,
 			DueDate: today,
+			ScoreType: course.fourPoint ? 'Rubric 0-4' : 'Raw Score',
 			Points: score + ' / ' + total,
 			Notes: '',
 			fake: true
