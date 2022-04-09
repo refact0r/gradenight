@@ -76,6 +76,11 @@ button {
 	}
 }
 
+select {
+	padding: $spacing-small;
+	border-radius: $roundness-small;
+}
+
 h1 {
 	color: var(--accent-color);
 	line-height: 50px;
