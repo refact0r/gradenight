@@ -194,12 +194,12 @@
 		<div class="scroll">
 			<div class="heading-container">
 				<h2>Assignments</h2>
-				<button class="fake" on:click={createFakeAssignment}>Add Fake Assignment</button>
+				<button class="fake-button" on:click={createFakeAssignment}>Add Fake Assignment</button>
 			</div>
 			<table>
 				{#if course.Marks.Mark.Assignments.Assignment}
 					{#each course.Marks.Mark.Assignments.Assignment as assignment, index}
-						<tr style={assignment.fake ? 'color: var(--font-color-2);' : ''}>
+						<tr class={assignment.fake ? 'fake' : ''}>
 							<td
 								class="assignment-name"
 								style={assignment.new ? 'font-weight: bold;' : ''}
@@ -316,7 +316,7 @@
 		height: 100%;
 	}
 
-	.fake {
+	.fake-button {
 		margin-left: auto;
 	}
 </style>
