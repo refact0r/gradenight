@@ -104,10 +104,8 @@
 	}
 
 	form {
+		@include box;
 		width: 500px;
-		padding: $spacing;
-		border-radius: $roundness;
-		background: var(--bg-color-2);
 		display: flex;
 		flex-direction: column;
 	}
