@@ -201,7 +201,8 @@
 				{#if course.Marks.Mark.Assignments.Assignment}
 					{#each course.Marks.Mark.Assignments.Assignment as assignment, index}
 						<tr
-							class={'assignment' + (assignment.fake ? ' fake' : '')}
+							class={'assignment' +
+								(assignment.fake || assignment.edited ? ' fake' : '')}
 							on:click={() => editAssignment.show(index)}
 						>
 							<td

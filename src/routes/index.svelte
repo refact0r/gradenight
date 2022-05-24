@@ -75,7 +75,7 @@
 			<table class="assignments-table">
 				{#each $session.gradebook.assignments as assignment}
 					{#if assignment.scorePercent >= 0}
-						<tr class={assignment.fake ? 'fake' : ''}>
+						<tr class={assignment.fake || assignment.edited ? 'fake' : ''}>
 							<td
 								class="assignment-name"
 								style={assignment.new ? 'font-weight: bold;' : ''}

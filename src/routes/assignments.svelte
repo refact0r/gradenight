@@ -28,7 +28,7 @@
 		<div class="scroll">
 			<table>
 				{#each $session.selected.assignments as assignment}
-					<tr class={assignment.fake ? 'fake' : ''}>
+					<tr class={assignment.fake || assignment.edited ? 'fake' : ''}>
 						<td
 							class="assignment-name"
 							style={assignment.new ? 'font-weight: bold;' : ''}
