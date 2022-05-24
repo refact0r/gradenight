@@ -54,11 +54,13 @@
 			return
 		}
 		shown = false
-		assignment.scoreRaw = points
-		assignment.totalRaw = total
-		assignment.edited = true
-		parseData($session, null)
-		$session = $session
+		if (points !== assignment.scoreRaw || total !== assignment.totalRaw) {
+			assignment.edited = true
+			assignment.scoreRaw = points
+			assignment.totalRaw = total
+			parseData($session, null)
+			$session = $session
+		}
 	}
 
 	function cancel() {

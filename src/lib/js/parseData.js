@@ -70,9 +70,12 @@ export function parseData(session, oldAssignments) {
 						oldAssignments.add(assignment.GradebookID)
 					}
 
-					if (assignment.Points.includes(' / ')) {
-						let split = assignment.Points.split(' / ')
+					if (
+						assignment.Points.includes(' / ') ||
+						(assignment.scoreRaw != null && assignment.totalRaw != null)
+					) {
 						if (!assignment.edited) {
+							let split = assignment.Points.split(' / ')
 							assignment.scoreRaw = parseFloat(split[0])
 							assignment.totalRaw = parseFloat(split[1])
 						}
