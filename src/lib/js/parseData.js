@@ -72,45 +72,49 @@ export function parseData(session, oldAssignments) {
 
 					if (assignment.Points.includes(' / ')) {
 						let split = assignment.Points.split(' / ')
-						let scoreValue = parseFloat(split[0])
-						let totalValue = parseFloat(split[1])
-						assignment.score = scoreValue + ' / ' + totalValue
+						if (!assignment.edited) {
+							assignment.scoreRaw = parseFloat(split[0])
+							assignment.totalRaw = parseFloat(split[1])
+						}
+						let points = assignment.scoreRaw
+						let total = assignment.totalRaw
+						assignment.score = points + ' / ' + total
 
 						if (
-							(scoreValue === 0 && totalValue === 0) ||
+							(points === 0 && total === 0) ||
 							assignment.Notes.toLowerCase().includes('not for grading')
 						) {
 							assignment.scorePercent = -1
 							assignment.percent = '-'
 						} else {
-							assignment.scorePercent = (scoreValue / totalValue) * 100
+							assignment.scorePercent = (points / total) * 100
 							assignment.percent = assignment.scorePercent
 								? assignment.scorePercent.toFixed(1) + '%'
 								: '0.0%'
 
 							if (course.Marks.Mark.GradeCalculationSummary.AssignmentGradeCalc) {
 								if (course.scoreTypes[assignment.Type]) {
-									course.scoreTypes[assignment.Type].score += scoreValue
-									course.scoreTypes[assignment.Type].total += totalValue
+									course.scoreTypes[assignment.Type].score += points
+									course.scoreTypes[assignment.Type].total += total
 								}
 							} else {
-								course.scoreTypes.All.score += scoreValue
-								course.scoreTypes.All.total += totalValue
+								course.scoreTypes.All.score += points
+								course.scoreTypes.All.total += total
 							}
 
 							let date = new Date(assignment.DueDate)
-							let score = 0
-							let total = 0
+							let scoreSum = 0
+							let totalSum = 0
 
 							for (let type of Object.values(course.scoreTypes)) {
 								if (type.total > 0) {
-									score += (type.score / type.total) * type.weight
-									total += type.weight
+									scoreSum += (type.score / type.total) * type.weight
+									totalSum += type.weight
 								}
 							}
 
-							let color = getColor((score / total) * 100)
-							let grade = (score / total) * (course.fourPoint ? 4 : 100)
+							let color = getColor((scoreSum / totalSum) * 100)
+							let grade = (scoreSum / totalSum) * (course.fourPoint ? 4 : 100)
 
 							if (
 								course.chartData.length > 0 &&

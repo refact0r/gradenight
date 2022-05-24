@@ -19,15 +19,14 @@
 	import { session } from '$app/stores'
 	import Chart from 'chart.js/auto'
 	import PeriodSelect from '$lib/components/PeriodSelect.svelte'
-	import FakeAssignmentModal from '$lib/components/FakeAssignmentModal.svelte'
+	import FakeAssignment from '$lib/components/FakeAssignment.svelte'
+	import EditAssignment from '$lib/components/EditAssignment.svelte'
 
 	export let courseIndex
 	$: course = $session.selected.Courses.Course[courseIndex]
 
-	let modal
-	function createFakeAssignment() {
-		modal.show()
-	}
+	let fakeAssignment
+	let editAssignment
 
 	let chartCanvas
 	let chart
@@ -194,12 +193,17 @@
 		<div class="scroll">
 			<div class="heading-container">
 				<h2>Assignments</h2>
-				<button class="fake-button" on:click={createFakeAssignment}>Add Fake Assignment</button>
+				<button class="fake-button" on:click={() => fakeAssignment.show()}>
+					Add Fake Assignment
+				</button>
 			</div>
 			<table>
 				{#if course.Marks.Mark.Assignments.Assignment}
 					{#each course.Marks.Mark.Assignments.Assignment as assignment, index}
-						<tr class={assignment.fake ? 'fake' : ''}>
+						<tr
+							class={'assignment' + (assignment.fake ? ' fake' : '')}
+							on:click={() => editAssignment.show(index)}
+						>
 							<td
 								class="assignment-name"
 								style={assignment.new ? 'font-weight: bold;' : ''}
@@ -221,7 +225,8 @@
 		</div>
 	</div>
 </div>
-<FakeAssignmentModal bind:this={modal} {course} />
+<FakeAssignment bind:this={fakeAssignment} {course} />
+<EditAssignment bind:this={editAssignment} {course} />
 
 <style lang="scss">
 	.layout {
@@ -284,10 +289,38 @@
 		padding: $spacing;
 	}
 
+	.assignments .scroll {
+		padding: $spacing-small;
+	}
+
+	.heading-container {
+		margin: $spacing-small;
+	}
+
+	.assignment {
+		&:hover {
+			cursor: pointer;
+			& td {
+				background: var(--bg-color-1-5);
+			}
+		}
+		& td {
+			&:last-child {
+				padding-right: $spacing-small;
+				border-radius: 0 $roundness-small $roundness-small 0;
+			}
+			&:first-child {
+				padding-left: $spacing-small;
+				border-radius: $roundness-small 0 0 $roundness-small;
+			}
+		}
+	}
+
 	td {
 		padding-top: $spacing-small;
 		padding-bottom: $spacing-small;
 		white-space: nowrap;
+		position: relative;
 	}
 
 	.type-name {
