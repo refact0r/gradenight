@@ -6,10 +6,7 @@
 
 	export let course
 
-	let assignment
-
-	let today = new Date()
-	today = today.getMonth() + 1 + '/' + today.getDate() + '/' + today.getFullYear()
+	let assignment, index
 
 	let shown = false
 	let error = ''
@@ -17,6 +14,7 @@
 	let total = null
 
 	export function show(index) {
+		index = index
 		assignment = course.Marks.Mark.Assignments.Assignment[index]
 		clear()
 		shown = true
@@ -24,24 +22,33 @@
 
 	function clear() {
 		error = ''
-		points = assignment.scoreRaw
-		total = assignment.totalRaw
+		points = assignment.points
+		total = assignment.total
 	}
 
 	function reset() {
-		assignment.edited = false
-		let split = assignment.Points.split(' / ')
-		assignment.scoreRaw = parseFloat(split[0])
-		assignment.totalRaw = parseFloat(split[1])
-		clear()
+		error = ''
+		points = assignment.pointsOriginal
+		total = assignment.totalOriginal
+	}
+
+	function del() {
+		shown = false
+		course.Marks.Mark.Assignments.Assignment.splice(assignment.index, 1)
+		parseData($session, null)
+		$session = $session
+	}
+
+	function cancel() {
+		shown = false
 	}
 
 	function save() {
-		if (points == null) {
+		if (points == null && total) {
 			error = 'Please enter a point value.'
 			return
 		}
-		if (total == null) {
+		if (total == null && points) {
 			error = 'Please enter a total value.'
 			return
 		}
@@ -54,17 +61,16 @@
 			return
 		}
 		shown = false
-		if (points !== assignment.scoreRaw || total !== assignment.totalRaw) {
+		console.log(points, total)
+		if (points == assignment.pointsOriginal && total == assignment.totalOriginal) {
+			assignment.edited = false
+		} else {
 			assignment.edited = true
-			assignment.scoreRaw = points
-			assignment.totalRaw = total
-			parseData($session, null)
-			$session = $session
 		}
-	}
-
-	function cancel() {
-		shown = false
+		assignment.points = points
+		assignment.total = total
+		parseData($session, null)
+		$session = $session
 	}
 </script>
 
@@ -93,7 +99,11 @@
 				<div class="error">{error}</div>
 			{/if}
 			<div class="row">
-				<button on:click={reset}>Reset</button>
+				{#if assignment.fake}
+					<button on:click={del}>Delete</button>
+				{:else}
+					<button on:click={reset}>Reset</button>
+				{/if}
 				<button on:click={cancel}>Cancel</button>
 				<button on:click={save}>Save</button>
 			</div>

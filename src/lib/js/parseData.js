@@ -70,39 +70,38 @@ export function parseData(session, oldAssignments) {
 						oldAssignments.add(assignment.GradebookID)
 					}
 
-					if (
-						assignment.Points.includes(' / ') ||
-						(assignment.scoreRaw != null && assignment.totalRaw != null)
-					) {
-						if (!assignment.edited) {
+					if (assignment.Points.includes(' / ') || assignment.edited) {
+						if (assignment.Points.includes(' / ')) {
 							let split = assignment.Points.split(' / ')
-							assignment.scoreRaw = parseFloat(split[0])
-							assignment.totalRaw = parseFloat(split[1])
+							assignment.pointsOriginal = parseFloat(split[0])
+							assignment.totalOriginal = parseFloat(split[1])
+							if (!assignment.edited) {
+								assignment.points = assignment.pointsOriginal
+								assignment.total = assignment.totalOriginal
+							}
 						}
-						let points = assignment.scoreRaw
-						let total = assignment.totalRaw
-						assignment.score = points + ' / ' + total
+						assignment.score = assignment.points + ' / ' + assignment.total
 
 						if (
-							(points === 0 && total === 0) ||
+							(assignment.points === 0 && assignment.total === 0) ||
 							assignment.Notes.toLowerCase().includes('not for grading')
 						) {
 							assignment.scorePercent = -1
 							assignment.percent = '-'
 						} else {
-							assignment.scorePercent = (points / total) * 100
+							assignment.scorePercent = (assignment.points / assignment.total) * 100
 							assignment.percent = assignment.scorePercent
 								? assignment.scorePercent.toFixed(1) + '%'
 								: '0.0%'
 
 							if (course.Marks.Mark.GradeCalculationSummary.AssignmentGradeCalc) {
 								if (course.scoreTypes[assignment.Type]) {
-									course.scoreTypes[assignment.Type].score += points
-									course.scoreTypes[assignment.Type].total += total
+									course.scoreTypes[assignment.Type].score += assignment.points
+									course.scoreTypes[assignment.Type].total += assignment.total
 								}
 							} else {
-								course.scoreTypes.All.score += points
-								course.scoreTypes.All.total += total
+								course.scoreTypes.All.score += assignment.points
+								course.scoreTypes.All.total += assignment.total
 							}
 
 							let date = new Date(assignment.DueDate)
