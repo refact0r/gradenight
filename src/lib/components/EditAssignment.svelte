@@ -82,9 +82,12 @@
 			out:fly|local={{ y: 5, duration: 200 }}
 		>
 			<h3>Edit Assignment</h3>
-			<p class="name">{assignment.Measure}</p>
+			<div class="row info">
+				<p class="name">{assignment.Measure}</p>
+				<p class="date">{assignment.DueDate}</p>
+			</div>
 			<!-- <p class="type">{assignment.Type}</p>
-			<p class="type">{assignment.DueDate}</p> -->
+			<p class="date">{assignment.DueDate}</p> -->
 			<div class="row">
 				<input
 					class="points"
@@ -142,9 +145,16 @@
 		display: flex;
 		gap: $spacing-small;
 		margin-top: $spacing-small;
+		&.info {
+			margin: 0;
+		}
 	}
 
 	.error {
 		margin-top: $spacing-small;
+	}
+
+	.date {
+		margin-left: auto;
 	}
 </style>

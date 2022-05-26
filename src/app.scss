@@ -81,10 +81,14 @@ select {
 	border-radius: $roundness-small;
 }
 
+p {
+	margin: $spacing-small 0;
+}
+
 h1 {
 	color: var(--accent-color);
-	line-height: 50px;
-	margin-top: $spacing-small;
+	line-height: 40px;
+	margin-top: calc($spacing-small + 5px);
 	margin-bottom: 0;
 }
 
