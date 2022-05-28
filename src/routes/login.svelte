@@ -113,7 +113,7 @@
 	.error {
 		margin: 20px 0;
 		color: var(--font-color-2);
-		font-size: 0.8em;
+		font-size: 1em;
 		text-align: center;
 	}
 
