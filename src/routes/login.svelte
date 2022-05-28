@@ -69,12 +69,12 @@
 </script>
 
 <svelte:head>
-	<title>StudentVue</title>
+	<title>Login</title>
 </svelte:head>
 
 <div class="content" out:fade={{ duration: 200 }}>
 	<form on:submit|preventDefault={login}>
-		<h2>StudentVue</h2>
+		<h2>Login</h2>
 		<input type="text" placeholder="District URL" bind:value={districtUrl} />
 		<input type="text" placeholder="Username" bind:value={username} />
 		<input type="password" placeholder="Password" bind:value={password} />
