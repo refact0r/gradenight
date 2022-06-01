@@ -65,7 +65,7 @@
 
 {#if $session.user}
 	{#if $session.gradebook && $session.student}
-		<nav in:fade={{ duration: 200, delay: 200 }}>
+		<nav in:fade={{ duration: 200, delay: 200 }} out:fade={{ duration: 200 }}>
 			{#if $session.student}
 				<img alt="profile" src={'data:image/jpeg;base64,' + $session.student.Photo} />
 			{/if}
@@ -93,7 +93,7 @@
 				<i class="bi bi-gear" />
 			</a>
 		</nav>
-		<main in:fade={{ duration: 200, delay: 200 }}>
+		<main in:fade={{ duration: 200, delay: 200 }} out:fade={{ duration: 200 }}>
 			{#key key}
 				<div
 					class="transition-container"
@@ -113,7 +113,13 @@
 		</div>
 	{/if}
 {:else}
-	<slot />
+	<div
+		class="login-container"
+		in:fade={{ duration: 200, delay: 200 }}
+		out:fade={{ duration: 200 }}
+	>
+		<slot />
+	</div>
 {/if}
 
 <style lang="scss">

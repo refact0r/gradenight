@@ -1,10 +1,19 @@
+<script>
+	export let width, border
+</script>
+
 <div class="container">
-	<div class="loader" />
+	<div
+		class="loader"
+		style={'width: ' + width + 'px; height: ' + width + 'px; border-width: ' + border + 'px;'}
+	/>
 </div>
 
 <style lang="scss">
 	.container {
 		width: min-content;
+		height: min-content;
+		display: inline-block;
 	}
 
 	.loader {
