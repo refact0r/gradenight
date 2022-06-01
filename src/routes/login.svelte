@@ -16,15 +16,15 @@
 	import { goto } from '$app/navigation'
 	import { parseData } from '$lib/js/parseData.js'
 	import { oldAssignments } from '$lib/js/oldAssignments.js'
+	import Spinner from '$lib/components/Spinner.svelte'
 
 	let districtUrl = 'https://wa-bsd405-psv.edupoint.com/'
 	let username
 	let password
 	let error
-	let status
+	let loading = false
 
 	async function login() {
-		error = ''
 		if (!username) {
 			error = 'Please enter a username.'
 			return
@@ -33,7 +33,7 @@
 			error = 'Please enter a password.'
 			return
 		}
-		status = 'Logging in...'
+		loading = true
 		const res = await fetch('/auth/login', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -63,8 +63,8 @@
 			goto('/')
 		} else {
 			error = 'Invalid login credentials.'
+			loading = false
 		}
-		status = ''
 	}
 </script>
 
@@ -72,7 +72,7 @@
 	<title>Login</title>
 </svelte:head>
 
-<div class="content" out:fade={{ duration: 200 }}>
+<div class="content">
 	<form on:submit|preventDefault={login}>
 		<h2>Login</h2>
 		<input type="text" placeholder="District URL" bind:value={districtUrl} />
@@ -87,7 +87,13 @@
 				<a href="https:/github.com/refact0r/studentvue">github</a>.
 			{/if}
 		</div>
-		<button type="submit">{status ? status : 'Login'}</button>
+		<button type="submit">
+			{#if loading}
+				<Spinner width={20} border={2} />
+			{:else}
+				Login
+			{/if}
+		</button>
 	</form>
 </div>
 
@@ -117,10 +123,6 @@
 		text-align: center;
 	}
 
-	button:hover {
-		background: var(--bg-color-1-5);
-	}
-
 	input {
 		margin-top: $spacing-small;
 	}
@@ -128,5 +130,10 @@
 	h2 {
 		width: 100%;
 		text-align: center;
+	}
+
+	button {
+		display: flex;
+		justify-content: center;
 	}
 </style>
