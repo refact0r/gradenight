@@ -248,6 +248,7 @@
 		main {
 			margin-left: 0;
 			margin-bottom: $spacing;
+			height: calc(100vh - 50px - 4 * $spacing);
 		}
 	}
 </style>

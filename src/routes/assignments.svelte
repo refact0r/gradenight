@@ -97,4 +97,15 @@
 		padding-left: 20px;
 		text-align: right;
 	}
+
+	@media (max-width: $breakpoint-phone) {
+		h1 {
+			margin-top: 0;
+		}
+
+		.assignment-course,
+		.assignment-date {
+			display: none;
+		}
+	}
 </style>
