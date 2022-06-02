@@ -281,6 +281,7 @@
 		grid-column: 3;
 		padding: 0;
 		overflow: auto;
+		white-space: nowrap;
 	}
 
 	.scroll {
@@ -320,7 +321,6 @@
 	td {
 		padding-top: $spacing-small;
 		padding-bottom: $spacing-small;
-		white-space: nowrap;
 		position: relative;
 	}
 
@@ -389,9 +389,7 @@
 			& table {
 				table-layout: fixed;
 				& td {
-					padding: 10px 0;
-					overflow: hidden;
-					text-overflow: ellipsis;
+					padding: $spacing-small 0;
 					&.assignment-name {
 						padding-right: 5px;
 					}
