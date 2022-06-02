@@ -86,8 +86,9 @@
 				<p class="name">{assignment.Measure}</p>
 				<p class="date">{assignment.DueDate}</p>
 			</div>
-			<!-- <p class="type">{assignment.Type}</p>
-			<p class="date">{assignment.DueDate}</p> -->
+			<div class="row info">
+				<p class="name">{assignment.Type}</p>
+			</div>
 			<div class="row">
 				<input
 					class="points"

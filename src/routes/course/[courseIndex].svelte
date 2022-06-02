@@ -362,6 +362,9 @@
 
 		h1 {
 			margin-top: 0;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 
 		.grid-heading-container {
@@ -390,7 +393,7 @@
 					overflow: hidden;
 					text-overflow: ellipsis;
 					&.assignment-name {
-						padding-right: 10px;
+						padding-right: 5px;
 					}
 					&.assignment-points {
 						width: 90px;
