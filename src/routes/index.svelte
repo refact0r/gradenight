@@ -181,7 +181,7 @@
 		width: 80px;
 		text-align: right;
 		white-space: nowrap;
-		padding-left: 10px;
+		padding-left: $spacing-small;
 	}
 
 	.course-grade {

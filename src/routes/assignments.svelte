@@ -29,13 +29,10 @@
 			<table>
 				{#each $session.selected.assignments as assignment}
 					<tr class={assignment.fake || assignment.edited ? 'fake' : ''}>
-						<td
-							class="assignment-name"
-							style={assignment.new ? 'font-weight: bold;' : ''}
-						>
+						<td class="name" style={assignment.new ? 'font-weight: bold;' : ''}>
 							{assignment.Measure}
 						</td>
-						<td class="assignment-course">
+						<td class="course">
 							<a
 								class="link"
 								sveltekit:prefetch
@@ -44,11 +41,11 @@
 								{assignment.course}
 							</a>
 						</td>
-						<td class="assignment-date">{assignment.DueDate}</td>
-						<td class="assignment-score" style={assignment.style}>
+						<td class="date">{assignment.DueDate}</td>
+						<td class="points" style={assignment.style}>
 							{assignment.score}
 						</td>
-						<td class="assignment-percentage" style={assignment.style}>
+						<td class="percentage" style={assignment.style}>
 							{assignment.percent}
 						</td>
 					</tr>
@@ -84,16 +81,17 @@
 		padding-bottom: $spacing-small;
 	}
 
-	.assignment-score,
-	.assignment-date {
-		padding: $spacing-small 20px;
+	.points,
+	.date {
+		padding-left: $spacing;
+		padding-right: $spacing;
 	}
 
-	.assignment-score {
+	.points {
 		text-align: center;
 	}
 
-	.assignment-percentage {
+	.percentage {
 		padding-left: 20px;
 		text-align: right;
 	}
@@ -103,8 +101,24 @@
 			margin-top: 0;
 		}
 
-		.assignment-course,
-		.assignment-date {
+		.scroll table {
+			table-layout: fixed;
+			& td {
+				padding: $spacing-small 0;
+				&.name {
+					padding-right: 5px;
+				}
+				&.points {
+					width: 90px;
+				}
+				&.percentage {
+					width: 65px;
+				}
+			}
+		}
+
+		.course,
+		.date {
 			display: none;
 		}
 	}
