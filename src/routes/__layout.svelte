@@ -66,9 +66,7 @@
 {#if $session.user}
 	{#if $session.gradebook && $session.student}
 		<nav in:fade={{ duration: 200, delay: 200 }} out:fade={{ duration: 200 }}>
-			{#if $session.student}
-				<img alt="profile" src={'data:image/jpeg;base64,' + $session.student.Photo} />
-			{/if}
+			<img alt="profile" src={'data:image/jpeg;base64,' + $session.student.Photo} />
 			<a class:active={$page.url.pathname === '/'} sveltekit:prefetch href="/">
 				<i class="bi bi-house" />
 			</a>
@@ -123,12 +121,6 @@
 {/if}
 
 <style lang="scss">
-	@media (max-width: $breakpoint-phone) {
-		.content {
-			background: var(--bg-color-2);
-		}
-	}
-
 	nav {
 		@include box;
 		display: flex;
@@ -235,6 +227,27 @@
 		}
 		to {
 			transform: rotate(360deg);
+		}
+	}
+
+	@media (max-width: $breakpoint-phone) {
+		nav {
+			flex-direction: row;
+			justify-content: space-between;
+			width: 100%;
+		}
+
+		a {
+			margin: 0 !important;
+		}
+
+		img {
+			display: none;
+		}
+
+		main {
+			margin-left: 0;
+			margin-bottom: $spacing;
 		}
 	}
 </style>

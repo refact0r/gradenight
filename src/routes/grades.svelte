@@ -20,7 +20,7 @@
 </svelte:head>
 
 <div class="layout">
-	<div class="heading-container">
+	<div class="grid-heading-container">
 		<h1>Grades</h1>
 		<PeriodSelect bind:period={$session.selectedPeriod} />
 	</div>
@@ -68,5 +68,11 @@
 	.course-grade {
 		padding: 0;
 		font-weight: bold;
+	}
+
+	@media (max-width: $breakpoint-phone) {
+		h1 {
+			margin-top: 0;
+		}
 	}
 </style>
