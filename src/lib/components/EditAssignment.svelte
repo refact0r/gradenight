@@ -157,4 +157,10 @@
 	.date {
 		margin-left: auto;
 	}
+
+	@media (max-width: $breakpoint-phone) {
+		.modal {
+			margin: auto $spacing;
+		}
+	}
 </style>

@@ -353,4 +353,68 @@
 	.fake-button {
 		margin-left: auto;
 	}
+
+	@media (max-width: $breakpoint-phone) {
+		.layout {
+			grid-template-columns: 1fr 3fr;
+			grid-template-rows: auto 1fr auto 3fr;
+		}
+
+		h1 {
+			margin-top: 0;
+		}
+
+		.grid-heading-container {
+			grid-row: 1;
+			grid-column: 1 / 3;
+		}
+
+		.grade {
+			grid-row: 2;
+			grid-column: 1;
+			aspect-ratio: auto;
+		}
+
+		.chart {
+			grid-row: 3;
+			grid-column: 1 / 3;
+		}
+
+		.assignments {
+			grid-row: 4;
+			grid-column: 1 / 3;
+			& table {
+				table-layout: fixed;
+				& td {
+					padding: 10px 0;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					&.assignment-name {
+						padding-right: 10px;
+					}
+					&.assignment-points {
+						width: 90px;
+					}
+					&.assignment-percentage {
+						width: 65px;
+					}
+				}
+			}
+		}
+
+		.summary {
+			grid-row: 2;
+			grid-column: 2;
+		}
+
+		.fake-button {
+			width: min-content;
+		}
+
+		.assignment-course,
+		.assignment-date,
+		.type-weight {
+			display: none;
+		}
+	}
 </style>
