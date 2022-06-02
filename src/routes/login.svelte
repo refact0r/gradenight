@@ -138,8 +138,8 @@
 	}
 
 	@media (max-width: $breakpoint-phone) {
-		.content {
-			background: var(--bg-color-2);
+		form {
+			margin: auto $spacing;
 		}
 	}
 </style>

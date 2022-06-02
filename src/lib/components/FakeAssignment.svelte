@@ -151,4 +151,10 @@
 	.error {
 		margin-top: $spacing-small;
 	}
+
+	@media (max-width: $breakpoint-phone) {
+		.modal {
+			margin: auto $spacing;
+		}
+	}
 </style>
