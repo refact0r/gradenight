@@ -123,6 +123,12 @@
 {/if}
 
 <style lang="scss">
+	@media (max-width: $breakpoint-phone) {
+		.content {
+			background: var(--bg-color-2);
+		}
+	}
+
 	nav {
 		@include box;
 		display: flex;
@@ -203,14 +209,15 @@
 		background: transparent;
 		&:hover {
 			background: var(--bg-color-1-5);
-			// color: var(--font-color-2);
 		}
 		&:active {
 			background: var(--bg-color-1);
-			// color: var(--font-color-3);
 			i {
 				transform: scale(0.9);
 			}
+		}
+		&.active {
+			background: var(--bg-color-1);
 		}
 	}
 
