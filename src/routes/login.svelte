@@ -98,6 +98,12 @@
 </div>
 
 <style lang="scss">
+	@media (max-width: $breakpoint-phone) {
+		.content {
+			background: var(--bg-color-2);
+		}
+	}
+
 	.content {
 		position: absolute;
 		top: 0;
