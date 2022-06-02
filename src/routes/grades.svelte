@@ -71,8 +71,16 @@
 	}
 
 	@media (max-width: $breakpoint-phone) {
+		.content {
+			font-size: 1em;
+		}
+
 		h1 {
 			margin-top: 0;
+		}
+
+		.course-staff {
+			display: none;
 		}
 	}
 </style>

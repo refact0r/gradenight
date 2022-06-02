@@ -101,4 +101,10 @@
 			border: 2px solid var(--accent-color);
 		}
 	}
+
+	@media (max-width: $breakpoint-phone) {
+		h1 {
+			margin-top: 0;
+		}
+	}
 </style>
