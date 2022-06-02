@@ -20,7 +20,7 @@
 </svelte:head>
 
 <div class="layout">
-	<div class="heading-container">
+	<div class="grid-heading-container">
 		<h1>Assignments</h1>
 		<PeriodSelect bind:period={$session.selectedPeriod} />
 	</div>

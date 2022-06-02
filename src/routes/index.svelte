@@ -23,6 +23,10 @@
 
 <div class="layout">
 	<h1>Good {greeting}, {$session.student.FormattedName.split(' ')[0]}!</h1>
+	<div class="grid-heading-container">
+		<img alt="profile" src={'data:image/jpeg;base64,' + $session.student.Photo} />
+		<h1>{$session.student.FormattedName.split(' ')[0]}</h1>
+	</div>
 	<div class="average value">
 		<h1 style={$session.gradebook.averageStyle}>
 			{$session.gradebook.average}
@@ -104,8 +108,12 @@
 	}
 
 	h1 {
-		margin-bottom: 0px;
 		grid-column: 1 / 5;
+		margin-bottom: 0px;
+	}
+
+	.grid-heading-container {
+		display: none;
 	}
 
 	.value {
@@ -183,5 +191,46 @@
 
 	.course-score {
 		text-align: right;
+	}
+
+	@media (max-width: $breakpoint-phone) {
+		.layout {
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: auto auto 1fr;
+		}
+
+		.layout > h1 {
+			display: none;
+		}
+
+		.grid-heading-container {
+			display: flex;
+			grid-column: 1 / 3;
+			margin-bottom: 0;
+			align-items: center;
+		}
+
+		img {
+			width: 50px;
+			height: 50px;
+			object-fit: cover;
+			object-position: 0 0;
+			border-radius: 50px;
+			margin-right: $spacing-small;
+		}
+
+		h1 {
+			margin-top: 0;
+		}
+
+		.grades {
+			grid-column: 1 / 3;
+		}
+
+		.week-assignments,
+		.days,
+		.assignments {
+			display: none;
+		}
 	}
 </style>

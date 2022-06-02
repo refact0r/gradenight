@@ -25,6 +25,12 @@ body {
 	padding: $spacing;
 }
 
+@media (max-width: $breakpoint-phone) {
+	#svelte {
+		flex-direction: column-reverse;
+	}
+}
+
 ::placeholder,
 ::-webkit-input-placeholder {
 	color: var(--font-color-2);
