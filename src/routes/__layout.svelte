@@ -133,7 +133,6 @@
 	main {
 		width: 100%;
 		height: 100%;
-		height: calc(100vh - 2 * $spacing);
 		margin-left: $spacing;
 	}
 
@@ -248,7 +247,7 @@
 		main {
 			margin-left: 0;
 			margin-bottom: $spacing;
-			height: calc(100vh - 50px - 4 * $spacing);
+			height: calc(100% - 2 * $spacing - 50px);
 		}
 	}
 </style>
