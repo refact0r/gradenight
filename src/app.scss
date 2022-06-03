@@ -11,16 +11,20 @@
 	scrollbar-width: thin;
 }
 
+html {
+	height: 100%;
+}
+
 body {
+	height: 100%;
 	margin: 0;
-	height: 100vh;
 	background: var(--bg-color-1);
 	color: var(--font-color);
 	overflow: hidden;
 }
 
 #svelte {
-	height: 100vh;
+	height: 100%;
 	display: flex;
 	padding: $spacing;
 }

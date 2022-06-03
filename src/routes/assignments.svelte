@@ -64,9 +64,9 @@
 
 	.content {
 		@include box;
-		flex-grow: 1;
 		padding: 0;
 		overflow: hidden;
+		flex-shrink: 3;
 	}
 
 	.scroll {
@@ -92,7 +92,7 @@
 	}
 
 	.percentage {
-		padding-left: 20px;
+		padding-left: $spacing;
 		text-align: right;
 	}
 
