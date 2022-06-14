@@ -399,7 +399,7 @@
 						width: 90px;
 					}
 					&.assignment-percentage {
-						width: 65px;
+						width: calc(55px + $spacing-small);
 					}
 				}
 			}
@@ -418,12 +418,18 @@
 						text-overflow: ellipsis;
 					}
 					&.type-points {
-						width: 90px;
+						width: 70px;
 					}
 					&.type-score {
-						width: 65px;
+						width: 55px;
 						padding-left: 5px;
 					}
+				}
+				& tr:first-child td {
+					padding-top: 0;
+				}
+				& tr:last-child td {
+					padding-bottom: 0;
 				}
 			}
 		}
