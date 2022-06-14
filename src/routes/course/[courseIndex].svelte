@@ -412,6 +412,7 @@
 				table-layout: fixed;
 				& td {
 					padding: $spacing-small 0;
+					width: min-content;
 					&.type-name {
 						white-space: nowrap;
 						overflow: hidden;
@@ -422,10 +423,6 @@
 					}
 				}
 			}
-		}
-
-		.fake-button {
-			width: min-content;
 		}
 
 		.assignment-course,
