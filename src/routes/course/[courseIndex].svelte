@@ -408,6 +408,20 @@
 		.summary {
 			grid-row: 2;
 			grid-column: 2;
+			& table {
+				table-layout: fixed;
+				& td {
+					padding: $spacing-small 0;
+					&.type-name {
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+					}
+					&.type-score {
+						padding-left: 5px;
+					}
+				}
+			}
 		}
 
 		.fake-button {
@@ -416,12 +430,9 @@
 
 		.assignment-course,
 		.assignment-date,
-		.type-weight {
+		.type-weight,
+		.summary h2 {
 			display: none;
-		}
-		
-		.type-name {
-			overflow-wrap: break-word;
 		}
 	}
 </style>
