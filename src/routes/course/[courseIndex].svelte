@@ -419,6 +419,7 @@
 						text-overflow: ellipsis;
 					}
 					&.type-score {
+						width: 65px;
 						padding-left: 5px;
 					}
 				}
