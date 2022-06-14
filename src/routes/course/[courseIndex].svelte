@@ -419,5 +419,9 @@
 		.type-weight {
 			display: none;
 		}
+		
+		.type-name {
+			overflow-wrap: break-word;
+		}
 	}
 </style>
