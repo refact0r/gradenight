@@ -194,7 +194,7 @@
 			<div class="heading-container">
 				<h2>Assignments</h2>
 				<button class="fake-button" on:click={() => fakeAssignment.show()}>
-					Add Fake Assignment
+					Fake Assignment
 				</button>
 			</div>
 			<table>
@@ -381,6 +381,8 @@
 		.chart {
 			grid-row: 3;
 			grid-column: 1 / 3;
+			padding: $spacing-small;
+			height: 120px;
 		}
 
 		.assignments {
