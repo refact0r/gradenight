@@ -418,6 +418,9 @@
 						overflow: hidden;
 						text-overflow: ellipsis;
 					}
+					&.type-points {
+						width: 90px;
+					}
 					&.type-score {
 						width: 65px;
 						padding-left: 5px;
