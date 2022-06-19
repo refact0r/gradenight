@@ -81,13 +81,15 @@
 			in:fly={{ y: -5, duration: 200 }}
 			out:fly|local={{ y: 5, duration: 200 }}
 		>
-			<h3>Edit Assignment</h3>
+			<h3>{assignment.Measure}</h3>
 			<div class="row info">
-				<p class="name">{assignment.Measure}</p>
+				<p class="name">{assignment.Type}</p>
 				<p class="date">{assignment.DueDate}</p>
 			</div>
 			<div class="row info">
-				<p class="name">{assignment.Type}</p>
+				{#if assignment.Notes}
+					<p class="name">{assignment.Notes}</p>
+				{/if}
 			</div>
 			<div class="row">
 				<input
