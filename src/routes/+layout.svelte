@@ -14,7 +14,7 @@
 	import { fly } from 'svelte/transition'
 	import { fade } from 'svelte/transition'
 	import { session, page } from '$app/stores'
-	import { browser } from '$app/env'
+	import { browser } from '$app/environment'
 	import { parseData } from '$lib/js/parseData.js'
 	import { settings } from '$lib/js/settings.js'
 	import { oldAssignments } from '$lib/js/oldAssignments.js'
