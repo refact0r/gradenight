@@ -1,12 +1,14 @@
 import { login } from 'studentvue.js'
 import * as cookie from 'cookie'
 
-export async function get(event) {
-	console.log('get all')
+export async function GET({ locals }) {
+	console.log('get data')
+	console.log(locals)
+
 	let client = await login(
-		Buffer.from(event.locals.user.districtUrl, 'base64').toString('ascii'),
-		Buffer.from(event.locals.user.username, 'base64').toString('ascii'),
-		Buffer.from(event.locals.user.password, 'base64').toString('ascii')
+		Buffer.from(locals.user.districtUrl, 'base64').toString('ascii'),
+		Buffer.from(locals.user.username, 'base64').toString('ascii'),
+		Buffer.from(locals.user.password, 'base64').toString('ascii')
 	)
 	// let student = JSON.parse(await client.getStudentInfo()).StudentInfo
 	// let gradebook = JSON.parse(await client.getGradebook()).Gradebook
@@ -31,16 +33,24 @@ export async function get(event) {
 		}
 	}
 
+	console.log('logged in')
+
 	const currentPeriod = result[1].ReportingPeriods.ReportPeriod.findIndex((period) => {
 		const date = new Date()
 		return date > new Date(period.StartDate) && date < new Date(period.EndDate)
 	})
 
-	return {
-		body: {
+	console.log({
+		student: result.shift(),
+		periods: result,
+		currentPeriod
+	})
+
+	return new Response(
+		JSON.stringify({
 			student: result.shift(),
 			periods: result,
 			currentPeriod
-		}
-	}
+		})
+	)
 }

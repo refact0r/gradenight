@@ -1,4 +1,4 @@
-<script context="module">
+<!-- <script context="module">
 	export async function load({ session }) {
 		if (!session.user) {
 			return {
@@ -233,4 +233,4 @@
 			display: none;
 		}
 	}
-</style>
+</style> -->
