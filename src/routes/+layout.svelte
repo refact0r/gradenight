@@ -1,4 +1,4 @@
-<script context="module">
+<!-- <script context="module">
 	export async function load({ url }) {
 		return {
 			props: {
@@ -6,59 +6,72 @@
 			}
 		}
 	}
-</script>
-
+</script> -->
 <script>
 	import '../app.scss'
 	import { onMount } from 'svelte'
-	import { fly } from 'svelte/transition'
-	import { fade } from 'svelte/transition'
-	import { session, page } from '$app/stores'
-	import { browser } from '$app/environment'
-	import { parseData } from '$lib/js/parseData.js'
-	import { settings } from '$lib/js/settings.js'
-	import { oldAssignments } from '$lib/js/oldAssignments.js'
-	import Spinner from '$lib/components/Spinner.svelte'
+	// import { fly } from 'svelte/transition'
+	// import { fade } from 'svelte/transition'
+	// import { page } from '$app/stores'
+	// import { browser } from '$app/environment'
+	// import { parseData } from '$lib/js/parseData.js'
+	// import { settings } from '$lib/js/settings.js'
+	// import { oldAssignments } from '$lib/js/oldAssignments.js'
+	// import Spinner from '$lib/components/Spinner.svelte'
 
-	export let key
-	let spinning = false
+	export let data
+
+	// export let key
+	// let spinning = false
 
 	onMount(async () => {
-		if ($session.user) {
-			console.log('fetch')
+		if (data.user) {
 			await load()
 		}
 	})
 
-	$: if ($session.periods) {
-		$session.selected = $session.periods[$session.selectedPeriod]
-	}
-
 	async function load() {
 		const res = await fetch('/data')
 		const json = await res.json()
-		let { student, periods, currentPeriod } = json
-		$session = {
-			...$session,
-			student,
-			periods,
-			currentPeriod,
-			selectedPeriod: currentPeriod,
-			selected: periods[currentPeriod],
-			gradebook: periods[currentPeriod]
-		}
-		parseData($session, $oldAssignments)
-		$oldAssignments = $oldAssignments
+		console.log(json)
 	}
 
-	async function refresh() {
-		spinning = true
-		await load()
-		spinning = false
-	}
+	// onMount(async () => {
+	// 	if ($session.user) {
+	// 		console.log('fetch')
+	// 		await load()
+	// 	}
+	// })
+
+	// $: if ($session.periods) {
+	// 	$session.selected = $session.periods[$session.selectedPeriod]
+	// }
+
+	// async function load() {
+	// 	const res = await fetch('/data')
+	// 	const json = await res.json()
+	// 	let { student, periods, currentPeriod } = json
+	// 	$session = {
+	// 		...$session,
+	// 		student,
+	// 		periods,
+	// 		currentPeriod,
+	// 		selectedPeriod: currentPeriod,
+	// 		selected: periods[currentPeriod],
+	// 		gradebook: periods[currentPeriod]
+	// 	}
+	// 	parseData($session, $oldAssignments)
+	// 	$oldAssignments = $oldAssignments
+	// }
+
+	// async function refresh() {
+	// 	spinning = true
+	// 	await load()
+	// 	spinning = false
+	// }
 </script>
 
-<svelte:head>
+<!-- <svelte:head>
 	<meta name="color-scheme" content={$settings.theme} />
 	<link rel="stylesheet" href={`/themes/${$settings.theme}.css`} />
 </svelte:head>
@@ -250,4 +263,4 @@
 			height: calc(100% - 2 * $spacing - 50px);
 		}
 	}
-</style>
+</style> -->
