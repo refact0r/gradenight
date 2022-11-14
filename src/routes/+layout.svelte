@@ -10,12 +10,12 @@
 <script>
 	import '../app.scss'
 	import { onMount } from 'svelte'
-	// import { fly } from 'svelte/transition'
-	// import { fade } from 'svelte/transition'
+	import { fly } from 'svelte/transition'
+	import { fade } from 'svelte/transition'
 	// import { page } from '$app/stores'
 	// import { browser } from '$app/environment'
 	// import { parseData } from '$lib/js/parseData.js'
-	// import { settings } from '$lib/js/settings.js'
+	import { settings } from '$lib/js/settings.js'
 	// import { oldAssignments } from '$lib/js/oldAssignments.js'
 	// import Spinner from '$lib/components/Spinner.svelte'
 
@@ -26,6 +26,7 @@
 
 	onMount(async () => {
 		if (data.user) {
+			console.log('load')
 			await load()
 		}
 	})
@@ -71,12 +72,12 @@
 	// }
 </script>
 
-<!-- <svelte:head>
+<svelte:head>
 	<meta name="color-scheme" content={$settings.theme} />
 	<link rel="stylesheet" href={`/themes/${$settings.theme}.css`} />
 </svelte:head>
 
-{#if $session.user}
+<!-- {#if $session.user}
 	{#if $session.gradebook && $session.student}
 		<nav in:fade={{ duration: 200, delay: 200 }} out:fade={{ duration: 200 }}>
 			<img alt="profile" src={'data:image/jpeg;base64,' + $session.student.Photo} />
@@ -123,16 +124,12 @@
 			</div>
 		</div>
 	{/if}
-{:else}
-	<div
-		class="login-container"
-		in:fade={{ duration: 200, delay: 200 }}
-		out:fade={{ duration: 200 }}
-	>
-		<slot />
-	</div>
-{/if}
+{:else} -->
+<div class="login-container" in:fade={{ duration: 200, delay: 200 }} out:fade={{ duration: 200 }}>
+	<slot />
+</div>
 
+<!-- {/if} -->
 <style lang="scss">
 	nav {
 		@include box;
@@ -263,4 +260,4 @@
 			height: calc(100% - 2 * $spacing - 50px);
 		}
 	}
-</style> -->
+</style>
