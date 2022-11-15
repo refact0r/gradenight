@@ -16,8 +16,8 @@
 	// import { browser } from '$app/environment'
 	import { goto } from '$app/navigation'
 	// import { parseData } from '$lib/js/parseData.js'
-	import { settings } from '$lib/js/settings.js'
-	// import { oldAssignments } from '$lib/js/oldAssignments.js'
+	import { settings } from '$lib/stores/settings.js'
+	import { oldAssignments } from '$lib/stores/oldAssignments.js'
 	// import Spinner from '$lib/components/Spinner.svelte'
 
 	export let data

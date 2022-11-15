@@ -13,9 +13,9 @@
 <script>
 	import { session } from '$app/stores'
 	import { goto } from '$app/navigation'
-	import { settings } from '$lib/js/settings.js'
+	import { settings } from '$lib/stores/settings.js'
 	import { parseData } from '$lib/js/parseData.js'
-	import { oldAssignments } from '$lib/js/oldAssignments.js'
+	import { oldAssignments } from '$lib/stores/oldAssignments.js'
 
 	async function logout() {
 		$session.user = null

@@ -1,7 +1,7 @@
 import { login } from 'studentvue.js'
 import cookie from 'cookie'
 
-export async function post({ request }) {
+export async function POST({ request }) {
 	console.log('post login')
 
 	try {
