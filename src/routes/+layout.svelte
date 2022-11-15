@@ -14,6 +14,7 @@
 	import { fade } from 'svelte/transition'
 	// import { page } from '$app/stores'
 	// import { browser } from '$app/environment'
+	import { goto } from '$app/navigation'
 	// import { parseData } from '$lib/js/parseData.js'
 	import { settings } from '$lib/js/settings.js'
 	// import { oldAssignments } from '$lib/js/oldAssignments.js'
@@ -33,6 +34,11 @@
 
 	async function load() {
 		const res = await fetch('/data')
+		if (!res.ok) {
+			console.log('fetch data not ok: ', res.status)
+			goto('/login')
+			return
+		}
 		const json = await res.json()
 		console.log(json)
 	}
