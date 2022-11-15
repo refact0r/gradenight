@@ -13,7 +13,7 @@
 <script>
 	import { goto } from '$app/navigation'
 	import { parseData } from '$lib/js/parseData.js'
-	import { oldAssignments } from '$lib/js/oldAssignments.js'
+	import { oldAssignments } from '$lib/stores/oldAssignments.js'
 	import Spinner from '$lib/components/Spinner.svelte'
 
 	let districtUrl = 'https://wa-bsd405-psv.edupoint.com/'
