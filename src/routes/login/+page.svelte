@@ -11,8 +11,6 @@
 </script>
 
 <script>
-	import { fade } from 'svelte/transition'
-	import { session } from '$app/stores'
 	import { goto } from '$app/navigation'
 	import { parseData } from '$lib/js/parseData.js'
 	import { oldAssignments } from '$lib/js/oldAssignments.js'
@@ -25,6 +23,10 @@
 	let loading = false
 
 	async function login() {
+		if (!districtUrl) {
+			error = 'Please enter a district URL.'
+			return
+		}
 		if (!username) {
 			error = 'Please enter a username.'
 			return
@@ -34,7 +36,7 @@
 			return
 		}
 		loading = true
-		const res = await fetch('/auth/login', {
+		const res = await fetch('/login', {
 			method: 'POST',
 			body: JSON.stringify({
 				username,
@@ -45,21 +47,21 @@
 		if (res.ok) {
 			const json = await res.json()
 			let { student, periods, currentPeriod } = json
-			$session = {
-				...$session,
-				user: {
-					username,
-					password,
-					districtUrl
-				},
-				student,
-				periods,
-				currentPeriod,
-				selectedPeriod: currentPeriod,
-				selected: periods[currentPeriod],
-				gradebook: periods[currentPeriod]
-			}
-			parseData($session, $oldAssignments)
+			//$session = {
+			//	...$session,
+			//	user: {
+			//		username,
+			//		password,
+			//		districtUrl
+			//	},
+			//	student,
+			//	periods,
+			//	currentPeriod,
+			//	selectedPeriod: currentPeriod,
+			//	selected: periods[currentPeriod],
+			//	gradebook: periods[currentPeriod]
+			//}
+			//parseData($session, $oldAssignments)
 			goto('/')
 		} else {
 			error = 'Invalid login credentials.'
