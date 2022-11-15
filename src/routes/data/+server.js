@@ -3,7 +3,6 @@ import * as cookie from 'cookie'
 
 export async function GET({ locals }) {
 	console.log('get data')
-	console.log(locals)
 
 	try {
 		let client = await login(
