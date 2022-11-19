@@ -1,3 +1,3 @@
-import { writable } from 'svelte/stores'
+import { writable } from 'svelte/store'
 
-export const session = writable()
+export const session = writable({})
