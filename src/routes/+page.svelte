@@ -1,17 +1,5 @@
-<!-- <script context="module">
-	export async function load({ session }) {
-		if (!session.user) {
-			return {
-				status: 302,
-				redirect: '/login'
-			}
-		}
-		return {}
-	}
-</script>
-
 <script>
-	import { session } from '$app/stores'
+	import { session } from '$lib/stores/session.js'
 
 	let date = new Date()
 	let greeting = date.getHours() < 12 ? 'morning' : date.getHours() < 18 ? 'afternoon' : 'evening'
@@ -233,4 +221,4 @@
 			display: none;
 		}
 	}
-</style> -->
+</style>

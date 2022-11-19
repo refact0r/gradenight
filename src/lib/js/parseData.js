@@ -13,8 +13,6 @@ export function parseData(session, oldAssignments) {
 			course.chartData = []
 
 			course.fourPoint = false
-
-			console.log(course)
 			if (course.Marks.Mark && course.Marks.Mark.CalculatedScoreString !== 'N/A') {
 				if (
 					course.Marks.Mark.Assignments.Assignment &&

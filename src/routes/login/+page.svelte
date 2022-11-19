@@ -13,6 +13,7 @@
 <script>
 	import { goto } from '$app/navigation'
 	import { parseData } from '$lib/js/parseData.js'
+	import { session } from '$lib/stores/session.js'
 	import { oldAssignments } from '$lib/stores/oldAssignments.js'
 	import Spinner from '$lib/components/Spinner.svelte'
 
@@ -47,21 +48,20 @@
 		if (res.ok) {
 			const json = await res.json()
 			let { student, periods, currentPeriod } = json
-			//$session = {
-			//	...$session,
-			//	user: {
-			//		username,
-			//		password,
-			//		districtUrl
-			//	},
-			//	student,
-			//	periods,
-			//	currentPeriod,
-			//	selectedPeriod: currentPeriod,
-			//	selected: periods[currentPeriod],
-			//	gradebook: periods[currentPeriod]
-			//}
-			//parseData($session, $oldAssignments)
+			$session = {
+				user: {
+					username,
+					password,
+					districtUrl
+				},
+				student,
+				periods,
+				currentPeriod,
+				selectedPeriod: currentPeriod,
+				selected: periods[currentPeriod],
+				gradebook: periods[currentPeriod]
+			}
+			parseData($session, $oldAssignments)
 			goto('/')
 		} else {
 			error = 'Invalid login credentials.'

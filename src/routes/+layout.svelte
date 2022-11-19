@@ -1,29 +1,20 @@
-<!-- <script context="module">
-	export async function load({ url }) {
-		return {
-			props: {
-				key: url.href
-			}
-		}
-	}
-</script> -->
 <script>
 	import '../app.scss'
 	import { onMount } from 'svelte'
 	import { fly } from 'svelte/transition'
 	import { fade } from 'svelte/transition'
-	// import { page } from '$app/stores'
+	import { page } from '$app/stores'
 	// import { browser } from '$app/environment'
 	import { goto } from '$app/navigation'
-	// import { parseData } from '$lib/js/parseData.js'
+	import { parseData } from '$lib/js/parseData.js'
+	import { session } from '$lib/stores/session.js'
 	import { settings } from '$lib/stores/settings.js'
 	import { oldAssignments } from '$lib/stores/oldAssignments.js'
-	// import Spinner from '$lib/components/Spinner.svelte'
+	import Spinner from '$lib/components/Spinner.svelte'
 
 	export let data
 
-	// export let key
-	// let spinning = false
+	let spinning = false
 
 	onMount(async () => {
 		if (data.user) {
@@ -40,42 +31,29 @@
 			return
 		}
 		const json = await res.json()
-		console.log(json)
+		let { student, periods, currentPeriod } = json
+		$session = {
+			student,
+			periods,
+			currentPeriod,
+			selectedPeriod: currentPeriod,
+			selected: periods[currentPeriod],
+			gradebook: periods[currentPeriod]
+		}
+		parseData($session, $oldAssignments)
+		console.log($session)
+		$oldAssignments = $oldAssignments
 	}
 
-	// onMount(async () => {
-	// 	if ($session.user) {
-	// 		console.log('fetch')
-	// 		await load()
-	// 	}
-	// })
+	$: if ($session.periods) {
+		$session.selected = $session.periods[$session.selectedPeriod]
+	}
 
-	// $: if ($session.periods) {
-	// 	$session.selected = $session.periods[$session.selectedPeriod]
-	// }
-
-	// async function load() {
-	// 	const res = await fetch('/data')
-	// 	const json = await res.json()
-	// 	let { student, periods, currentPeriod } = json
-	// 	$session = {
-	// 		...$session,
-	// 		student,
-	// 		periods,
-	// 		currentPeriod,
-	// 		selectedPeriod: currentPeriod,
-	// 		selected: periods[currentPeriod],
-	// 		gradebook: periods[currentPeriod]
-	// 	}
-	// 	parseData($session, $oldAssignments)
-	// 	$oldAssignments = $oldAssignments
-	// }
-
-	// async function refresh() {
-	// 	spinning = true
-	// 	await load()
-	// 	spinning = false
-	// }
+	async function refresh() {
+		spinning = true
+		await load()
+		spinning = false
+	}
 </script>
 
 <svelte:head>
@@ -83,36 +61,32 @@
 	<link rel="stylesheet" href={`/themes/${$settings.theme}.css`} />
 </svelte:head>
 
-<!-- {#if $session.user}
+{#if data.user}
 	{#if $session.gradebook && $session.student}
-		<nav in:fade={{ duration: 200, delay: 200 }} out:fade={{ duration: 200 }}>
+		<nav
+			in:fade={{ duration: 200, delay: 200 }}
+			out:fade={{ duration: 200 }}
+			data-sveltekit-prefetch
+		>
 			<img alt="profile" src={'data:image/jpeg;base64,' + $session.student.Photo} />
-			<a class:active={$page.url.pathname === '/'} sveltekit:prefetch href="/">
+			<a class:active={$page.url.pathname === '/'} href="/">
 				<i class="bi bi-house" />
 			</a>
-			<a class:active={$page.url.pathname === '/grades'} sveltekit:prefetch href="/grades">
+			<a class:active={$page.url.pathname === '/grades'} href="/grades">
 				<i class="bi bi-list-ol" />
 			</a>
-			<a
-				class:active={$page.url.pathname === '/assignments'}
-				sveltekit:prefetch
-				href="/assignments"
-			>
+			<a class:active={$page.url.pathname === '/assignments'} href="/assignments">
 				<i class="bi bi-pen" />
 			</a>
 			<button class={'refresh' + (spinning ? ' spinning' : '')} on:click={refresh}>
 				<i class="bi bi-arrow-repeat" />
 			</button>
-			<a
-				class:active={$page.url.pathname === '/settings'}
-				sveltekit:prefetch
-				href="/settings"
-			>
+			<a class:active={$page.url.pathname === '/settings'} href="/settings">
 				<i class="bi bi-gear" />
 			</a>
 		</nav>
 		<main in:fade={{ duration: 200, delay: 200 }} out:fade={{ duration: 200 }}>
-			{#key key}
+			{#key data.url}
 				<div
 					class="transition-container"
 					in:fly={{ y: -5, duration: 200, delay: 200 }}
@@ -130,12 +104,16 @@
 			</div>
 		</div>
 	{/if}
-{:else} -->
-<div class="login-container" in:fade={{ duration: 200, delay: 200 }} out:fade={{ duration: 200 }}>
-	<slot />
-</div>
+{:else}
+	<div
+		class="login-container"
+		in:fade={{ duration: 200, delay: 200 }}
+		out:fade={{ duration: 200 }}
+	>
+		<slot />
+	</div>
+{/if}
 
-<!-- {/if} -->
 <style lang="scss">
 	nav {
 		@include box;
