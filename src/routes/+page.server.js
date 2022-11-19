@@ -7,5 +7,4 @@ export async function load({ params, locals }) {
 		console.log('redirect')
 		throw redirect(307, '/login')
 	}
-	return {}
 }
