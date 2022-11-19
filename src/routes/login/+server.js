@@ -4,11 +4,12 @@ import cookie from 'cookie'
 export async function POST({ request }) {
 	console.log('post login')
 
-	try {
-		const body = await request.json()
+	const body = await request.json()
+	let result
 
+	try {
 		let client = await login(body.districtUrl, body.username, body.password)
-		let result = await Promise.all([
+		result = await Promise.all([
 			client.getStudentInfo().then((value) => JSON.parse(value).StudentInfo),
 			client.getGradebook(0).then((value) => JSON.parse(value).Gradebook),
 			client.getGradebook(1).then((value) => JSON.parse(value).Gradebook),
@@ -20,6 +21,7 @@ export async function POST({ request }) {
 			throw new Error('No data returned')
 		}
 	} catch (error) {
+		console.log(error)
 		return new Response(null, {
 			status: 401
 		})
@@ -31,11 +33,11 @@ export async function POST({ request }) {
 	})
 
 	return new Response(
-		{
+		JSON.stringify({
 			student: result.shift(),
 			periods: result,
 			currentPeriod
-		},
+		}),
 		{
 			headers: {
 				'Set-Cookie': cookie.serialize(
