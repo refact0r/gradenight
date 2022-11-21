@@ -7,7 +7,7 @@
 	<title>Assignments</title>
 </svelte:head>
 
-<div class="layout">
+<div class="layout" data-sveltekit-prefetch>
 	<div class="grid-heading-container">
 		<h1>Assignments</h1>
 		<PeriodSelect bind:period={$session.selectedPeriod} />
@@ -21,11 +21,7 @@
 							{assignment.Measure}
 						</td>
 						<td class="course">
-							<a
-								class="link"
-								sveltekit:prefetch
-								href={'/course/' + assignment.courseIndex}
-							>
+							<a class="link" href={'/course/' + assignment.courseIndex}>
 								{assignment.course}
 							</a>
 						</td>

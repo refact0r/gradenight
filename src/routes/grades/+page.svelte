@@ -7,7 +7,7 @@
 	<title>Grades</title>
 </svelte:head>
 
-<div class="layout">
+<div class="layout" data-sveltekit-prefetch>
 	<div class="grid-heading-container">
 		<h1>Grades</h1>
 		<PeriodSelect bind:period={$session.selectedPeriod} />
@@ -17,9 +17,7 @@
 			{#each $session.selected.Courses.Course as course, index}
 				<tr>
 					<td class="course-name">
-						<a class="link" sveltekit:prefetch href={'/course/' + index}
-							>{course.Title}</a
-						>
+						<a class="link" href={'/course/' + index}>{course.Title}</a>
 					</td>
 					<td class="course-staff">{course.Staff}</td>
 					<td class="course-grade" style={course.style}>
