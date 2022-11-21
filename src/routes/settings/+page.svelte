@@ -7,7 +7,7 @@
 
 	async function logout() {
 		$session.user = null
-		await fetch('/auth/logout', {
+		await fetch('/logout', {
 			method: 'POST'
 		})
 		goto('/login')

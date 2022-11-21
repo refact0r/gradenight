@@ -1,7 +1,7 @@
-import * as cookie from 'cookie'
+import cookie from 'cookie'
 
-export async function post() {
-	return {
+export async function POST() {
+	return new Response(null, {
 		headers: {
 			'Set-cookie': cookie.serialize('auth', '', {
 				httpOnly: true,
@@ -10,5 +10,5 @@ export async function post() {
 				expires: new Date(0)
 			})
 		}
-	}
+	})
 }
