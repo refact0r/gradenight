@@ -6,8 +6,8 @@
 	import FakeAssignment from '$lib/components/FakeAssignment.svelte'
 	import EditAssignment from '$lib/components/EditAssignment.svelte'
 
-	export let courseIndex
-	$: course = $session.selected.Courses.Course[courseIndex]
+	export let data
+	$: course = $session.selected.Courses.Course[data.courseIndex]
 
 	let fakeAssignment
 	let editAssignment

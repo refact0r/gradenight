@@ -5,6 +5,6 @@ export async function load({ params, locals }) {
 	console.log('page server load')
 	if (!locals.user) {
 		console.log('redirect')
-		throw redirect(41, '/login')
+		throw redirect(401, '/login')
 	}
 }
