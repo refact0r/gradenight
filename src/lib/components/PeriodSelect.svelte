@@ -1,5 +1,5 @@
 <script>
-	import { session } from '$app/stores'
+	import { session } from '$lib/stores/session.js'
 	export let period
 </script>
 

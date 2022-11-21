@@ -1,5 +1,5 @@
 <script>
-	import { session } from '$app/stores'
+	import { session } from '$lib/stores/session.js'
 	import { fly } from 'svelte/transition'
 	import { fade } from 'svelte/transition'
 	import { parseData } from '$lib/js/parseData.js'
