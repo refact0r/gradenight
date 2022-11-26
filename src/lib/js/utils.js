@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { settings } from './settings.js'
+import { settings } from '../stores/settings.js'
 
 const lightThemes = ['light']
 

@@ -1,17 +1,5 @@
-<script context="module">
-	export async function load({ session }) {
-		if (!session.user) {
-			return {
-				status: 302,
-				redirect: '/login'
-			}
-		}
-		return {}
-	}
-</script>
-
 <script>
-	import { session } from '$app/stores'
+	import { session } from '$lib/stores/session.js'
 
 	let date = new Date()
 	let greeting = date.getHours() < 12 ? 'morning' : date.getHours() < 18 ? 'afternoon' : 'evening'
@@ -21,7 +9,7 @@
 	<title>StudentVue</title>
 </svelte:head>
 
-<div class="layout">
+<div class="layout" data-sveltekit-prefetch>
 	<h1>Good {greeting}, {$session.student.FormattedName.split(' ')[0]}!</h1>
 	<div class="grid-heading-container">
 		<img alt="profile" src={'data:image/jpeg;base64,' + $session.student.Photo} />
@@ -56,12 +44,12 @@
 		</div>
 	</div>
 	<div class="grades">
-		<a class="link" sveltekit:prefetch href="/grades"><h2>Grades</h2></a>
+		<a class="link" href="/grades"><h2>Grades</h2></a>
 		<table class="grades-table">
 			{#each $session.gradebook.Courses.Course as course, index}
 				<tr>
 					<td class="course-name">
-						<a class="link" sveltekit:prefetch href={'/course/' + index}>
+						<a class="link" href={'/course/' + index}>
 							{course.Title}
 						</a>
 					</td>
@@ -75,7 +63,7 @@
 	</div>
 	<div class="assignments">
 		<div class="assignments-scroll">
-			<a class="link" sveltekit:prefetch href="/assignments"><h2>Assignments</h2></a>
+			<a class="link" href="/assignments"><h2>Assignments</h2></a>
 			<table class="assignments-table">
 				{#each $session.gradebook.assignments as assignment}
 					{#if assignment.scorePercent >= 0}

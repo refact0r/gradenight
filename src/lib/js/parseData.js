@@ -13,7 +13,7 @@ export function parseData(session, oldAssignments) {
 			course.chartData = []
 
 			course.fourPoint = false
-			if (course.Marks.Mark.CalculatedScoreString !== 'N/A') {
+			if (course.Marks.Mark && course.Marks.Mark.CalculatedScoreString !== 'N/A') {
 				if (
 					course.Marks.Mark.Assignments.Assignment &&
 					Array.isArray(course.Marks.Mark.Assignments.Assignment) &&
@@ -23,7 +23,7 @@ export function parseData(session, oldAssignments) {
 				}
 			}
 
-			if (course.Marks.Mark.Assignments.Assignment) {
+			if (course.Marks.Mark && course.Marks.Mark.Assignments.Assignment) {
 				if (!Array.isArray(course.Marks.Mark.Assignments.Assignment)) {
 					course.Marks.Mark.Assignments.Assignment = [
 						course.Marks.Mark.Assignments.Assignment

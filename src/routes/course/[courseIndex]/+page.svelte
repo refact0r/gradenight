@@ -1,29 +1,13 @@
-<script context="module">
-	export async function load({ session, params }) {
-		if (!session.user) {
-			return {
-				status: 302,
-				redirect: '/login'
-			}
-		}
-		return {
-			props: {
-				courseIndex: params.courseIndex
-			}
-		}
-	}
-</script>
-
 <script>
 	import { onMount } from 'svelte'
-	import { session } from '$app/stores'
+	import { session } from '$lib/stores/session.js'
 	import Chart from 'chart.js/auto'
 	import PeriodSelect from '$lib/components/PeriodSelect.svelte'
 	import FakeAssignment from '$lib/components/FakeAssignment.svelte'
 	import EditAssignment from '$lib/components/EditAssignment.svelte'
 
-	export let courseIndex
-	$: course = $session.selected.Courses.Course[courseIndex]
+	export let data
+	$: course = $session.selected.Courses.Course[data.courseIndex]
 
 	let fakeAssignment
 	let editAssignment

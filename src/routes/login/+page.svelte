@@ -1,21 +1,8 @@
-<script context="module">
-	export async function load({ session }) {
-		if (session.user) {
-			return {
-				status: 302,
-				redirect: '/'
-			}
-		}
-		return {}
-	}
-</script>
-
 <script>
-	import { fade } from 'svelte/transition'
-	import { session } from '$app/stores'
 	import { goto } from '$app/navigation'
 	import { parseData } from '$lib/js/parseData.js'
-	import { oldAssignments } from '$lib/js/oldAssignments.js'
+	import { session } from '$lib/stores/session.js'
+	import { oldAssignments } from '$lib/stores/oldAssignments.js'
 	import Spinner from '$lib/components/Spinner.svelte'
 
 	let districtUrl = 'https://wa-bsd405-psv.edupoint.com/'
@@ -25,6 +12,10 @@
 	let loading = false
 
 	async function login() {
+		if (!districtUrl) {
+			error = 'Please enter a district URL.'
+			return
+		}
 		if (!username) {
 			error = 'Please enter a username.'
 			return
@@ -34,7 +25,7 @@
 			return
 		}
 		loading = true
-		const res = await fetch('/auth/login', {
+		const res = await fetch('/login', {
 			method: 'POST',
 			body: JSON.stringify({
 				username,
@@ -46,7 +37,6 @@
 			const json = await res.json()
 			let { student, periods, currentPeriod } = json
 			$session = {
-				...$session,
 				user: {
 					username,
 					password,
