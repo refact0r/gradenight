@@ -1,5 +1,5 @@
 <script>
-	import { session } from '$app/stores'
+	import { session } from '$lib/stores/session.js'
 	import { fly } from 'svelte/transition'
 	import { fade } from 'svelte/transition'
 	import { parseData } from '$lib/js/parseData.js'
@@ -75,7 +75,12 @@
 </script>
 
 {#if shown}
-	<div class="background" on:click|self={cancel} transition:fade={{ duration: 200 }}>
+	<div
+		class="background"
+		on:click|self={cancel}
+		on:keypress={() => {}}
+		transition:fade={{ duration: 200 }}
+	>
 		<div
 			class="modal"
 			in:fly={{ y: -5, duration: 200 }}
@@ -107,7 +112,7 @@
 			<div class="row">
 				{#if assignment.fake}
 					<button on:click={del}>Delete</button>
-				{:else}
+				{:else if assignment.edited}
 					<button on:click={reset}>Reset</button>
 				{/if}
 				<button on:click={cancel}>Cancel</button>

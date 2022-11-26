@@ -1,25 +1,13 @@
-<script context="module">
-	export async function load({ session }) {
-		if (!session.user) {
-			return {
-				status: 302,
-				redirect: '/login'
-			}
-		}
-		return {}
-	}
-</script>
-
 <script>
-	import { session } from '$app/stores'
+	import { session } from '$lib/stores/session.js'
 	import { goto } from '$app/navigation'
-	import { settings } from '$lib/js/settings.js'
+	import { settings } from '$lib/stores/settings.js'
 	import { parseData } from '$lib/js/parseData.js'
-	import { oldAssignments } from '$lib/js/oldAssignments.js'
+	import { oldAssignments } from '$lib/stores/oldAssignments.js'
 
 	async function logout() {
 		$session.user = null
-		await fetch('/auth/logout', {
+		await fetch('/logout', {
 			method: 'POST'
 		})
 		goto('/login')
