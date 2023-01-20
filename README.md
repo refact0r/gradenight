@@ -2,11 +2,13 @@
 
 A better looking and easier to use version of StudentVue using [StudentVue.js](https://github.com/StudentVue/StudentVue.js).
 
+This app stores your login info as a cookie in your browser and nowhere else. If you don't trust me, feel free to fork and run it yourself.
+
 ## features
 - clean design
-- grade graphs
-- fake assignments
-- editing assignments
+- fancy graphs
+- create fake assignments and see impact on grade
+- edit assignments and see impact on grade
 - color-coded scores and percentages
 - themes
 
