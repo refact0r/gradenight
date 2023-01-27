@@ -42,10 +42,12 @@ export async function GET({ locals }) {
 
 	console.log('logged in')
 
-	const currentPeriod = result[1].ReportingPeriods.ReportPeriod.findLast((period) => {
-		const date = new Date()
-		return date > new Date(period.StartDate)
-	})
+	const currentPeriod = result[1].ReportingPeriods.ReportPeriod.slice()
+		.reverse()
+		.findIndex((period) => {
+			const date = new Date()
+			return date > new Date(period.StartDate)
+		})
 
 	console.log(currentPeriod)
 

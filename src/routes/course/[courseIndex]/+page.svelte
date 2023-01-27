@@ -139,7 +139,7 @@
 	</div>
 	<div class="grade">
 		<h1 class="grade-letter" style={course.style}>
-			{course.Marks.Mark.CalculatedScoreString}
+			{course.scoreString}
 		</h1>
 		<div style={course.style}>{course.score}</div>
 	</div>
