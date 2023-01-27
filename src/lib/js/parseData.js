@@ -155,6 +155,7 @@ export function parseData(session, oldAssignments) {
 
 			course.scorePercent = -1
 			course.score = '-'
+			course.scoreString = course.Marks.Mark ? course.Marks.Mark.CalculatedScoreString : 'N/A'
 			if (course.chartData.length > 0) {
 				course.scorePercent = course.chartData[course.chartData.length - 1].y
 				course.score = course.scorePercent.toFixed(1)
@@ -164,7 +165,7 @@ export function parseData(session, oldAssignments) {
 					course.score += '%'
 				}
 				grades.push(course.scorePercent)
-				course.Marks.Mark.CalculatedScoreString = percentToLetter(course.scorePercent)
+				course.scoreString = percentToLetter(course.scorePercent)
 			}
 			course.color = getColor(course.scorePercent)
 			course.style = `color: ${course.color};`
@@ -180,6 +181,7 @@ export function parseData(session, oldAssignments) {
 		assignments.sort((a, b) => new Date(b.DueDate) - new Date(a.DueDate))
 		period.assignments = assignments
 		period.week = getWeek(period.assignments)
+		console.log(period.week)
 	}
 }
 
