@@ -73,36 +73,39 @@
 </script>
 
 {#if shown}
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div class="background" on:click|self={cancel} transition:fade={{ duration: 200 }}>
 		<div
 			class="modal"
 			in:fly={{ y: -5, duration: 200 }}
 			out:fly|local={{ y: 5, duration: 200 }}
 		>
-			<h3>Fake Assignment</h3>
-			<input class="name" type="string" placeholder="Name" bind:value={name} />
-			<div class="row">
-				<select bind:value={type}>
-					{#each Object.keys(course.scoreTypes) as scoreType}
-						<option value={scoreType}>{scoreType}</option>
-					{/each}
-				</select>
-				<input
-					class="points"
-					type="number"
-					min="0"
-					placeholder="Points"
-					bind:value={points}
-				/>
-				<input class="total" type="number" min="0" placeholder="Total" bind:value={total} />
-			</div>
-			{#if error}
-				<div class="error">{error}</div>
-			{/if}
-			<div class="row">
-				<button on:click={cancel}>Cancel</button>
-				<button on:click={add}>Add</button>
-			</div>
+			<form on:submit={add}>
+				<h3>Fake Assignment</h3>
+				<input class="name" type="string" placeholder="Name" bind:value={name} />
+				<div class="row">
+					<select bind:value={type}>
+						{#each Object.keys(course.scoreTypes) as scoreType}
+							<option value={scoreType}>{scoreType}</option>
+						{/each}
+					</select>
+					<input
+						class="points"
+						type="number"
+						min="0"
+						placeholder="Points"
+						bind:value={points}
+					/>
+					<input class="total" type="number" min="0" placeholder="Total" bind:value={total} />
+				</div>
+				{#if error}
+					<div class="error">{error}</div>
+				{/if}
+				<div class="row">
+					<button on:click={cancel}>Cancel</button>
+					<button type="submit">Add</button>
+				</div>
+			</form>
 		</div>
 	</div>
 {/if}
