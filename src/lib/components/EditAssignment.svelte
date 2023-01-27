@@ -96,28 +96,30 @@
 					<p class="name">{assignment.Notes}</p>
 				{/if}
 			</div>
-			<div class="row">
-				<input
-					class="points"
-					type="number"
-					min="0"
-					placeholder="Points"
-					bind:value={points}
-				/>
-				<input class="total" type="number" min="0" placeholder="Total" bind:value={total} />
-			</div>
-			{#if error}
-				<div class="error">{error}</div>
-			{/if}
-			<div class="row">
-				{#if assignment.fake}
-					<button on:click={del}>Delete</button>
-				{:else if assignment.edited}
-					<button on:click={reset}>Reset</button>
+			<form on:submit={save}>
+				<div class="row">
+					<input
+						class="points"
+						type="number"
+						min="0"
+						placeholder="Points"
+						bind:value={points}
+					/>
+					<input class="total" type="number" min="0" placeholder="Total" bind:value={total} />
+				</div>
+				{#if error}
+					<div class="error">{error}</div>
 				{/if}
-				<button on:click={cancel}>Cancel</button>
-				<button on:click={save}>Save</button>
-			</div>
+				<div class="row">
+					{#if assignment.fake}
+						<button on:click={del}>Delete</button>
+					{:else if assignment.edited}
+						<button on:click={reset}>Reset</button>
+					{/if}
+					<button on:click={cancel}>Cancel</button>
+					<button type="submit">Save</button>
+				</div>
+			</form>
 		</div>
 	</div>
 {/if}
