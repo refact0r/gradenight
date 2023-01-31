@@ -175,7 +175,7 @@
 	.refresh {
 		margin-top: auto;
 		&.spinning i {
-			animation: spin 1s linear infinite;
+			animation: spin 1s ease-in-out infinite;
 		}
 	}
 

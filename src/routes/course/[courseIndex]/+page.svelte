@@ -275,19 +275,16 @@
 		padding: $spacing;
 	}
 
-	.assignments .scroll {
-		padding: $spacing-small;
-	}
-
-	.heading-container {
-		margin: $spacing-small;
-	}
-
 	.assignment {
 		&:hover {
 			cursor: pointer;
 			& td {
 				background: var(--bg-color-1-5);
+			}
+		}
+		&:active {
+			& td {
+				background: var(--bg-color-1);
 			}
 		}
 		& td {
