@@ -17,13 +17,17 @@
 			{#each $session.selected.Courses.Course as course, index}
 				<tr>
 					<td class="course-name">
-						<a class="link" href={'/course/' + index}>{course.Title}</a>
+						<a class="cell-link" href={'/course/' + index}>{course.Title}</a>
 					</td>
-					<td class="course-staff">{course.Staff}</td>
+					<td class="course-staff">
+						<a class="cell-link" href={'/course/' + index}>{course.Staff}</a>
+					</td>
 					<td class="course-grade" style={course.style}>
-						{course.scoreString}
+						<a class="cell-link" href={'/course/' + index}>{course.scoreString}</a>
 					</td>
-					<td class="course-score" style={course.style}>{course.score}</td>
+					<td class="course-score" style={course.style}>
+						<a class="cell-link" href={'/course/' + index}>{course.score}</a>
+					</td>
 				</tr>
 			{/each}
 		</table>
@@ -41,18 +45,47 @@
 		@include box;
 		flex-grow: 1;
 		font-size: 1.2em;
+		padding-top: 0;
+		padding-bottom: 0;
 	}
 
 	table {
 		height: 100%;
+		width: 100%;
+		border-spacing: 0 $spacing;
 	}
 
-	.course-score {
-		text-align: right;
+	tr {
+		&:hover .cell-link {
+			background: var(--bg-color-1-5);
+		}
+		&:active .cell-link {
+			background: var(--bg-color-1);
+		}
+		td:first-child .cell-link {
+			padding-left: $spacing-small;
+			border-radius: $roundness-small 0 0 $roundness-small;
+		}
+		td:last-child .cell-link {
+			padding-right: $spacing-small;
+			border-radius: 0 $roundness-small $roundness-small 0;
+		}
+	}
+
+	.cell-link {
+		width: 100%;
+		height: 100%;
+		padding: $spacing-small 0;
+		text-decoration: none;
+		display: flex;
+		align-items: center;
+	}
+
+	.course-score .cell-link {
+		justify-content: right;
 	}
 
 	.course-grade {
-		padding: 0;
 		font-weight: bold;
 	}
 

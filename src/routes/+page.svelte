@@ -49,14 +49,14 @@
 			{#each $session.gradebook.Courses.Course as course, index}
 				<tr>
 					<td class="course-name">
-						<a class="link" href={'/course/' + index}>
-							{course.Title}
-						</a>
+						<a class="cell-link" href={'/course/' + index}>{course.Title} </a>
 					</td>
 					<td class="course-grade" style={course.style}>
-						{course.scoreString}
+						<a class="cell-link" href={'/course/' + index}>{course.scoreString}</a>
 					</td>
-					<td class="course-score" style={course.style}>{course.score}</td>
+					<td class="course-score" style={course.style}>
+						<a class="cell-link" href={'/course/' + index}>{course.score}</a>
+					</td>
 				</tr>
 			{/each}
 		</table>
@@ -146,6 +146,35 @@
 
 	.grades-table {
 		height: calc(100% - 2 * $spacing);
+		& tr {
+			&:hover .cell-link {
+				background: var(--bg-color-1-5);
+			}
+			&:active .cell-link {
+				background: var(--bg-color-1);
+			}
+			td:first-child .cell-link {
+				padding-left: 10px;
+				border-radius: $roundness-small 0 0 $roundness-small;
+			}
+			td:last-child .cell-link {
+				padding-right: 10px;
+				border-radius: 0 $roundness-small $roundness-small 0;
+			}
+		}
+	}
+
+	.cell-link {
+		width: 100%;
+		height: 100%;
+		padding: 10px 0;
+		text-decoration: none;
+		display: flex;
+		align-items: center;
+	}
+
+	.course-score .cell-link {
+		justify-content: right;
 	}
 
 	.assignments-table {
