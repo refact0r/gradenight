@@ -85,6 +85,7 @@
 		border-radius: 50%;
 		margin-top: $spacing-small;
 		margin-right: 5px;
+		box-sizing: content-box;
 		&.active {
 			border: 2px solid var(--accent-color);
 		}
