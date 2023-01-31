@@ -22,7 +22,7 @@
 		border-radius: 50%;
 		width: 50px;
 		height: 50px;
-		animation: spin 1s ease-in-out infinite;
+		animation: 1s ease-in-out infinite spin;
 	}
 
 	@keyframes spin {

@@ -1,10 +1,10 @@
 :root {
-	--bg-color-1: hsl(220, 18%, 9%);
-	--bg-color-1-5: hsl(220, 18%, 10.5%);
+	--bg-color-1: hsl(220, 18%, 8%);
+	--bg-color-1-5: hsl(220, 18%, 10%);
 	--bg-color-2: hsl(220, 18%, 12%);
-	--bg-color-2-5: hsl(220, 18%, 14.5%);
-	--bg-color-3: hsl(220, 18%, 16%);
-	--bg-color-3-5: hsl(220, 18%, 18%);
+	--bg-color-2-5: hsl(220, 18%, 15%);
+	--bg-color-3: hsl(220, 18%, 18%);
+	--bg-color-3-5: hsl(220, 18%, 21%);
 	--font-color-3: hsl(220, 18%, 26%);
 	--font-color-2: hsl(220, 18%, 34%);
 	--font-color: hsl(220, 37%, 68%);

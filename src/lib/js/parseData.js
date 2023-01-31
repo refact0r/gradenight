@@ -1,8 +1,6 @@
 import { getColor, fourToPercent, percentToLetter } from './utils.js'
 
 export function parseData(session, oldAssignments) {
-	console.log(session)
-
 	for (let period of session.periods) {
 		let grades = []
 		let assignments = []
@@ -181,7 +179,6 @@ export function parseData(session, oldAssignments) {
 		assignments.sort((a, b) => new Date(b.DueDate) - new Date(a.DueDate))
 		period.assignments = assignments
 		period.week = getWeek(period.assignments)
-		console.log(period.week)
 	}
 }
 
