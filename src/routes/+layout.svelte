@@ -17,6 +17,9 @@
 	let spinning = false
 
 	onMount(async () => {
+		if ($settings.theme === 'dark') {
+			$settings.theme = 'night'
+		}
 		if (data.user) {
 			console.log('load')
 			await load()
