@@ -15,20 +15,12 @@
 	<div class="content">
 		<table>
 			{#each $session.selected.Courses.Course as course, index}
-				<tr>
-					<td class="course-name">
-						<a class="cell-link" href={'/course/' + index}>{course.Title}</a>
-					</td>
-					<td class="course-staff">
-						<a class="cell-link" href={'/course/' + index}>{course.Staff}</a>
-					</td>
-					<td class="course-grade" style={course.style}>
-						<a class="cell-link" href={'/course/' + index}>{course.scoreString}</a>
-					</td>
-					<td class="course-score" style={course.style}>
-						<a class="cell-link" href={'/course/' + index}>{course.score}</a>
-					</td>
-				</tr>
+				<a class="row-link" href={'/course/' + index}>
+					<td class="course-name"> {course.Title}</td>
+					<td class="course-staff">{course.Staff} </td>
+					<td class="course-grade" style={course.style}>{course.scoreString} </td>
+					<td class="course-score" style={course.style}>{course.score} </td>
+				</a>
 			{/each}
 		</table>
 	</div>
@@ -55,34 +47,31 @@
 		border-spacing: 0 $spacing;
 	}
 
-	tr {
-		&:hover .cell-link {
-			background: var(--bg-color-1-5);
-		}
-		&:active .cell-link {
-			background: var(--bg-color-1);
-		}
-		td:first-child .cell-link {
-			padding-left: $spacing-small;
+	.row-link {
+		display: table-row;
+		text-decoration: none;
+
+		td:first-child {
 			border-radius: $roundness-small 0 0 $roundness-small;
 		}
-		td:last-child .cell-link {
-			padding-right: $spacing-small;
+		td:last-child {
 			border-radius: 0 $roundness-small $roundness-small 0;
+		}
+		&:hover td {
+			background: var(--bg-color-1-5);
+		}
+		&:active td {
+			background: var(--bg-color-1);
 		}
 	}
 
-	.cell-link {
-		width: 100%;
-		height: 100%;
-		padding: $spacing-small 0;
-		text-decoration: none;
-		display: flex;
-		align-items: center;
+	td {
+		padding: $spacing-small;
+		vertical-align: middle;
 	}
 
-	.course-score .cell-link {
-		justify-content: right;
+	.course-score {
+		text-align: right;
 	}
 
 	.course-grade {

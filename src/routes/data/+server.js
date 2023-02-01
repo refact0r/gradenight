@@ -49,8 +49,6 @@ export async function GET({ locals }) {
 			return date > new Date(period.StartDate)
 		})
 
-	console.log(currentPeriod)
-
 	return new Response(
 		JSON.stringify({
 			student: result.shift(),
