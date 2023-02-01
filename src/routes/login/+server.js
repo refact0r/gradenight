@@ -27,10 +27,12 @@ export async function POST({ request }) {
 		})
 	}
 
-	const currentPeriod = result[1].ReportingPeriods.ReportPeriod.findIndex((period) => {
-		const date = new Date()
-		return date > new Date(period.StartDate) && date < new Date(period.EndDate)
-	})
+	const currentPeriod = result[1].ReportingPeriods.ReportPeriod.slice()
+		.reverse()
+		.findIndex((period) => {
+			const date = new Date()
+			return date > new Date(period.StartDate)
+		})
 
 	return new Response(
 		JSON.stringify({
