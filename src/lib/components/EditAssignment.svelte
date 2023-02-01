@@ -101,11 +101,19 @@
 					<input
 						class="points"
 						type="number"
+						step="any"
 						min="0"
 						placeholder="Points"
 						bind:value={points}
 					/>
-					<input class="total" type="number" min="0" placeholder="Total" bind:value={total} />
+					<input
+						class="total"
+						type="number"
+						step="any"
+						min="0"
+						placeholder="Total"
+						bind:value={total}
+					/>
 				</div>
 				{#if error}
 					<div class="error">{error}</div>
