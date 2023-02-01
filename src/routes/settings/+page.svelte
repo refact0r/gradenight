@@ -34,9 +34,9 @@
 		<div>{$settings.theme.charAt(0).toUpperCase() + $settings.theme.substring(1)}</div>
 		<div class="themes">
 			<button
-				class={'theme' + ($settings.theme === 'dark' ? ' active' : '')}
+				class={'theme' + ($settings.theme === 'night' ? ' active' : '')}
 				style="background: linear-gradient(45deg, #192024 0% 50%, #13161b 50% 100%);"
-				on:click={() => changeSetting('theme', 'dark')}
+				on:click={() => changeSetting('theme', 'night')}
 			/>
 			<button
 				class={'theme' + ($settings.theme === 'light' ? ' active' : '')}
