@@ -1,6 +1,6 @@
 {
 	"name": "studentvue",
-	"version": "0.0.1",
+	"version": "1.3.1",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
