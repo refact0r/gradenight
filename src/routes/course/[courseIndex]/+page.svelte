@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte'
 	import { session } from '$lib/stores/session.js'
-	import Chart from 'chart.js/auto/auto.js'
+	import Chart from 'chart.js/auto/auto'
 	import PeriodSelect from '$lib/components/PeriodSelect.svelte'
 	import FakeAssignment from '$lib/components/FakeAssignment.svelte'
 	import EditAssignment from '$lib/components/EditAssignment.svelte'
