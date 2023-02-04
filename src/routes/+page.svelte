@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>StudentVue</title>
+	<title>Gradenight</title>
 </svelte:head>
 
 <div class="layout" data-sveltekit-prefetch>
