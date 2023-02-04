@@ -4,7 +4,6 @@
 	import { fly } from 'svelte/transition'
 	import { fade } from 'svelte/transition'
 	import { page } from '$app/stores'
-	// import { browser } from '$app/environment'
 	import { goto } from '$app/navigation'
 	import { parseData } from '$lib/js/parseData.js'
 	import { session } from '$lib/stores/session.js'
