@@ -20,8 +20,17 @@
 			$settings.theme = 'night'
 		}
 		if (data.user) {
-			console.log('load')
-			await load()
+			$session = {
+				student: data.student,
+				periods: data.periods,
+				currentPeriod: data.currentPeriod,
+				selectedPeriod: data.currentPeriod,
+				selected: data.periods[data.currentPeriod],
+				gradebook: data.periods[data.currentPeriod]
+			}
+			parseData($session, $oldAssignments)
+			console.log($session)
+			$oldAssignments = $oldAssignments
 		}
 	})
 
