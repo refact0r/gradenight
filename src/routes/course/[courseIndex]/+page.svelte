@@ -342,10 +342,8 @@
 		}
 
 		h1 {
+			@include nowrap;
 			margin-top: 0;
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
 		}
 
 		.grid-heading-container {
