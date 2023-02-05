@@ -19,6 +19,7 @@
 		"eslint-plugin-svelte3": "^3.2.1",
 		"prettier": "^2.4.1",
 		"prettier-plugin-svelte": "^2.4.0",
+		"pwa-asset-generator": "^6.2.1",
 		"sass": "^1.55.0",
 		"svelte": "^3.44.0",
 		"svelte-preprocess": "^4.10.1",

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1000"
+   height="1000"
+   viewBox="0 0 264.58333 264.58333"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="moon.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   inkscape:export-filename="moon.png"
+   inkscape:export-xdpi="49.151997"
+   inkscape:export-ydpi="49.151997"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="0.914906"
+     inkscape:cx="422.44777"
+     inkscape:cy="472.72616"
+     inkscape:window-width="2560"
+     inkscape:window-height="1411"
+     inkscape:window-x="-9"
+     inkscape:window-y="309"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <filter
+       id="mask-powermask-path-effect1243_inverse"
+       inkscape:label="filtermask-powermask-path-effect1243"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect1243_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect1243_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="fill:#1b1f27;fill-opacity:1;stroke-width:0.469125"
+       id="circle7790"
+       cy="132.29167"
+       cx="132.29167"
+       r="132.29167" />
+    <path
+       id="path111"
+       style="fill:#8fa3cc;fill-opacity:1;stroke-width:0.3753"
+       d="M 85.989575,52.094111 A 92.604164,92.604164 0 0 0 52.0941,178.59375 92.604164,92.604164 0 0 0 178.59374,212.48923 92.604164,92.604164 0 0 0 213.34942,176.95517 79.375,79.375 0 0 1 108.48659,146.03553 79.375,79.375 0 0 1 134.22199,39.710206 92.604164,92.604164 0 0 0 85.989575,52.094111 Z"
+       inkscape:transform-center-x="5.7732141"
+       inkscape:transform-center-y="0.0012429005" />
+  </g>
+</svg>
