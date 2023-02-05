@@ -237,7 +237,7 @@
 		}
 
 		.week-assignments,
-		.days,
+		.improvement,
 		.assignments {
 			display: none;
 		}
