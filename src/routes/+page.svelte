@@ -180,17 +180,15 @@
 	}
 
 	.assignment-name {
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
+		@include nowrap;
 		width: 100%;
 	}
 
 	.assignment-score {
-		width: 80px;
+		width: min-content;
 		text-align: right;
 		white-space: nowrap;
-		padding-left: $spacing-small;
+		padding-left: 0;
 	}
 
 	.course-grade {
@@ -198,8 +196,49 @@
 		font-weight: bold;
 	}
 
-	.course-score {
-		text-align: right;
+	// @media (max-height: 650px) {
+	// 	.value {
+	// 		display: none;
+	// 	}
+	// 	.grades {
+	// 		grid-row: 2/4;
+	// 	}
+	// }
+
+	@media (max-width: 950px) {
+		.layout {
+			grid-template-columns: 1fr 1fr 1fr 1.75fr;
+		}
+		.week-assignments {
+			display: none;
+		}
+		h1 {
+			grid-column: 1 / 4;
+		}
+		.assignments {
+			grid-column: 4;
+		}
+		.grades {
+			grid-column: 1 / 4;
+		}
+	}
+
+	@media (max-width: 750px) {
+		.layout {
+			grid-template-columns: 1fr 1fr 1fr;
+		}
+		.improvement {
+			display: flex;
+		}
+		.assignments {
+			display: none;
+		}
+		h1 {
+			grid-column: 1 / 4;
+		}
+		.grades {
+			grid-column: 1 / 4;
+		}
 	}
 
 	@media (max-width: $breakpoint-phone) {

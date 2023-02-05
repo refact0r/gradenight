@@ -12,3 +12,9 @@ $breakpoint-phone: 480px;
 	border-radius: $roundness;
 	padding: $spacing;
 }
+
+@mixin nowrap {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
