@@ -90,6 +90,7 @@
 	}
 
 	h1 {
+		@include nowrap;
 		grid-column: 1 / 5;
 		margin-bottom: 0px;
 	}
