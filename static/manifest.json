@@ -31,5 +31,5 @@
 	],
 	"theme_color": "#13161b",
 	"background_color": "#13161b",
-	"display": "minimal-ui"
+	"display": "standalone"
 }
