@@ -119,6 +119,9 @@
 					<div class="error">{error}</div>
 				{/if}
 				<div class="row">
+					<input type="range" min="0" max={total} bind:value={points} class="slider" />
+				</div>
+				<div class="row">
 					{#if assignment.fake}
 						<button on:click={del}>Delete</button>
 					{:else if assignment.edited}
