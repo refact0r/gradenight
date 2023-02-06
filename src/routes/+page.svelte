@@ -276,10 +276,33 @@
 			grid-column: 1 / 3;
 		}
 
+		.grades-table {
+			table-layout: fixed;
+			td {
+				@include nowrap;
+			}
+			.course-grade {
+				width: min-content;
+			}
+			.course-score {
+				width: 75px;
+			}
+		}
+
 		.week-assignments,
 		.improvement,
 		.assignments {
 			display: none;
+		}
+
+		@media (max-height: 700px) {
+			.value {
+				display: none;
+			}
+
+			.grades {
+				grid-row: 2 / 4;
+			}
 		}
 	}
 </style>
