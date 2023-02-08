@@ -182,11 +182,10 @@
 
 	.assignment-name {
 		@include nowrap;
-		width: 100%;
 	}
 
 	.assignment-score {
-		width: min-content;
+		width: 80px;
 		text-align: right;
 		white-space: nowrap;
 		padding-left: 0;
