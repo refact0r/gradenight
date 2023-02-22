@@ -33,6 +33,7 @@
 			return
 		}
 		const json = await res.json()
+		console.log(json)
 		let { student, periods, currentPeriod } = json
 		$session = {
 			student,
