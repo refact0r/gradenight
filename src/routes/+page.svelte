@@ -43,17 +43,19 @@
 			<br />{$session.gradebook.ReportingPeriod.GradePeriod}
 		</div>
 	</div>
-	<div class="grades">
-		<a class="link" href="/grades"><h2>Grades</h2></a>
-		<table class="grades-table">
-			{#each $session.gradebook.Courses.Course as course, index}
-				<a class="row-link" href={'/course/' + index}>
-					<td class="course-name">{course.Title}</td>
-					<td class="course-grade" style={course.style}>{course.scoreString}</td>
-					<td class="course-score" style={course.style}>{course.score}</td>
-				</a>
-			{/each}
-		</table>
+	<div class="topG">
+		<div class="grades">
+			<a class="link" href="/grades"><h2>Grades</h2></a>
+			<table class="grades-table">
+				{#each $session.gradebook.Courses.Course as course, index}
+					<a class="row-link" href={'/course/' + index}>
+						<td class="course-name">{course.Title}</td>
+						<td class="course-grade" style={course.style}>{course.scoreString}</td>
+						<td class="course-score" style={course.style}>{course.score}</td>
+					</a>
+				{/each}
+			</table>
+		</div>
 	</div>
 	<div class="assignments">
 		<div class="assignments-scroll">
@@ -119,9 +121,18 @@
 		}
 	}
 
-	.grades {
+	.topG {
 		@include box;
+		padding: 0;
 		grid-column: 1 / 5;
+		overflow: hidden;
+	}
+
+	.grades {
+		height: 100%;
+		scrollbar-color: var(--bg-color-2-5) transparent;
+		padding: $spacing;
+		overflow: scroll;
 	}
 
 	.assignments {

@@ -51,7 +51,12 @@ body {
 }
 ::-webkit-scrollbar-track {
 	background: transparent;
+} 
+
+::-webkit-scrollbar-corner {
+	background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
 	background: var(--bg-color-2-5);
 }
