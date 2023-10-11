@@ -30,8 +30,11 @@ export function parseData(session, oldAssignments) {
 
 				course.scoreTypes = {}
 				if (course.Marks.Mark.GradeCalculationSummary.AssignmentGradeCalc) {
-					for (let type of course.Marks.Mark.GradeCalculationSummary
-						.AssignmentGradeCalc) {
+					let gradeCalc = course.Marks.Mark.GradeCalculationSummary.AssignmentGradeCalc
+					if (!Array.isArray(gradeCalc)) {
+						gradeCalc = [gradeCalc]
+					}
+					for (let type of gradeCalc) {
 						if (parseInt(type.Weight) !== 100.0) {
 							course.scoreTypes[type.Type] = {
 								score: 0,
