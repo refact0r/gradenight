@@ -55,7 +55,8 @@ export async function GET({ locals }) {
 		JSON.stringify({
 			student: result.shift(),
 			periods: result,
-			currentPeriod
+			currentPeriod,
+			periodDates: result[1].ReportingPeriods.ReportPeriod
 		}),
 		{
 			headers: {
