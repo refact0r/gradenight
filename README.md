@@ -4,6 +4,8 @@ A better looking and easier to use version of StudentVue using [StudentVue.js](h
 
 This app stores your login info as a cookie in your browser and nowhere else. If you don't trust me, feel free to fork and run it yourself on netlify or vercel.
 
+This is a fork of the project https://github.com/refact0r/gradenight with the goal of incorporating new features and layouts
+
 ## features
 - clean design
 - fancy graphs
