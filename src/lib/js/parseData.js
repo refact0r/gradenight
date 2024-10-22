@@ -57,6 +57,7 @@ export function parseData(session, oldAssignments) {
 					assignment.courseIndex = index
 					assignment.style = null
 					assignment.scorePercent = -1
+
 					if (assignment.Points.includes('Points Possible')) {
 						assignment.percent = '?'
 						assignment.score = 'Not Graded'
@@ -83,9 +84,11 @@ export function parseData(session, oldAssignments) {
 						}
 						assignment.score = assignment.points + ' / ' + assignment.total
 
+						// Ensure total is not zero or undefined
 						if (
 							(assignment.points === 0 && assignment.total === 0) ||
-							assignment.Notes.toLowerCase().includes('not for grading')
+							assignment.Notes.toLowerCase().includes('not for grading') ||
+							!assignment.total
 						) {
 							assignment.scorePercent = -1
 							assignment.percent = '-'
@@ -110,28 +113,32 @@ export function parseData(session, oldAssignments) {
 							let totalSum = 0
 
 							for (let type of Object.values(course.scoreTypes)) {
+								// Ensure total is not zero
 								if (type.total > 0) {
 									scoreSum += (type.score / type.total) * type.weight
 									totalSum += type.weight
 								}
 							}
 
-							let color = getColor((scoreSum / totalSum) * 100)
-							let grade = (scoreSum / totalSum) * (course.fourPoint ? 4 : 100)
+							// Ensure totalSum is not zero
+							if (totalSum > 0) {
+								let color = getColor((scoreSum / totalSum) * 100)
+								let grade = (scoreSum / totalSum) * (course.fourPoint ? 4 : 100)
 
-							if (
-								course.chartData.length > 0 &&
-								course.chartData[course.chartData.length - 1].x ===
-									Math.floor(date / 8.64e7)
-							) {
-								course.chartData[course.chartData.length - 1].y = grade
-								course.chartData[course.chartData.length - 1].color = color
-							} else {
-								course.chartData.push({
-									x: Math.floor(date / 8.64e7),
-									y: grade,
-									color: color
-								})
+								if (
+									course.chartData.length > 0 &&
+									course.chartData[course.chartData.length - 1].x ===
+										Math.floor(date / 8.64e7)
+								) {
+									course.chartData[course.chartData.length - 1].y = grade
+									course.chartData[course.chartData.length - 1].color = color
+								} else {
+									course.chartData.push({
+										x: Math.floor(date / 8.64e7),
+										y: grade,
+										color: color
+									})
+								}
 							}
 						}
 						assignment.style = `color: ${getColor(assignment.scorePercent)};`
@@ -147,10 +154,12 @@ export function parseData(session, oldAssignments) {
 					totalWeight += type.weight
 				}
 				for (let type of Object.values(course.scoreTypes)) {
-					type.weight = ((type.weight / totalWeight) * 100).toFixed(1)
-					let percent = type.total ? type.score / type.total : 0
-					type.scorePercent = (percent * type.weight).toFixed(1)
-					type.color = type.style = `color: ${percent ? getColor(percent * 100) : 0};`
+					if (totalWeight > 0) {
+						type.weight = ((type.weight / totalWeight) * 100).toFixed(1)
+						let percent = type.total ? type.score / type.total : 0
+						type.scorePercent = (percent * type.weight).toFixed(1)
+						type.color = type.style = `color: ${percent ? getColor(percent * 100) : 0};`
+					}
 				}
 			}
 
@@ -173,7 +182,9 @@ export function parseData(session, oldAssignments) {
 		}
 
 		let averageRaw = -1
-		if (grades.length > 0) averageRaw = grades.reduce((a, b) => a + b) / grades.length
+		if (grades.length > 0) {
+			averageRaw = grades.reduce((a, b) => a + b) / grades.length
+		}
 
 		period.averageStyle = `color: ${getColor(averageRaw)};`
 		period.average = averageRaw >= 0 ? averageRaw.toFixed(1) + '%' : '-'
@@ -192,9 +203,12 @@ function getWeek(assignments) {
 	let week = assignments.filter((a) => {
 		return new Date(a.DueDate) > lastSunday && a.scorePercent >= 0
 	})
+
 	let average = -1
-	if (week.length > 0)
+	if (week.length > 0) {
 		average = (week.reduce((a, b) => a + b.scorePercent, 0) / week.length).toFixed(1)
+	}
+
 	return {
 		average: average >= 0 ? average + '%' : '-',
 		averageStyle: `color: ${getColor(average)};`,
