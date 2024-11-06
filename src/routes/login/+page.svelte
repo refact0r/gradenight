@@ -5,7 +5,7 @@
 	import { oldAssignments } from '$lib/stores/oldAssignments.js'
 	import Spinner from '$lib/components/Spinner.svelte'
 
-	let districtUrl = 'https://wa-bsd405-psv.edupoint.com/'
+	let districtUrl = 'https://ca-pleas-psv.edupoint.com/'
 	let username
 	let password
 	let error
@@ -74,7 +74,7 @@
 			{:else}
 				Your login info will not be saved anywhere except your browser.<br />
 				You can see all the code on the
-				<a rel="external" href="https://github.com/refact0r/studentvue">github</a>.
+				<a rel="external" href="https://github.com/kabowabo/gradenight">github</a>.
 			{/if}
 		</div>
 		<button type="submit">

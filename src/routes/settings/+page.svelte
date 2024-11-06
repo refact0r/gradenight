@@ -53,6 +53,21 @@
 				style="background: linear-gradient(45deg, #567EC1 0% ,#bd5077 100%);"
 				on:click={() => changeSetting('theme', 'glass')}
 			/>
+			<button
+				class={'theme' + ($settings.theme === 'cyberpunk' ? ' active' : '')}
+				style="background: linear-gradient(45deg, hsl(240deg 60% 30%) 0%, hsl(340deg 100% 50%) 100%);"
+				on:click={() => changeSetting('theme', 'cyberpunk')}
+			/>
+			<button
+				class={'theme' + ($settings.theme === 'beach' ? ' active' : '')}
+				style="background: linear-gradient(45deg, hsl(200deg 70% 60%) 0%, hsl(50deg 80% 70%) 100%);"
+				on:click={() => changeSetting('theme', 'beach')}
+			/>
+			<button
+				class={'theme' + ($settings.theme === 'pastelpurple' ? ' active' : '')}
+				style="background: linear-gradient(45deg, hsl(270deg 50% 85%) 0%, hsl(300deg 50% 90%) 100%);"
+				on:click={() => changeSetting('theme', 'pastelpurple')}
+			/>
 		</div>
 	</div>
 </div>

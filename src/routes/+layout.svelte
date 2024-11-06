@@ -10,6 +10,7 @@
 	import { settings } from '$lib/stores/settings.js'
 	import { oldAssignments } from '$lib/stores/oldAssignments.js'
 	import Spinner from '$lib/components/Spinner.svelte'
+	
 
 	export let data
 
@@ -80,6 +81,9 @@
 			</a>
 			<a class:active={$page.url.pathname === '/assignments'} href="/assignments">
 				<i class="bi bi-pen" />
+			</a>
+			<a class:active={$page.url.pathname === '/assignments'} href="/assignments">
+				Attendence
 			</a>
 			<button class={'refresh' + (spinning ? ' spinning' : '')} on:click={refresh}>
 				<i class="bi bi-arrow-repeat" />
