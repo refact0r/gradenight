@@ -1,8 +1,11 @@
 # gradenight
 
-A better looking and easier to use version of StudentVue using [StudentVue.js](https://github.com/StudentVue/StudentVue.js) and [Sveltekit](https://kit.svelte.dev).
+An unofficial client that displays grades from your school's StudentVue portal. Built using [StudentVue.js](https://github.com/StudentVue/StudentVue.js) and [Sveltekit](https://kit.svelte.dev).
 
-This app stores your login info as a cookie in your browser and nowhere else. If you don't trust me, feel free to fork and run it yourself on netlify or vercel.
+*gradenight is an independent project and is not affiliated with, endorsed by, or supported by Edupoint Educational Systems. StudentVue and Synergy are trademarks of Edupoint.*
+
+> [!WARNING]
+> This project is no longer maintained or deployed.
 
 ## features
 - clean design
